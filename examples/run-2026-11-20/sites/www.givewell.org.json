@@ -1,0 +1,229 @@
+{
+  "url": "https://www.givewell.org/",
+  "checked_at": "2026-11-20 08:56 UTC",
+  "verdict": {
+    "status": "not_installed",
+    "reason": "installation code missing",
+    "blockers": [
+      "fu_code_in_source"
+    ],
+    "warnings": []
+  },
+  "checklist": [
+    {
+      "id": "page_reachable",
+      "title": "Page loads in a headless browser",
+      "status": "pass",
+      "detail": "HTTP 200, final URL https://www.givewell.org/",
+      "evidence": [
+        "https://www.givewell.org/"
+      ],
+      "blocking": true
+    },
+    {
+      "id": "fu_code_in_source",
+      "title": "Installation code is in the page source",
+      "status": "fail",
+      "detail": "No installation code found in the source and no widget request recorded.",
+      "evidence": [],
+      "blocking": true
+    },
+    {
+      "id": "gtm_container",
+      "title": "Google Tag Manager container",
+      "status": "pass",
+      "detail": "GTM-MKLT9TL",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "ga4",
+      "title": "GA4 measurement ID",
+      "status": "pass",
+      "detail": "G-5Y1K5KX9ZG",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "meta_pixel",
+      "title": "Meta Pixel",
+      "status": "info",
+      "detail": "Not seen (optional; may load after consent).",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "consent_banner",
+      "title": "Cookie consent tool",
+      "status": "info",
+      "detail": "No known consent tool detected. Needed for EU/UK visitors; vendor cookies need a consent setup.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "other_platforms",
+      "title": "No other donation tool on the page",
+      "status": "pass",
+      "detail": "None found.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "page_speed",
+      "title": "Page load under 6 s",
+      "status": "pass",
+      "detail": "load event at 2.1s",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "console_errors",
+      "title": "Console errors (any source)",
+      "status": "info",
+      "detail": "2 error(s)",
+      "evidence": [
+        "Permissions policy violation: unload is not allowed in this document.",
+        "Failed to load resource: the server responded with a status of 403 ()"
+      ],
+      "blocking": false
+    }
+  ],
+  "facts": {
+    "url": "https://www.givewell.org/",
+    "page": {
+      "status": 200,
+      "final_url": "https://www.givewell.org/",
+      "https": true,
+      "load_error": null,
+      "load_ms": 2065,
+      "dom_content_loaded_ms": 1054,
+      "check_seconds": 7.7,
+      "request_count": 160,
+      "failed_request_count": 1,
+      "console_error_count": 2,
+      "console_errors_sample": [
+        "Permissions policy violation: unload is not allowed in this document.",
+        "Failed to load resource: the server responded with a status of 403 ()"
+      ],
+      "page_errors_sample": [],
+      "bot_challenge": false
+    },
+    "fundraiseup": {
+      "installed_in_source": false,
+      "loaded_at_runtime": false,
+      "account_ids": [],
+      "snippet_count_in_source": 0,
+      "in_head": false,
+      "scripts_after_in_head": 0,
+      "source_excerpt": null,
+      "widget_requests": [],
+      "request_count": 0,
+      "failed_requests": [],
+      "console_errors": [],
+      "csp_errors": [],
+      "global_object": "undefined",
+      "checkout_form_links": [],
+      "inserted_by": null
+    },
+    "tags": {
+      "gtm": {
+        "container_ids": [
+          "GTM-MKLT9TL"
+        ],
+        "loaded_ids": [
+          "GTM-MKLT9TL"
+        ],
+        "in_source_ids": [
+          "GTM-MKLT9TL"
+        ],
+        "dataLayer_entries": 5
+      },
+      "ga4": {
+        "measurement_ids": [
+          "G-5Y1K5KX9ZG"
+        ],
+        "collect_hits_for": [
+          "G-5Y1K5KX9ZG"
+        ]
+      },
+      "meta_pixel": {
+        "loaded": false,
+        "pixel_ids": []
+      },
+      "consent": []
+    },
+    "other_donation_platforms": []
+  },
+  "ai": {
+    "summary": "The page https://www.givewell.org/ loaded in the headless browser with HTTP 200 and no bot challenge. The load event was at 2.1 seconds. No FundraiseUp installation code was found in the page source, and no FundraiseUp widget request was recorded at runtime. The verdict is not installed, because the installation code is missing. Google Tag Manager container GTM-MKLT9TL and GA4 measurement ID G-5Y1K5KX9ZG were found. No other donation tool was found on the page. The Meta Pixel was not seen, and no cookie consent tool was detected. The browser recorded 2 console errors and 1 failed request. The browser did not click any buttons, so checkout behavior was not tested. Only links that were found are reported.",
+    "risks": [
+      {
+        "title": "FundraiseUp installation code is missing",
+        "severity": "high",
+        "detail": "No installation code was found in the page source and no widget request was recorded. The donation widget does not load on this page.",
+        "check_ids": [
+          "fu_code_in_source"
+        ]
+      },
+      {
+        "title": "No cookie consent tool detected",
+        "severity": "medium",
+        "detail": "No known consent tool was detected. Visitors from the EU and UK need a consent setup for vendor cookies.",
+        "check_ids": [
+          "consent_banner"
+        ]
+      },
+      {
+        "title": "Console errors and a failed request on the page",
+        "severity": "low",
+        "detail": "The browser recorded 2 console errors: a permissions policy violation for unload, and a 403 response from a resource. One request failed.",
+        "check_ids": [
+          "console_errors"
+        ]
+      }
+    ],
+    "next_steps": [
+      {
+        "owner": "customer",
+        "action": "Add the FundraiseUp installation code to the page source of https://www.givewell.org/ and confirm the code is in the served HTML.",
+        "check_ids": [
+          "fu_code_in_source"
+        ]
+      },
+      {
+        "owner": "customer",
+        "action": "Confirm whether a cookie consent tool is in use for EU and UK visitors. If one is needed, set it up so vendor cookies wait for consent.",
+        "check_ids": [
+          "consent_banner"
+        ]
+      },
+      {
+        "owner": "onboarding_team",
+        "action": "Confirm with the customer which FundraiseUp account the installation code should use, then re-run this check after the customer updates the page.",
+        "check_ids": [
+          "fu_code_in_source",
+          "gtm_container",
+          "ga4"
+        ]
+      },
+      {
+        "owner": "onboarding_team",
+        "action": "Review the 403 response and the permissions policy message with the customer to see if they affect donation forms.",
+        "check_ids": [
+          "console_errors"
+        ]
+      }
+    ],
+    "customer_email": {
+      "subject": "Next steps to launch donations on givewell.org",
+      "body": "Hello,\n\nThank you for working with us to set up online donations. We checked your homepage at https://www.givewell.org/. The page loads correctly. We did not find the donation installation code on the page yet.\n\nPlease do the following:\n\n1. Add the donation installation code to the page source of https://www.givewell.org/. We will send you the exact code and where to place it.\n2. Confirm whether you use a cookie consent tool for visitors in the EU and UK. If you do, make sure vendor cookies wait for consent.\n3. Let us know if the 403 error on the page is expected. It may affect donation forms.\n\nOnce the code is in place, reply to this email and we will run the check again.\n\nThank you,\nOnboarding Team"
+    },
+    "_dropped_uncited": 0,
+    "_usage": {
+      "model": "claude-haiku-5-5",
+      "input_tokens": 2540,
+      "output_tokens": 1078,
+      "cost_usd": 0.00079
+    }
+  }
+}

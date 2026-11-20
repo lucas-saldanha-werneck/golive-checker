@@ -1,0 +1,287 @@
+{
+  "url": "https://bestfriends.org/",
+  "checked_at": "2026-11-20 08:55 UTC",
+  "verdict": {
+    "status": "ready_with_warnings",
+    "reason": "Code is in <head>, last script",
+    "blockers": [],
+    "warnings": [
+      "fu_in_head"
+    ]
+  },
+  "checklist": [
+    {
+      "id": "page_reachable",
+      "title": "Page loads in a headless browser",
+      "status": "pass",
+      "detail": "HTTP 200, final URL https://bestfriends.org/",
+      "evidence": [
+        "https://bestfriends.org/"
+      ],
+      "blocking": true
+    },
+    {
+      "id": "fu_code_in_source",
+      "title": "Installation code is in the page source",
+      "status": "pass",
+      "detail": "account ID(s): AFZUYXBL",
+      "evidence": [
+        "for(i=0;i<7;i++)o[l[i]]=o(l[i]);w[n]=o} })(window,document,'script','FundraiseUp','AFZUYXBL');</script> <script type=\"application/ld+json\"> { \"@contex"
+      ],
+      "blocking": true
+    },
+    {
+      "id": "fu_in_head",
+      "title": "Code is in <head>, last script",
+      "status": "warn",
+      "detail": "In <head>, but 4 <script> tag(s) follow it. Docs recommend it as the last script.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "fu_single_account",
+      "title": "One account ID on the page",
+      "status": "pass",
+      "detail": "AFZUYXBL",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "fu_widget_loads",
+      "title": "Widget script loads",
+      "status": "pass",
+      "detail": "HTTP 200, 21 requests to vendor hosts.",
+      "evidence": [
+        "https://cdn.fundraiseup.com/widget/AFZUYXBL"
+      ],
+      "blocking": true
+    },
+    {
+      "id": "fu_no_console_errors",
+      "title": "No widget errors in console",
+      "status": "pass",
+      "detail": "None recorded.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "fu_checkout_links",
+      "title": "Donate links open the checkout",
+      "status": "pass",
+      "detail": "1 '?form=' link(s): FUNAVXCWESD",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "gtm_container",
+      "title": "Google Tag Manager container",
+      "status": "pass",
+      "detail": "GTM-NMXDTP",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "ga4",
+      "title": "GA4 measurement ID",
+      "status": "pass",
+      "detail": "G-7X412QBZQC, G-JDV4SZ13C8",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "meta_pixel",
+      "title": "Meta Pixel",
+      "status": "pass",
+      "detail": "loaded, pixel id(s): 576668945811638",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "consent_banner",
+      "title": "Cookie consent tool",
+      "status": "info",
+      "detail": "No known consent tool detected. Needed for EU/UK visitors; vendor cookies need a consent setup.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "other_platforms",
+      "title": "No other donation tool on the page",
+      "status": "pass",
+      "detail": "None found.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "page_speed",
+      "title": "Page load under 6 s",
+      "status": "pass",
+      "detail": "load event at 4.8s",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "console_errors",
+      "title": "Console errors (any source)",
+      "status": "info",
+      "detail": "1 error(s)",
+      "evidence": [
+        "Failed to load resource: the server responded with a status of 451 ()"
+      ],
+      "blocking": false
+    }
+  ],
+  "facts": {
+    "url": "https://bestfriends.org/",
+    "page": {
+      "status": 200,
+      "final_url": "https://bestfriends.org/",
+      "https": true,
+      "load_error": null,
+      "load_ms": 4750,
+      "dom_content_loaded_ms": 845,
+      "check_seconds": 9.0,
+      "request_count": 198,
+      "failed_request_count": 1,
+      "console_error_count": 1,
+      "console_errors_sample": [
+        "Failed to load resource: the server responded with a status of 451 ()"
+      ],
+      "page_errors_sample": [],
+      "bot_challenge": false
+    },
+    "fundraiseup": {
+      "installed_in_source": true,
+      "loaded_at_runtime": true,
+      "account_ids": [
+        "AFZUYXBL"
+      ],
+      "snippet_count_in_source": 1,
+      "in_head": true,
+      "scripts_after_in_head": 4,
+      "source_excerpt": "for(i=0;i<7;i++)o[l[i]]=o(l[i]);w[n]=o} })(window,document,'script','FundraiseUp','AFZUYXBL');</script> <script type=\"application/ld+json\"> { \"@contex",
+      "widget_requests": [
+        {
+          "account_id": "AFZUYXBL",
+          "url": "https://cdn.fundraiseup.com/widget/AFZUYXBL",
+          "status": 200
+        }
+      ],
+      "request_count": 21,
+      "failed_requests": [],
+      "console_errors": [],
+      "csp_errors": [],
+      "global_object": "function",
+      "checkout_form_links": [
+        "FUNAVXCWESD"
+      ],
+      "inserted_by": {
+        "kind": "script",
+        "container": null,
+        "script": "https://bestfriends.org/"
+      }
+    },
+    "tags": {
+      "gtm": {
+        "container_ids": [
+          "GTM-NMXDTP"
+        ],
+        "loaded_ids": [
+          "GTM-NMXDTP"
+        ],
+        "in_source_ids": [
+          "GTM-NMXDTP"
+        ],
+        "dataLayer_entries": 11
+      },
+      "ga4": {
+        "measurement_ids": [
+          "G-7X412QBZQC",
+          "G-JDV4SZ13C8"
+        ],
+        "collect_hits_for": [
+          "G-JDV4SZ13C8"
+        ]
+      },
+      "meta_pixel": {
+        "loaded": true,
+        "pixel_ids": [
+          "576668945811638"
+        ]
+      },
+      "consent": []
+    },
+    "other_donation_platforms": []
+  },
+  "ai": {
+    "summary": "The page https://bestfriends.org/ loaded in the headless browser with HTTP 200 and took 4.8 seconds to load. The FundraiseUp snippet is in the page source with one account ID, AFZUYXBL. The widget script loaded from the vendor host. The snippet sits in <head>, but 4 script tags follow it, and the docs recommend it be the last script. One donate link with a checkout form ID (FUNAVXCWESD) was found. The browser did not click the link, so checkout behavior was not tested. No known cookie consent tool was detected. One console error (HTTP 451) was recorded. The verdict is ready with warnings, with no blockers.",
+    "risks": [
+      {
+        "title": "Script placement is not last in head",
+        "severity": "medium",
+        "detail": "The FundraiseUp snippet is in <head>, but 4 script tags load after it. The vendor docs recommend it as the last script.",
+        "check_ids": [
+          "fu_in_head"
+        ]
+      },
+      {
+        "title": "No cookie consent tool detected",
+        "severity": "medium",
+        "detail": "No known consent tool was found on the page. Vendor cookies may need a consent setup for EU and UK visitors.",
+        "check_ids": [
+          "consent_banner"
+        ]
+      },
+      {
+        "title": "Console error on page load",
+        "severity": "low",
+        "detail": "One console error was recorded: the server responded with status 451 for a resource. The cause was not identified.",
+        "check_ids": [
+          "console_errors"
+        ]
+      }
+    ],
+    "next_steps": [
+      {
+        "owner": "customer",
+        "action": "Move the FundraiseUp script so it is the last script in the head section, after the other 4 script tags, or ask the onboarding team to confirm the placement is acceptable.",
+        "check_ids": [
+          "fu_in_head"
+        ]
+      },
+      {
+        "owner": "customer",
+        "action": "Confirm whether the site serves EU or UK visitors. If it does, set up a cookie consent tool before vendor cookies load.",
+        "check_ids": [
+          "consent_banner"
+        ]
+      },
+      {
+        "owner": "onboarding_team",
+        "action": "Confirm with the customer which donate link (form FUNAVXCWESD) is the intended checkout and test it manually.",
+        "check_ids": [
+          "fu_checkout_links"
+        ]
+      },
+      {
+        "owner": "onboarding_team",
+        "action": "Re-run this check after the customer changes the script placement or adds a consent tool.",
+        "check_ids": [
+          "fu_in_head",
+          "consent_banner"
+        ]
+      }
+    ],
+    "customer_email": {
+      "subject": "Action needed: FundraiseUp script placement on bestfriends.org",
+      "body": "Hello,\n\nThank you for working with us to set up donations on your website. We checked https://bestfriends.org/ and the FundraiseUp code is installed with account ID AFZUYXBL. The widget loads correctly.\n\nPlease make these changes:\n\n1. Move the FundraiseUp script so it is the last script in the head section. Right now, 4 script tags load after it.\n\n2. If your site has visitors in the EU or UK, set up a cookie consent tool so vendor cookies load only after consent.\n\nOnce these are done, reply to this email and we will run the check again.\n\nThank you,\nOnboarding Team"
+    },
+    "_dropped_uncited": 0,
+    "_usage": {
+      "model": "claude-haiku-5-5",
+      "input_tokens": 3206,
+      "output_tokens": 1041,
+      "cost_usd": 0.00084
+    }
+  }
+}

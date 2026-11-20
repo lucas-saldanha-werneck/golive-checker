@@ -1,0 +1,288 @@
+{
+  "url": "https://www.rainforesttrust.org/",
+  "checked_at": "2026-11-20 08:55 UTC",
+  "verdict": {
+    "status": "ready_with_warnings",
+    "reason": "Page load under 6 s",
+    "blockers": [],
+    "warnings": [
+      "page_speed"
+    ]
+  },
+  "checklist": [
+    {
+      "id": "page_reachable",
+      "title": "Page loads in a headless browser",
+      "status": "pass",
+      "detail": "HTTP 200, final URL https://www.rainforesttrust.org/",
+      "evidence": [
+        "https://www.rainforesttrust.org/"
+      ],
+      "blocking": true
+    },
+    {
+      "id": "fu_code_in_source",
+      "title": "Installation code is in the page source",
+      "status": "pass",
+      "detail": "account ID(s): ACMRCWPB",
+      "evidence": [
+        ".href;o.l=[]; for(i=0;i<7;i++)o[l[i]]=o(l[i]);w[n]=o} })(window,document,'script','FundraiseUp','ACMRCWPB');</script> <!-- End Fundraise Up --> </head> <body> <n"
+      ],
+      "blocking": true
+    },
+    {
+      "id": "fu_in_head",
+      "title": "Code is in <head>, last script",
+      "status": "pass",
+      "detail": "Found in <head> with no scripts after it.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "fu_single_account",
+      "title": "One account ID on the page",
+      "status": "pass",
+      "detail": "ACMRCWPB",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "fu_widget_loads",
+      "title": "Widget script loads",
+      "status": "pass",
+      "detail": "HTTP 200, 17 requests to vendor hosts.",
+      "evidence": [
+        "https://cdn.fundraiseup.com/widget/ACMRCWPB"
+      ],
+      "blocking": true
+    },
+    {
+      "id": "fu_no_console_errors",
+      "title": "No widget errors in console",
+      "status": "pass",
+      "detail": "None recorded.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "fu_checkout_links",
+      "title": "Donate links open the checkout",
+      "status": "pass",
+      "detail": "2 '?form=' link(s): FUNAQFHNLKJ, FUNRGCCWCNJ",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "gtm_container",
+      "title": "Google Tag Manager container",
+      "status": "pass",
+      "detail": "GTM-TQZN89M",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "ga4",
+      "title": "GA4 measurement ID",
+      "status": "pass",
+      "detail": "G-MVP5KC1KV6",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "meta_pixel",
+      "title": "Meta Pixel",
+      "status": "pass",
+      "detail": "loaded, pixel id(s): 162328464462089, 5913213552134911",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "consent_banner",
+      "title": "Cookie consent tool",
+      "status": "pass",
+      "detail": "CookieYes",
+      "evidence": [
+        "https://cdn-cookieyes.com/client_data/bce0e242974d3ef4aada5386/script.js"
+      ],
+      "blocking": false
+    },
+    {
+      "id": "other_platforms",
+      "title": "No other donation tool on the page",
+      "status": "pass",
+      "detail": "None found.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "page_speed",
+      "title": "Page load under 6 s",
+      "status": "warn",
+      "detail": "load event at 6.3s",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "console_errors",
+      "title": "Console errors (any source)",
+      "status": "info",
+      "detail": "1 error(s)",
+      "evidence": [
+        "Failed to load resource: the server responded with a status of 400 ()"
+      ],
+      "blocking": false
+    }
+  ],
+  "facts": {
+    "url": "https://www.rainforesttrust.org/",
+    "page": {
+      "status": 200,
+      "final_url": "https://www.rainforesttrust.org/",
+      "https": true,
+      "load_error": null,
+      "load_ms": 6267,
+      "dom_content_loaded_ms": 1025,
+      "check_seconds": 10.7,
+      "request_count": 109,
+      "failed_request_count": 0,
+      "console_error_count": 1,
+      "console_errors_sample": [
+        "Failed to load resource: the server responded with a status of 400 ()"
+      ],
+      "page_errors_sample": [],
+      "bot_challenge": false
+    },
+    "fundraiseup": {
+      "installed_in_source": true,
+      "loaded_at_runtime": true,
+      "account_ids": [
+        "ACMRCWPB"
+      ],
+      "snippet_count_in_source": 1,
+      "in_head": true,
+      "scripts_after_in_head": 0,
+      "source_excerpt": ".href;o.l=[]; for(i=0;i<7;i++)o[l[i]]=o(l[i]);w[n]=o} })(window,document,'script','FundraiseUp','ACMRCWPB');</script> <!-- End Fundraise Up --> </head> <body> <n",
+      "widget_requests": [
+        {
+          "account_id": "ACMRCWPB",
+          "url": "https://cdn.fundraiseup.com/widget/ACMRCWPB",
+          "status": 200
+        }
+      ],
+      "request_count": 17,
+      "failed_requests": [],
+      "console_errors": [],
+      "csp_errors": [],
+      "global_object": "function",
+      "checkout_form_links": [
+        "FUNAQFHNLKJ",
+        "FUNRGCCWCNJ"
+      ],
+      "inserted_by": {
+        "kind": "script",
+        "container": null,
+        "script": "https://www.rainforesttrust.org/"
+      }
+    },
+    "tags": {
+      "gtm": {
+        "container_ids": [
+          "GTM-TQZN89M"
+        ],
+        "loaded_ids": [
+          "GTM-TQZN89M"
+        ],
+        "in_source_ids": [
+          "GTM-TQZN89M"
+        ],
+        "dataLayer_entries": 12
+      },
+      "ga4": {
+        "measurement_ids": [
+          "G-MVP5KC1KV6"
+        ],
+        "collect_hits_for": [
+          "G-MVP5KC1KV6"
+        ]
+      },
+      "meta_pixel": {
+        "loaded": true,
+        "pixel_ids": [
+          "162328464462089",
+          "5913213552134911"
+        ]
+      },
+      "consent": [
+        {
+          "name": "CookieYes",
+          "evidence": "https://cdn-cookieyes.com/client_data/bce0e242974d3ef4aada5386/script.js"
+        }
+      ]
+    },
+    "other_donation_platforms": []
+  },
+  "ai": {
+    "summary": "The page https://www.rainforesttrust.org/ loaded with HTTP 200 in the headless browser. The FundraiseUp code is in the page source once, in the head, with account ID ACMRCWPB. The widget script loaded from the vendor host with HTTP 200. Two donate links with form IDs FUNAQFHNLKJ and FUNRGCCWCNJ were found. The browser did not click these links, so checkout behavior was not tested. Google Tag Manager (GTM-TQZN89M), GA4 (G-MVP5KC1KV6), Meta Pixel (two pixel IDs), and CookieYes were found. No other donation tool was found. The page load event took 6.3 seconds, which is over the 6 second limit. The verdict is ready with warnings. One console error was recorded: a 400 response from a resource.",
+    "risks": [
+      {
+        "title": "Page load is slow",
+        "severity": "medium",
+        "detail": "The load event finished at 6.3 seconds. The limit is 6 seconds. The verdict is ready with warnings, not blocked.",
+        "check_ids": [
+          "page_speed"
+        ]
+      },
+      {
+        "title": "One console error on the page",
+        "severity": "low",
+        "detail": "The browser recorded one console error: a failed resource with HTTP status 400. The source of the resource was not recorded. The FundraiseUp widget reported no console errors.",
+        "check_ids": [
+          "console_errors",
+          "fu_no_console_errors"
+        ]
+      }
+    ],
+    "next_steps": [
+      {
+        "owner": "customer",
+        "action": "Review the page load time and reduce the load event time below 6 seconds. Check large scripts or images on the homepage.",
+        "check_ids": [
+          "page_speed"
+        ]
+      },
+      {
+        "owner": "customer",
+        "action": "Find the resource that returns a 400 error on the homepage and fix or remove it.",
+        "check_ids": [
+          "console_errors"
+        ]
+      },
+      {
+        "owner": "onboarding_team",
+        "action": "Confirm with the customer that the FundraiseUp donate links FUNAQFHNLKJ and FUNRGCCWCNJ open the correct checkout. The browser did not test this.",
+        "check_ids": [
+          "fu_checkout_links"
+        ]
+      },
+      {
+        "owner": "onboarding_team",
+        "action": "Re-run this check after the customer makes changes to confirm the load time and console error are resolved.",
+        "check_ids": [
+          "page_speed",
+          "console_errors"
+        ]
+      }
+    ],
+    "customer_email": {
+      "subject": "A few fixes before your donation page goes live",
+      "body": "Hello,\n\nThanks for setting up your FundraiseUp donation tools on rainforesttrust.org. Most of the setup looks good. The page loads, the FundraiseUp code and widget are in place, and your tracking tools were found.\n\nPlease make two fixes on your homepage:\n\n1. Speed up the page. It currently takes about 6.3 seconds to finish loading. Please bring it under 6 seconds. Large images and extra scripts are common causes.\n\n2. Fix one failing resource. The page returns a 400 error when loading one file. Please find that file and fix or remove it.\n\nOnce these are done, let us know and we will run the check again.\n\nThank you,\nOnboarding Team"
+    },
+    "_dropped_uncited": 0,
+    "_usage": {
+      "model": "claude-haiku-5-5",
+      "input_tokens": 3316,
+      "output_tokens": 1021,
+      "cost_usd": 0.00084
+    }
+  }
+}

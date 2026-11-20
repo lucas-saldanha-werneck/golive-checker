@@ -1,0 +1,230 @@
+{
+  "url": "https://www.hrw.org/",
+  "checked_at": "2026-11-20 08:55 UTC",
+  "verdict": {
+    "status": "not_installed",
+    "reason": "installation code missing",
+    "blockers": [
+      "fu_code_in_source"
+    ],
+    "warnings": []
+  },
+  "checklist": [
+    {
+      "id": "page_reachable",
+      "title": "Page loads in a headless browser",
+      "status": "pass",
+      "detail": "HTTP 200, final URL https://www.hrw.org/",
+      "evidence": [
+        "https://www.hrw.org/"
+      ],
+      "blocking": true
+    },
+    {
+      "id": "fu_code_in_source",
+      "title": "Installation code is in the page source",
+      "status": "fail",
+      "detail": "No installation code found in the source and no widget request recorded.",
+      "evidence": [],
+      "blocking": true
+    },
+    {
+      "id": "gtm_container",
+      "title": "Google Tag Manager container",
+      "status": "pass",
+      "detail": "GTM-W5D7ZP",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "ga4",
+      "title": "GA4 measurement ID",
+      "status": "pass",
+      "detail": "G-7G2G6XTV4C, G-8G7WH8R2Z8",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "meta_pixel",
+      "title": "Meta Pixel",
+      "status": "pass",
+      "detail": "loaded, pixel id(s): 1179892355551430",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "consent_banner",
+      "title": "Cookie consent tool",
+      "status": "info",
+      "detail": "No known consent tool detected. Needed for EU/UK visitors; vendor cookies need a consent setup.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "other_platforms",
+      "title": "No other donation tool on the page",
+      "status": "pass",
+      "detail": "None found.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "page_speed",
+      "title": "Page load under 6 s",
+      "status": "pass",
+      "detail": "load event at 3.3s",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "console_errors",
+      "title": "Console errors (any source)",
+      "status": "info",
+      "detail": "2 error(s)",
+      "evidence": [
+        "Loading the script 'https://bat.bing.com/bat.js' violates the following Content Security Policy directive: \"script-src 'self' 'report-sample' 'unsafe-inline' 'u",
+        "Loading the script 'https://conversions.digitalwerksautomation.com/api/fb.min.js' violates the following Content Security Policy directive: \"script-src 'self' '"
+      ],
+      "blocking": false
+    }
+  ],
+  "facts": {
+    "url": "https://www.hrw.org/",
+    "page": {
+      "status": 200,
+      "final_url": "https://www.hrw.org/",
+      "https": true,
+      "load_error": null,
+      "load_ms": 3319,
+      "dom_content_loaded_ms": 1578,
+      "check_seconds": 7.7,
+      "request_count": 86,
+      "failed_request_count": 2,
+      "console_error_count": 2,
+      "console_errors_sample": [
+        "Loading the script 'https://bat.bing.com/bat.js' violates the following Content Security Policy directive: \"script-src 'self' 'report-sample' 'unsafe-inline' 'unsafe-eval' features.hrw.org sst.hrw.org www.googletagmanager.com www.googleadservices.com connect.facebook.net static.ads-twitter.com analytics.twitter.com googleads.g.doubleclick.net *.clarity.ms js-agent.newrelic.com bam.nr-data.net www.instagram.com ajax.googleapis.com www.google-analytics.com code.jquery.com cdn.syndication.twimg.com",
+        "Loading the script 'https://conversions.digitalwerksautomation.com/api/fb.min.js' violates the following Content Security Policy directive: \"script-src 'self' 'report-sample' 'unsafe-inline' 'unsafe-eval' features.hrw.org sst.hrw.org www.googletagmanager.com www.googleadservices.com connect.facebook.net static.ads-twitter.com analytics.twitter.com googleads.g.doubleclick.net *.clarity.ms js-agent.newrelic.com bam.nr-data.net www.instagram.com ajax.googleapis.com www.google-analytics.com code.jqu"
+      ],
+      "page_errors_sample": [],
+      "bot_challenge": false
+    },
+    "fundraiseup": {
+      "installed_in_source": false,
+      "loaded_at_runtime": false,
+      "account_ids": [],
+      "snippet_count_in_source": 0,
+      "in_head": false,
+      "scripts_after_in_head": 0,
+      "source_excerpt": null,
+      "widget_requests": [],
+      "request_count": 0,
+      "failed_requests": [],
+      "console_errors": [],
+      "csp_errors": [],
+      "global_object": "undefined",
+      "checkout_form_links": [],
+      "inserted_by": null
+    },
+    "tags": {
+      "gtm": {
+        "container_ids": [
+          "GTM-W5D7ZP"
+        ],
+        "loaded_ids": [
+          "GTM-W5D7ZP"
+        ],
+        "in_source_ids": [
+          "GTM-W5D7ZP"
+        ],
+        "dataLayer_entries": 5
+      },
+      "ga4": {
+        "measurement_ids": [
+          "G-7G2G6XTV4C",
+          "G-8G7WH8R2Z8"
+        ],
+        "collect_hits_for": [
+          "G-7G2G6XTV4C"
+        ]
+      },
+      "meta_pixel": {
+        "loaded": true,
+        "pixel_ids": [
+          "1179892355551430"
+        ]
+      },
+      "consent": []
+    },
+    "other_donation_platforms": []
+  },
+  "ai": {
+    "summary": "The page https://www.hrw.org/ loaded in the headless browser (HTTP 200, load event at 3.3s). No FundraiseUp installation code was found in the page source, and no FundraiseUp widget request was recorded. The FundraiseUp global object is not defined. The browser did not click anything, so no checkout or donate button was tested. Google Tag Manager container GTM-W5D7ZP, GA4 IDs G-7G2G6XTV4C and G-8G7WH8R2Z8, and Meta Pixel 1179892355551430 were found. No other donation tool was found. No known cookie consent tool was detected. Two console errors were recorded, both Content Security Policy blocks on third-party scripts (bat.bing.com and conversions.digitalwerksautomation.com). Verdict: not installed, because installation code is missing.",
+    "risks": [
+      {
+        "title": "FundraiseUp installation code is missing",
+        "severity": "high",
+        "detail": "No installation code was found in the page source and no widget request was recorded. The verdict is not installed.",
+        "check_ids": [
+          "fu_code_in_source"
+        ]
+      },
+      {
+        "title": "No cookie consent tool detected",
+        "severity": "medium",
+        "detail": "No known consent tool was detected. Consent is needed for EU and UK visitors, and vendor cookies need a consent setup.",
+        "check_ids": [
+          "consent_banner"
+        ]
+      },
+      {
+        "title": "Content Security Policy blocks two third-party scripts",
+        "severity": "low",
+        "detail": "The browser recorded two CSP errors blocking bat.bing.com and conversions.digitalwerksautomation.com scripts. The cause was not checked.",
+        "check_ids": [
+          "console_errors"
+        ]
+      }
+    ],
+    "next_steps": [
+      {
+        "owner": "customer",
+        "action": "Add the FundraiseUp installation code to the page source of https://www.hrw.org/. Make sure it is in the head of the page.",
+        "check_ids": [
+          "fu_code_in_source"
+        ]
+      },
+      {
+        "owner": "customer",
+        "action": "Set up a cookie consent tool for EU and UK visitors, and make sure vendor cookies respect it.",
+        "check_ids": [
+          "consent_banner"
+        ]
+      },
+      {
+        "owner": "customer",
+        "action": "Review the Content Security Policy on the site so the Bing and Meta scripts are allowed or removed, if they are needed.",
+        "check_ids": [
+          "console_errors"
+        ]
+      },
+      {
+        "owner": "onboarding_team",
+        "action": "Confirm with the customer that the installation code change is live, then re-run this check.",
+        "check_ids": [
+          "fu_code_in_source"
+        ]
+      }
+    ],
+    "customer_email": {
+      "subject": "Next steps for installing FundraiseUp on hrw.org",
+      "body": "Hello,\n\nThank you for working with us to set up donations on your site. We checked https://www.hrw.org/ and found that the FundraiseUp installation code is not in the page source yet.\n\nPlease make these changes:\n\n1. Add the FundraiseUp installation code to the head of the page at https://www.hrw.org/. We will send you the exact code to copy.\n2. Set up a cookie consent tool for visitors in the EU and UK, and make sure vendor cookies respect the visitor's choice.\n3. Review your Content Security Policy. Two third-party scripts, bat.bing.com and conversions.digitalwerksautomation.com, are being blocked. Allow them or remove them if you no longer use them.\n\nOnce these are done, let us know and we will run the check again.\n\nThank you,\nOnboarding Team"
+    },
+    "_dropped_uncited": 0,
+    "_usage": {
+      "model": "claude-haiku-5-5",
+      "input_tokens": 2659,
+      "output_tokens": 1128,
+      "cost_usd": 0.00083
+    }
+  }
+}

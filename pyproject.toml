@@ -1,0 +1,30 @@
+[project]
+name = "golive-checker"
+version = "0.1.0"
+description = "Check that a nonprofit site has the donation widget and tracking tags installed, and draft a go-live checklist."
+readme = "README.md"
+authors = [
+    { name = "Lucas Saldanha Werneck", email = "lucas@2olhares.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "anthropic>=2.11.0",
+    "playwright==1.65.2",
+    "pydantic>=2.14.4",
+]
+
+[project.scripts]
+golive-checker = "golive_checker.cli:main"
+
+[build-system]
+requires = ["uv_build>=0.11.6,<0.12.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["tests"]
+testpaths = ["tests"]

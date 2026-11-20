@@ -1,0 +1,234 @@
+{
+  "url": "https://www.thetrevorproject.org/",
+  "checked_at": "2026-11-20 08:56 UTC",
+  "verdict": {
+    "status": "not_installed",
+    "reason": "installation code missing",
+    "blockers": [
+      "fu_code_in_source"
+    ],
+    "warnings": [
+      "page_speed"
+    ]
+  },
+  "checklist": [
+    {
+      "id": "page_reachable",
+      "title": "Page loads in a headless browser",
+      "status": "pass",
+      "detail": "HTTP 200, final URL https://www.thetrevorproject.org/",
+      "evidence": [
+        "https://www.thetrevorproject.org/"
+      ],
+      "blocking": true
+    },
+    {
+      "id": "fu_code_in_source",
+      "title": "Installation code is in the page source",
+      "status": "fail",
+      "detail": "No installation code found in the source and no widget request recorded.",
+      "evidence": [],
+      "blocking": true
+    },
+    {
+      "id": "gtm_container",
+      "title": "Google Tag Manager container",
+      "status": "pass",
+      "detail": "GTM-K652FKQ",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "ga4",
+      "title": "GA4 measurement ID",
+      "status": "pass",
+      "detail": "G-A2ABC2ABCD, G-BD80V9CE2Q, G-DZG3N29WTN",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "meta_pixel",
+      "title": "Meta Pixel",
+      "status": "pass",
+      "detail": "loaded, pixel id(s): 249611735914172",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "consent_banner",
+      "title": "Cookie consent tool",
+      "status": "info",
+      "detail": "No known consent tool detected. Needed for EU/UK visitors; vendor cookies need a consent setup.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "other_platforms",
+      "title": "No other donation tool on the page",
+      "status": "pass",
+      "detail": "None found.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "page_speed",
+      "title": "Page load under 6 s",
+      "status": "warn",
+      "detail": "load event at 8.0s",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "console_errors",
+      "title": "Console errors (any source)",
+      "status": "info",
+      "detail": "2 error(s)",
+      "evidence": [
+        "requestStorageAccess: Permission denied.",
+        "Failed to load resource: the server responded with a status of 451 ()"
+      ],
+      "blocking": false
+    }
+  ],
+  "facts": {
+    "url": "https://www.thetrevorproject.org/",
+    "page": {
+      "status": 200,
+      "final_url": "https://www.thetrevorproject.org/",
+      "https": true,
+      "load_error": null,
+      "load_ms": 7982,
+      "dom_content_loaded_ms": 4135,
+      "check_seconds": 12.2,
+      "request_count": 153,
+      "failed_request_count": 2,
+      "console_error_count": 2,
+      "console_errors_sample": [
+        "requestStorageAccess: Permission denied.",
+        "Failed to load resource: the server responded with a status of 451 ()"
+      ],
+      "page_errors_sample": [],
+      "bot_challenge": false
+    },
+    "fundraiseup": {
+      "installed_in_source": false,
+      "loaded_at_runtime": false,
+      "account_ids": [],
+      "snippet_count_in_source": 0,
+      "in_head": false,
+      "scripts_after_in_head": 0,
+      "source_excerpt": null,
+      "widget_requests": [],
+      "request_count": 0,
+      "failed_requests": [],
+      "console_errors": [],
+      "csp_errors": [],
+      "global_object": "undefined",
+      "checkout_form_links": [],
+      "inserted_by": null
+    },
+    "tags": {
+      "gtm": {
+        "container_ids": [
+          "GTM-K652FKQ"
+        ],
+        "loaded_ids": [
+          "GTM-K652FKQ"
+        ],
+        "in_source_ids": [
+          "GTM-K652FKQ"
+        ],
+        "dataLayer_entries": 11
+      },
+      "ga4": {
+        "measurement_ids": [
+          "G-A2ABC2ABCD",
+          "G-BD80V9CE2Q",
+          "G-DZG3N29WTN"
+        ],
+        "collect_hits_for": [
+          "G-BD80V9CE2Q",
+          "G-DZG3N29WTN"
+        ]
+      },
+      "meta_pixel": {
+        "loaded": true,
+        "pixel_ids": [
+          "249611735914172"
+        ]
+      },
+      "consent": []
+    },
+    "other_donation_platforms": []
+  },
+  "ai": {
+    "summary": "The page loaded (HTTP 200, final URL https://www.thetrevorproject.org/). No FundraiseUp installation code was found in the page source, and no FundraiseUp widget request was recorded. The verdict is not installed, with one blocker: installation code missing. Tags found: Google Tag Manager container GTM-K652FKQ; GA4 measurement IDs G-A2ABC2ABCD, G-BD80V9CE2Q, G-DZG3N29WTN (hits recorded for G-BD80V9CE2Q and G-DZG3N29WTN); Meta Pixel 249611735914172 loaded. No other donation tool was found. No known cookie consent tool was detected. The page load event took 8.0 seconds, over the 6 second target. The browser did not click any links, so checkout behavior was not tested. Two console errors were recorded, and two requests failed.",
+    "risks": [
+      {
+        "title": "FundraiseUp installation code is missing",
+        "severity": "high",
+        "detail": "No installation code was found in the page source and no widget request was recorded. The install is not in place on this page.",
+        "check_ids": [
+          "fu_code_in_source"
+        ]
+      },
+      {
+        "title": "No cookie consent tool detected",
+        "severity": "medium",
+        "detail": "No known consent tool was detected. Visitors from the EU and UK need a consent setup for vendor cookies.",
+        "check_ids": [
+          "consent_banner"
+        ]
+      },
+      {
+        "title": "Slow page load",
+        "severity": "low",
+        "detail": "The load event fired at 8.0 seconds, over the 6 second target.",
+        "check_ids": [
+          "page_speed"
+        ]
+      }
+    ],
+    "next_steps": [
+      {
+        "owner": "customer",
+        "action": "Add the FundraiseUp installation code to the page source of https://www.thetrevorproject.org/, then tell the onboarding team when it is live.",
+        "check_ids": [
+          "fu_code_in_source"
+        ]
+      },
+      {
+        "owner": "customer",
+        "action": "Set up a cookie consent tool on the site so EU and UK visitors can accept or decline vendor cookies.",
+        "check_ids": [
+          "consent_banner"
+        ]
+      },
+      {
+        "owner": "onboarding_team",
+        "action": "Confirm with the customer that the installation code was added, then re-run this check.",
+        "check_ids": [
+          "fu_code_in_source"
+        ]
+      },
+      {
+        "owner": "onboarding_team",
+        "action": "Confirm with the customer whether the cookie consent setup is planned, and note the answer in the account record.",
+        "check_ids": [
+          "consent_banner"
+        ]
+      }
+    ],
+    "customer_email": {
+      "subject": "Next steps to launch your donation page",
+      "body": "Hello,\n\nThank you for working with us to set up online donations. We ran a check on https://www.thetrevorproject.org/. The page loads, but the donation installation code was not found in the page source, so the donation tool is not live yet.\n\nPlease do the following:\n\n1. Add the donation installation code to the page source of https://www.thetrevorproject.org/. Our team will send the code to you separately.\n2. Set up a cookie consent tool so visitors in the EU and UK can accept or decline vendor cookies.\n\nOnce the code is added, please reply to this email so we can re-run the check.\n\nThank you,\nThe Onboarding Team"
+    },
+    "_dropped_uncited": 0,
+    "_usage": {
+      "model": "claude-haiku-5-5",
+      "input_tokens": 2625,
+      "output_tokens": 1032,
+      "cost_usd": 0.00078
+    }
+  }
+}

@@ -1,0 +1,245 @@
+{
+  "url": "https://oceana.org/",
+  "checked_at": "2026-11-20 08:55 UTC",
+  "verdict": {
+    "status": "not_installed",
+    "reason": "installation code missing",
+    "blockers": [
+      "fu_code_in_source"
+    ],
+    "warnings": []
+  },
+  "checklist": [
+    {
+      "id": "page_reachable",
+      "title": "Page loads in a headless browser",
+      "status": "pass",
+      "detail": "HTTP 200, final URL https://oceana.org/",
+      "evidence": [
+        "https://oceana.org/"
+      ],
+      "blocking": true
+    },
+    {
+      "id": "fu_code_in_source",
+      "title": "Installation code is in the page source",
+      "status": "fail",
+      "detail": "No installation code found in the source and no widget request recorded.",
+      "evidence": [],
+      "blocking": true
+    },
+    {
+      "id": "gtm_container",
+      "title": "Google Tag Manager container",
+      "status": "pass",
+      "detail": "GTM-NGMV83",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "ga4",
+      "title": "GA4 measurement ID",
+      "status": "pass",
+      "detail": "G-05PMM8GBNZ, G-9HNNDLLPKR, G-HT8KYEQFRH",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "meta_pixel",
+      "title": "Meta Pixel",
+      "status": "pass",
+      "detail": "loaded, pixel id(s): 1519122081743399",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "consent_banner",
+      "title": "Cookie consent tool",
+      "status": "pass",
+      "detail": "CookieYes",
+      "evidence": [
+        "https://cdn-cookieyes.com/client_data/2fb46d9a45eba8b7a4df2e60/script.js"
+      ],
+      "blocking": false
+    },
+    {
+      "id": "other_platforms",
+      "title": "No other donation tool on the page",
+      "status": "info",
+      "detail": "Engaging Networks (linked from page)",
+      "evidence": [
+        "https://ca-p2p.engagingnetworks.app/24225/diy?ea.tracking.id=waystogive"
+      ],
+      "blocking": false
+    },
+    {
+      "id": "page_speed",
+      "title": "Page load under 6 s",
+      "status": "pass",
+      "detail": "load event at 4.7s",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "console_errors",
+      "title": "Console errors (any source)",
+      "status": "info",
+      "detail": "3 error(s)",
+      "evidence": [
+        "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+        "Refused to execute script from 'https://action.media6degrees.com/orbserv/nspix?adv=cl174113446236656&ns=9207&nc=MCOHP&ncv=49' because its MIME type ('image/gif'",
+        "Refused to execute script from 'https://action.media6degrees.com/orbserv/nspix?adv=cl174113446236656&ns=9207&nc=MCOAPS&ncv=49' because its MIME type ('image/gif"
+      ],
+      "blocking": false
+    }
+  ],
+  "facts": {
+    "url": "https://oceana.org/",
+    "page": {
+      "status": 200,
+      "final_url": "https://oceana.org/",
+      "https": true,
+      "load_error": null,
+      "load_ms": 4739,
+      "dom_content_loaded_ms": 891,
+      "check_seconds": 9.0,
+      "request_count": 167,
+      "failed_request_count": 1,
+      "console_error_count": 3,
+      "console_errors_sample": [
+        "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+        "Refused to execute script from 'https://action.media6degrees.com/orbserv/nspix?adv=cl174113446236656&ns=9207&nc=MCOHP&ncv=49' because its MIME type ('image/gif') is not executable.",
+        "Refused to execute script from 'https://action.media6degrees.com/orbserv/nspix?adv=cl174113446236656&ns=9207&nc=MCOAPS&ncv=49' because its MIME type ('image/gif') is not executable."
+      ],
+      "page_errors_sample": [
+        "Cannot read properties of null (reading 'addEventListener')"
+      ],
+      "bot_challenge": false
+    },
+    "fundraiseup": {
+      "installed_in_source": false,
+      "loaded_at_runtime": false,
+      "account_ids": [],
+      "snippet_count_in_source": 0,
+      "in_head": false,
+      "scripts_after_in_head": 0,
+      "source_excerpt": null,
+      "widget_requests": [],
+      "request_count": 0,
+      "failed_requests": [],
+      "console_errors": [],
+      "csp_errors": [],
+      "global_object": "undefined",
+      "checkout_form_links": [],
+      "inserted_by": null
+    },
+    "tags": {
+      "gtm": {
+        "container_ids": [
+          "GTM-NGMV83"
+        ],
+        "loaded_ids": [
+          "GTM-NGMV83"
+        ],
+        "in_source_ids": [
+          "GTM-NGMV83"
+        ],
+        "dataLayer_entries": 11
+      },
+      "ga4": {
+        "measurement_ids": [
+          "G-05PMM8GBNZ",
+          "G-9HNNDLLPKR",
+          "G-HT8KYEQFRH"
+        ],
+        "collect_hits_for": [
+          "G-05PMM8GBNZ",
+          "G-9HNNDLLPKR",
+          "G-HT8KYEQFRH"
+        ]
+      },
+      "meta_pixel": {
+        "loaded": true,
+        "pixel_ids": [
+          "1519122081743399"
+        ]
+      },
+      "consent": [
+        {
+          "name": "CookieYes",
+          "evidence": "https://cdn-cookieyes.com/client_data/2fb46d9a45eba8b7a4df2e60/script.js"
+        }
+      ]
+    },
+    "other_donation_platforms": [
+      {
+        "name": "Engaging Networks",
+        "how": "linked from page",
+        "evidence": "https://ca-p2p.engagingnetworks.app/24225/diy?ea.tracking.id=waystogive"
+      }
+    ]
+  },
+  "ai": {
+    "summary": "The page at https://oceana.org/ loaded in the headless browser (HTTP 200, load event at 4.7 s). No FundRaiseUp installation code was found in the page source, and no FundRaiseUp widget request was recorded. The verdict is not installed, with the reason 'installation code missing'. GTM, GA4, Meta Pixel and CookieYes were found on the page. A link to Engaging Networks was found on the page. The browser did not click any buttons, so this check does not say whether any donate or checkout button works. The page had 3 console errors and 1 failed request.",
+    "risks": [
+      {
+        "title": "FundRaiseUp installation code is missing",
+        "severity": "high",
+        "detail": "No installation code was found in the page source and no widget request was recorded. This is the blocking item for the install.",
+        "check_ids": [
+          "fu_code_in_source"
+        ]
+      },
+      {
+        "title": "Another donation tool is linked from the page",
+        "severity": "medium",
+        "detail": "A link to Engaging Networks was found on the page. The check does not show whether this link is used for donations.",
+        "check_ids": [
+          "other_platforms"
+        ]
+      },
+      {
+        "title": "Console errors on the page",
+        "severity": "low",
+        "detail": "Three console errors were recorded, including one failed network name lookup and scripts refused for MIME type reasons from media6degrees.com.",
+        "check_ids": [
+          "console_errors"
+        ]
+      }
+    ],
+    "next_steps": [
+      {
+        "owner": "onboarding_team",
+        "action": "Confirm with the customer whether Engaging Networks is still their active donation tool and whether they plan to move to FundRaiseUp.",
+        "check_ids": [
+          "other_platforms"
+        ]
+      },
+      {
+        "owner": "customer",
+        "action": "Add the FundRaiseUp installation code to the page source of https://oceana.org/ as provided during onboarding.",
+        "check_ids": [
+          "fu_code_in_source"
+        ]
+      },
+      {
+        "owner": "onboarding_team",
+        "action": "Re-run this check after the customer confirms the installation code is added, and confirm the widget request and installation code appear.",
+        "check_ids": [
+          "fu_code_in_source"
+        ]
+      }
+    ],
+    "customer_email": {
+      "subject": "Next step to install FundRaiseUp on oceana.org",
+      "body": "Hello,\n\nThank you for working with us to set up FundRaiseUp on your website. We checked https://oceana.org/ and the FundRaiseUp installation code was not found in the page source.\n\nPlease do the following:\n\n1. Add the FundRaiseUp installation code to the page source of https://oceana.org/. We will send you the code if you do not have it.\n2. Let us know once the change is live so we can run the check again.\n3. Tell us whether the Engaging Networks donation link on your page is still in use, so we can plan the next steps.\n\nThank you,\nThe Onboarding Team"
+    },
+    "_dropped_uncited": 0,
+    "_usage": {
+      "model": "claude-haiku-5-5",
+      "input_tokens": 2947,
+      "output_tokens": 890,
+      "cost_usd": 0.00074
+    }
+  }
+}

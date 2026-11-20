@@ -1,0 +1,22 @@
+url,note
+# Homepage HTML mentions the vendor (curl, 2026-11-20)
+https://www.rainforesttrust.org/,uses widget
+https://wildaid.org/,uses widget
+https://mercyforanimals.org/,uses widget
+https://bestfriends.org/,uses widget
+https://www.ifaw.org/,uses widget
+https://www.childrenshealthfund.org/,uses widget
+https://www.edf.org/,uses widget (config block seen)
+# Nonprofits I expected without it (curl of the homepage found no install code)
+https://oceana.org/,other
+https://www.hrw.org/,other
+https://earthjustice.org/,other
+https://www.givedirectly.org/,other
+https://www.charitywater.org/,other
+https://wck.org/,other
+https://www.thetrevorproject.org/,other
+https://www.nature.org/,other
+https://www.rescue.org/,other
+https://www.care.org/,other
+https://www.givewell.org/,other
+https://www.pih.org/,curl got HTTP 403

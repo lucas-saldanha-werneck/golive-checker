@@ -1,0 +1,272 @@
+{
+  "url": "https://www.edf.org/",
+  "checked_at": "2026-11-20 08:55 UTC",
+  "verdict": {
+    "status": "ready_with_warnings",
+    "reason": "Installation code is in the page source; Google Tag Manager container; GA4 measurement ID",
+    "blockers": [],
+    "warnings": [
+      "fu_code_in_source",
+      "gtm_container",
+      "ga4"
+    ]
+  },
+  "checklist": [
+    {
+      "id": "page_reachable",
+      "title": "Page loads in a headless browser",
+      "status": "pass",
+      "detail": "HTTP 200, final URL https://www.edf.org/",
+      "evidence": [
+        "https://www.edf.org/"
+      ],
+      "blocking": true
+    },
+    {
+      "id": "fu_code_in_source",
+      "title": "Installation code is in the page source",
+      "status": "warn",
+      "detail": "Widget loads at runtime but the code is not in the server HTML. Inserted by: JavaScript from https://assets.edfcdn.org/assets/global/dist/js/utilities.min.js?v=2026112002 (not a tag manager). Vendor docs ask for the code in the global <head> and confirm it by viewing the page source.",
+      "evidence": [
+        "https://cdn.fundraiseup.com/widget/AQBHBSYR",
+        "https://assets.edfcdn.org/assets/global/dist/js/utilities.min.js?v=2026112002"
+      ],
+      "blocking": false
+    },
+    {
+      "id": "fu_single_account",
+      "title": "One account ID on the page",
+      "status": "pass",
+      "detail": "AQBHBSYR",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "fu_widget_loads",
+      "title": "Widget script loads",
+      "status": "pass",
+      "detail": "HTTP 200, 24 requests to vendor hosts.",
+      "evidence": [
+        "https://cdn.fundraiseup.com/widget/AQBHBSYR"
+      ],
+      "blocking": true
+    },
+    {
+      "id": "fu_no_console_errors",
+      "title": "No widget errors in console",
+      "status": "pass",
+      "detail": "None recorded.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "fu_checkout_links",
+      "title": "Donate links open the checkout",
+      "status": "pass",
+      "detail": "1 '?form=' link(s): eoy-match-web",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "gtm_container",
+      "title": "Google Tag Manager container",
+      "status": "warn",
+      "detail": "No GTM container. Checkout events (donation, open, close) reach GA4 through a GTM container template.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "ga4",
+      "title": "GA4 measurement ID",
+      "status": "warn",
+      "detail": "No GA4 property seen loading or sending hits (may load only after consent).",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "meta_pixel",
+      "title": "Meta Pixel",
+      "status": "info",
+      "detail": "Not seen (optional; may load after consent).",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "consent_banner",
+      "title": "Cookie consent tool",
+      "status": "info",
+      "detail": "No known consent tool detected. Needed for EU/UK visitors; vendor cookies need a consent setup.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "other_platforms",
+      "title": "No other donation tool on the page",
+      "status": "pass",
+      "detail": "None found.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "page_speed",
+      "title": "Page load under 6 s",
+      "status": "pass",
+      "detail": "load event at 2.4s",
+      "evidence": [],
+      "blocking": false
+    }
+  ],
+  "facts": {
+    "url": "https://www.edf.org/",
+    "page": {
+      "status": 200,
+      "final_url": "https://www.edf.org/",
+      "https": true,
+      "load_error": null,
+      "load_ms": 2437,
+      "dom_content_loaded_ms": 841,
+      "check_seconds": 7.2,
+      "request_count": 125,
+      "failed_request_count": 0,
+      "console_error_count": 0,
+      "console_errors_sample": [],
+      "page_errors_sample": [],
+      "bot_challenge": false
+    },
+    "fundraiseup": {
+      "installed_in_source": false,
+      "loaded_at_runtime": true,
+      "account_ids": [
+        "AQBHBSYR"
+      ],
+      "snippet_count_in_source": 0,
+      "in_head": false,
+      "scripts_after_in_head": 0,
+      "source_excerpt": null,
+      "widget_requests": [
+        {
+          "account_id": "AQBHBSYR",
+          "url": "https://cdn.fundraiseup.com/widget/AQBHBSYR",
+          "status": 200
+        }
+      ],
+      "request_count": 24,
+      "failed_requests": [],
+      "console_errors": [],
+      "csp_errors": [],
+      "global_object": "function",
+      "checkout_form_links": [
+        "eoy-match-web"
+      ],
+      "inserted_by": {
+        "kind": "script",
+        "container": null,
+        "script": "https://assets.edfcdn.org/assets/global/dist/js/utilities.min.js?v=2026112002"
+      }
+    },
+    "tags": {
+      "gtm": {
+        "container_ids": [],
+        "loaded_ids": [],
+        "in_source_ids": [],
+        "dataLayer_entries": 23
+      },
+      "ga4": {
+        "measurement_ids": [],
+        "collect_hits_for": []
+      },
+      "meta_pixel": {
+        "loaded": false,
+        "pixel_ids": []
+      },
+      "consent": []
+    },
+    "other_donation_platforms": []
+  },
+  "ai": {
+    "summary": "The page https://www.edf.org/ loaded with HTTP 200 in the headless browser. The FundraiseUp widget for account AQBHBSYR loads at runtime from cdn.fundraiseup.com with HTTP 200. The installation code is not in the server HTML. It is inserted by JavaScript from assets.edfcdn.org (utilities.min.js), not by a tag manager. No GTM container was found. No GA4 measurement ID was seen loading or sending hits, though GA4 may load only after consent. No Meta Pixel was seen. No cookie consent tool was detected. One donate link was found with the form parameter eoy-match-web. The browser did not click any link, so the checkout was not tested. No other donation tool was found. The page loaded in 2.4 seconds. The verdict is ready with warnings and no blockers.",
+    "risks": [
+      {
+        "title": "Install code is not in the page source",
+        "severity": "medium",
+        "detail": "The widget is added by JavaScript at runtime from a site script, not in the global head. Vendor docs ask for the code in the head and a page source check.",
+        "check_ids": [
+          "fu_code_in_source"
+        ]
+      },
+      {
+        "title": "No Google Tag Manager container found",
+        "severity": "medium",
+        "detail": "Checkout events such as donation, open, and close do not reach GA4 through a GTM container template as recorded.",
+        "check_ids": [
+          "gtm_container"
+        ]
+      },
+      {
+        "title": "No GA4 measurement ID seen",
+        "severity": "medium",
+        "detail": "No GA4 property was seen loading or sending hits. It may load only after consent, so this needs confirmation.",
+        "check_ids": [
+          "ga4"
+        ]
+      },
+      {
+        "title": "No cookie consent tool detected",
+        "severity": "low",
+        "detail": "No known consent tool was found. EU and UK visitors need one for vendor cookies.",
+        "check_ids": [
+          "consent_banner"
+        ]
+      }
+    ],
+    "next_steps": [
+      {
+        "owner": "onboarding_team",
+        "action": "Confirm with the customer whether GA4 loads only after consent, and check the GA4 property in the dashboard for the measurement ID.",
+        "check_ids": [
+          "ga4"
+        ]
+      },
+      {
+        "owner": "onboarding_team",
+        "action": "Confirm with the customer whether they use a tag manager and whether a GTM container is set up for checkout events.",
+        "check_ids": [
+          "gtm_container"
+        ]
+      },
+      {
+        "owner": "customer",
+        "action": "Ask your web team to place the FundraiseUp install code in the global head of the page instead of loading it through the site script, then view the page source to confirm it is there.",
+        "check_ids": [
+          "fu_code_in_source"
+        ]
+      },
+      {
+        "owner": "customer",
+        "action": "Ask your web team to add a cookie consent tool for EU and UK visitors and set up the vendor cookies to respect it.",
+        "check_ids": [
+          "consent_banner"
+        ]
+      },
+      {
+        "owner": "onboarding_team",
+        "action": "Re-run this check after the customer makes changes and test the donate link with the checkout in a normal browser.",
+        "check_ids": [
+          "fu_checkout_links",
+          "fu_code_in_source"
+        ]
+      }
+    ],
+    "customer_email": {
+      "subject": "A few fixes before your donation page is ready",
+      "body": "Hello,\n\nThank you for working with us to launch your donation page. We checked https://www.edf.org/ and found a few items to fix.\n\nPlease ask your web team to:\n\n1. Place the donation widget code in the global head of the page, not added by a site script. After the change, view the page source to confirm the code is there.\n\n2. Add a cookie consent tool for visitors in the EU and UK, and set up the donation vendor cookies to respect it.\n\nOnce these are done, let us know and we will run the check again.\n\nThank you,\nThe Onboarding Team"
+    },
+    "_dropped_uncited": 0,
+    "_usage": {
+      "model": "claude-haiku-5-5",
+      "input_tokens": 3013,
+      "output_tokens": 1188,
+      "cost_usd": 0.0009
+    }
+  }
+}

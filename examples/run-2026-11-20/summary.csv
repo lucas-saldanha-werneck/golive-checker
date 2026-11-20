@@ -1,0 +1,20 @@
+url,status,reason,account_ids,gtm,ga4,meta_pixel,consent,other_donation_tools,load_ms,check_seconds
+https://www.rainforesttrust.org/,ready_with_warnings,Page load under 6 s,ACMRCWPB,GTM-TQZN89M,G-MVP5KC1KV6,True,CookieYes,,6267,10.7
+https://wildaid.org/,ready,,AQTMUHNH,GTM-KF7HNF4 GTM-KZW6SPR,G-M6T97S534K,True,,,5922,10.2
+https://mercyforanimals.org/,ready_with_warnings,Installation code is in the page source,AVGENVAN,GTM-K524TFT GTM-M3LDFJ GTM-MGT2PJQJ GTM-YV5D9SSG31,G-B35EWX8EQ4 G-EN2Y9H0GJ5,True,,,5639,9.9
+https://bestfriends.org/,ready_with_warnings,"Code is in <head>, last script",AFZUYXBL,GTM-NMXDTP,G-7X412QBZQC G-JDV4SZ13C8,True,,,4750,9.0
+https://www.ifaw.org/,ready_with_warnings,"Code is in <head>, last script; Widget not held back by the consent tool; GA4 measurement ID",AWMWZJRX,GTM-W7GRNP,,False,Usercentrics,,4174,8.6
+https://www.childrenshealthfund.org/,ready_with_warnings,Google Tag Manager container,AVVHNSHB,,G-SXWX7Z8RFC,False,,,5151,9.7
+https://www.edf.org/,ready_with_warnings,Installation code is in the page source; Google Tag Manager container; GA4 measurement ID,AQBHBSYR,,,False,,,2437,7.2
+https://oceana.org/,not_installed,installation code missing,,GTM-NGMV83,G-05PMM8GBNZ G-9HNNDLLPKR G-HT8KYEQFRH,True,CookieYes,Engaging Networks,4739,9.0
+https://www.hrw.org/,not_installed,installation code missing,,GTM-W5D7ZP,G-7G2G6XTV4C G-8G7WH8R2Z8,True,,,3319,7.7
+https://earthjustice.org/,not_installed,installation code missing,,GTM-MXDNZTW,,False,Civic Cookie Control,,731,5.2
+https://www.givedirectly.org/,not_installed,installation code missing,,GTM-PJNMMGH,G-GV8XF9FJ16,True,,,3805,8.4
+https://www.charitywater.org/,not_installed,installation code missing,,GTM-P6DJRR,G-SKG6MDYX1T,False,CookieScript,,7609,12.2
+https://wck.org/,not_installed,installation code missing,,GTM-MKV74FD,G-5WKVY8503C,True,OneTrust,,9221,14.3
+https://www.thetrevorproject.org/,not_installed,installation code missing,,GTM-K652FKQ,G-A2ABC2ABCD G-BD80V9CE2Q G-DZG3N29WTN,True,,,7982,12.2
+https://www.nature.org/,not_installed,installation code missing,,,,True,OneTrust,,1805,6.1
+https://www.rescue.org/,ready_with_warnings,Installation code is in the page source,AFGSSTXA,GTM-5JH3VLS,G-DDZCWB8N2Y G-MCH4QLVDRD,True,OneTrust,,2606,7.0
+https://www.care.org/,not_installed,installation code missing,,GTM-WMMPLB,G-BE6GP7SC1M,True,,Blackbaud Luminate Online,7332,11.9
+https://www.givewell.org/,not_installed,installation code missing,,GTM-MKLT9TL,G-5Y1K5KX9ZG,False,,,2065,7.7
+https://www.pih.org/,unreachable,bot challenge / access denied page (HTTP 403),,,,False,,,1068,5.3

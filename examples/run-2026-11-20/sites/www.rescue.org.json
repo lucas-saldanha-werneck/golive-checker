@@ -1,0 +1,254 @@
+{
+  "url": "https://www.rescue.org/",
+  "checked_at": "2026-11-20 08:56 UTC",
+  "verdict": {
+    "status": "ready_with_warnings",
+    "reason": "Installation code is in the page source",
+    "blockers": [],
+    "warnings": [
+      "fu_code_in_source"
+    ]
+  },
+  "checklist": [
+    {
+      "id": "page_reachable",
+      "title": "Page loads in a headless browser",
+      "status": "pass",
+      "detail": "HTTP 200, final URL https://www.rescue.org/",
+      "evidence": [
+        "https://www.rescue.org/"
+      ],
+      "blocking": true
+    },
+    {
+      "id": "fu_code_in_source",
+      "title": "Installation code is in the page source",
+      "status": "warn",
+      "detail": "Widget loads at runtime but the code is not in the server HTML. Inserted by: JavaScript from https://www.rescue.org/sites/default/files/js/js_7FJZD1Rmf6kTOo6GC90du9gqdSyoYe8B7R2muiqtwOU.js?scope=header&delta=1&lan (not a tag manager). Vendor docs ask for the code in the global <head> and confirm it by viewing the page source.",
+      "evidence": [
+        "https://cdn.fundraiseup.com/widget/AFGSSTXA",
+        "https://www.rescue.org/sites/default/files/js/js_7FJZD1Rmf6kTOo6GC90du9gqdSyoYe8B7R2muiqtwOU.js?scope=header&delta=1&language=en&theme=x&include=eJxljlsOgzAMBC8E-BLcwzLEoSEPIycgevs2AVVq-7Pa8ViyDRUK9GSFiR90ONHcscVZYswtJYGRRIUxuORR2f55uyej5DLjvlX53hdFo-5gGGsfa63G0syTiMeJMsOHsvG4trtBcsHDZVdEoUJ_Q5WR1HPBLLvODBf1FzUthgK07Pgs9V0wum8Uhhu7RWQJjIUWWN7xywOtdH4P4wuLTnEu"
+      ],
+      "blocking": false
+    },
+    {
+      "id": "fu_single_account",
+      "title": "One account ID on the page",
+      "status": "pass",
+      "detail": "AFGSSTXA",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "fu_widget_loads",
+      "title": "Widget script loads",
+      "status": "pass",
+      "detail": "HTTP 200, 14 requests to vendor hosts.",
+      "evidence": [
+        "https://cdn.fundraiseup.com/widget/AFGSSTXA"
+      ],
+      "blocking": true
+    },
+    {
+      "id": "fu_no_console_errors",
+      "title": "No widget errors in console",
+      "status": "pass",
+      "detail": "None recorded.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "fu_checkout_links",
+      "title": "Donate links open the checkout",
+      "status": "pass",
+      "detail": "3 '?form=' link(s): donate, evergreen-crisis-ftr, evergreen-crisis-w",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "gtm_container",
+      "title": "Google Tag Manager container",
+      "status": "pass",
+      "detail": "GTM-5JH3VLS",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "ga4",
+      "title": "GA4 measurement ID",
+      "status": "pass",
+      "detail": "G-DDZCWB8N2Y, G-MCH4QLVDRD",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "meta_pixel",
+      "title": "Meta Pixel",
+      "status": "pass",
+      "detail": "loaded, pixel id(s): 412981725737143",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "consent_banner",
+      "title": "Cookie consent tool",
+      "status": "pass",
+      "detail": "OneTrust",
+      "evidence": [
+        "https://cdn.cookielaw.org/scripttemplates/otSDKStub.js?did=3b1085ba-2b42-4c13-bc5b-9aa9908e2ea6&data-document-language=true"
+      ],
+      "blocking": false
+    },
+    {
+      "id": "other_platforms",
+      "title": "No other donation tool on the page",
+      "status": "pass",
+      "detail": "None found.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "page_speed",
+      "title": "Page load under 6 s",
+      "status": "pass",
+      "detail": "load event at 2.6s",
+      "evidence": [],
+      "blocking": false
+    }
+  ],
+  "facts": {
+    "url": "https://www.rescue.org/",
+    "page": {
+      "status": 200,
+      "final_url": "https://www.rescue.org/",
+      "https": true,
+      "load_error": null,
+      "load_ms": 2606,
+      "dom_content_loaded_ms": 298,
+      "check_seconds": 7.0,
+      "request_count": 253,
+      "failed_request_count": 0,
+      "console_error_count": 0,
+      "console_errors_sample": [],
+      "page_errors_sample": [],
+      "bot_challenge": false
+    },
+    "fundraiseup": {
+      "installed_in_source": false,
+      "loaded_at_runtime": true,
+      "account_ids": [
+        "AFGSSTXA"
+      ],
+      "snippet_count_in_source": 0,
+      "in_head": false,
+      "scripts_after_in_head": 0,
+      "source_excerpt": null,
+      "widget_requests": [
+        {
+          "account_id": "AFGSSTXA",
+          "url": "https://cdn.fundraiseup.com/widget/AFGSSTXA",
+          "status": 200
+        }
+      ],
+      "request_count": 14,
+      "failed_requests": [],
+      "console_errors": [],
+      "csp_errors": [],
+      "global_object": "function",
+      "checkout_form_links": [
+        "donate",
+        "evergreen-crisis-ftr",
+        "evergreen-crisis-w"
+      ],
+      "inserted_by": {
+        "kind": "script",
+        "container": null,
+        "script": "https://www.rescue.org/sites/default/files/js/js_7FJZD1Rmf6kTOo6GC90du9gqdSyoYe8B7R2muiqtwOU.js?scope=header&delta=1&language=en&theme=x&include=eJxljlsOgzAMBC8E-BLcwzLEoSEPIycgevs2AVVq-7Pa8ViyDRUK9GSFiR90ONHcscVZYswtJYGRRIUxuORR2f55uyej5DLjvlX53hdFo-5gGGsfa63G0syTiMeJMsOHsvG4trtBcsHDZVdEoUJ_Q5WR1HPBLLvODBf1FzUthgK07Pgs9V0wum8Uhhu7RWQJjIUWWN7xywOtdH4P4wuLTnEu"
+      }
+    },
+    "tags": {
+      "gtm": {
+        "container_ids": [
+          "GTM-5JH3VLS"
+        ],
+        "loaded_ids": [
+          "GTM-5JH3VLS"
+        ],
+        "in_source_ids": [
+          "GTM-5JH3VLS"
+        ],
+        "dataLayer_entries": 14
+      },
+      "ga4": {
+        "measurement_ids": [
+          "G-DDZCWB8N2Y",
+          "G-MCH4QLVDRD"
+        ],
+        "collect_hits_for": [
+          "G-DDZCWB8N2Y",
+          "G-MCH4QLVDRD"
+        ]
+      },
+      "meta_pixel": {
+        "loaded": true,
+        "pixel_ids": [
+          "412981725737143"
+        ]
+      },
+      "consent": [
+        {
+          "name": "OneTrust",
+          "evidence": "https://cdn.cookielaw.org/scripttemplates/otSDKStub.js?did=3b1085ba-2b42-4c13-bc5b-9aa9908e2ea6&data-document-language=true"
+        }
+      ]
+    },
+    "other_donation_platforms": []
+  },
+  "ai": {
+    "summary": "The page https://www.rescue.org/ loaded in a headless browser with HTTP 200 and no load error. The FundraiseUp widget script loads at runtime from account AFGSSTXA. The installation code is not in the server HTML and is not in the page source. It is inserted by a JavaScript file at runtime. Vendor docs ask for the code in the global head and a check of the page source, so this needs a fix. The browser found three checkout links with '?form=' (donate, evergreen-crisis-ftr, evergreen-crisis-w). The browser did not click these links. No console errors, no failed requests, and no other donation tools were recorded. The page load event was at 2.6 seconds. Overall verdict: ready with warnings.",
+    "risks": [
+      {
+        "title": "Installation code is not in page source",
+        "severity": "medium",
+        "detail": "The FundraiseUp code is not in the server HTML. It is added by a JavaScript file at runtime. Vendor docs ask for the code in the global head and confirmation by viewing the page source. Check that the widget still loads after any change to the site's JavaScript.",
+        "check_ids": [
+          "fu_code_in_source"
+        ]
+      }
+    ],
+    "next_steps": [
+      {
+        "owner": "customer",
+        "action": "Add the FundraiseUp installation code for account AFGSSTXA to the global head of the site, so it appears in the page source.",
+        "check_ids": [
+          "fu_code_in_source"
+        ]
+      },
+      {
+        "owner": "onboarding_team",
+        "action": "After the customer updates the site, re-run this check and confirm the code appears in the page source and in the head.",
+        "check_ids": [
+          "fu_code_in_source"
+        ]
+      },
+      {
+        "owner": "onboarding_team",
+        "action": "Confirm with the customer that the three checkout links (donate, evergreen-crisis-ftr, evergreen-crisis-w) go to the intended FundraiseUp forms.",
+        "check_ids": [
+          "fu_checkout_links"
+        ]
+      }
+    ],
+    "customer_email": {
+      "subject": "One fix needed for your donation widget",
+      "body": "Hello,\n\nWe checked your website, https://www.rescue.org/, for the online donation widget. The widget loads on your page, and we found three donation links that point to checkout forms. The page loads without errors.\n\nOne fix is needed. The widget code is not in your page source. It is added later by a JavaScript file. Please add the widget installation code for account AFGSSTXA to the global head section of your website, so it appears in the page source. Once it is added, you can view the page source to confirm it is there.\n\nPlease let us know when the change is live. We will run the check again.\n\nThank you,\nOnboarding Team"
+    },
+    "_dropped_uncited": 0,
+    "_usage": {
+      "model": "claude-haiku-5-5",
+      "input_tokens": 3792,
+      "output_tokens": 843,
+      "cost_usd": 0.0008
+    }
+  }
+}

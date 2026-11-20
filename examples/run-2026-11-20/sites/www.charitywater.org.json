@@ -1,0 +1,206 @@
+{
+  "url": "https://www.charitywater.org/",
+  "checked_at": "2026-11-20 08:56 UTC",
+  "verdict": {
+    "status": "not_installed",
+    "reason": "installation code missing",
+    "blockers": [
+      "fu_code_in_source"
+    ],
+    "warnings": [
+      "page_speed"
+    ]
+  },
+  "checklist": [
+    {
+      "id": "page_reachable",
+      "title": "Page loads in a headless browser",
+      "status": "pass",
+      "detail": "HTTP 200, final URL https://www.charitywater.org/",
+      "evidence": [
+        "https://www.charitywater.org/"
+      ],
+      "blocking": true
+    },
+    {
+      "id": "fu_code_in_source",
+      "title": "Installation code is in the page source",
+      "status": "fail",
+      "detail": "No installation code found in the source and no widget request recorded.",
+      "evidence": [],
+      "blocking": true
+    },
+    {
+      "id": "gtm_container",
+      "title": "Google Tag Manager container",
+      "status": "pass",
+      "detail": "GTM-P6DJRR",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "ga4",
+      "title": "GA4 measurement ID",
+      "status": "pass",
+      "detail": "G-SKG6MDYX1T",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "meta_pixel",
+      "title": "Meta Pixel",
+      "status": "info",
+      "detail": "Not seen (optional; may load after consent).",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "consent_banner",
+      "title": "Cookie consent tool",
+      "status": "pass",
+      "detail": "CookieScript",
+      "evidence": [
+        "https://cdn.cookie-script.com/s/2d3a4f9c11fdc0c16540dbcd802c5618.js"
+      ],
+      "blocking": false
+    },
+    {
+      "id": "other_platforms",
+      "title": "No other donation tool on the page",
+      "status": "pass",
+      "detail": "None found.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "page_speed",
+      "title": "Page load under 6 s",
+      "status": "warn",
+      "detail": "load event at 7.6s",
+      "evidence": [],
+      "blocking": false
+    }
+  ],
+  "facts": {
+    "url": "https://www.charitywater.org/",
+    "page": {
+      "status": 200,
+      "final_url": "https://www.charitywater.org/",
+      "https": true,
+      "load_error": null,
+      "load_ms": 7609,
+      "dom_content_loaded_ms": 300,
+      "check_seconds": 12.2,
+      "request_count": 395,
+      "failed_request_count": 1,
+      "console_error_count": 0,
+      "console_errors_sample": [],
+      "page_errors_sample": [],
+      "bot_challenge": false
+    },
+    "fundraiseup": {
+      "installed_in_source": false,
+      "loaded_at_runtime": false,
+      "account_ids": [],
+      "snippet_count_in_source": 0,
+      "in_head": false,
+      "scripts_after_in_head": 0,
+      "source_excerpt": null,
+      "widget_requests": [],
+      "request_count": 0,
+      "failed_requests": [],
+      "console_errors": [],
+      "csp_errors": [],
+      "global_object": "undefined",
+      "checkout_form_links": [],
+      "inserted_by": null
+    },
+    "tags": {
+      "gtm": {
+        "container_ids": [
+          "GTM-P6DJRR"
+        ],
+        "loaded_ids": [
+          "GTM-P6DJRR"
+        ],
+        "in_source_ids": [
+          "GTM-P6DJRR"
+        ],
+        "dataLayer_entries": 19
+      },
+      "ga4": {
+        "measurement_ids": [
+          "G-SKG6MDYX1T"
+        ],
+        "collect_hits_for": []
+      },
+      "meta_pixel": {
+        "loaded": false,
+        "pixel_ids": []
+      },
+      "consent": [
+        {
+          "name": "CookieScript",
+          "evidence": "https://cdn.cookie-script.com/s/2d3a4f9c11fdc0c16540dbcd802c5618.js"
+        }
+      ]
+    },
+    "other_donation_platforms": []
+  },
+  "ai": {
+    "summary": "The page https://www.charitywater.org/ loaded in the headless browser with HTTP 200 and no load error. The FundraiseUp installation code was not found in the page source, and no FundraiseUp widget request was recorded. The verdict is not installed, because the installation code is missing. Google Tag Manager (GTM-P6DJRR), GA4 (G-SKG6MDYX1T), and CookieScript were found. No other donation tool was found. The page load event took 7.6 s, which is over the 6 s target. The Meta Pixel was not seen, which is optional. The browser did not click any buttons, so checkout and donate behavior was not tested. No checkout form links were recorded.",
+    "risks": [
+      {
+        "title": "Installation code missing",
+        "severity": "high",
+        "detail": "No installation code was found in the page source and no widget request was recorded. The platform cannot run on this page until the code is added.",
+        "check_ids": [
+          "fu_code_in_source"
+        ]
+      },
+      {
+        "title": "Slow page load",
+        "severity": "low",
+        "detail": "The load event was recorded at 7.6 s, above the 6 s target. This is a warning and does not block installation.",
+        "check_ids": [
+          "page_speed"
+        ]
+      }
+    ],
+    "next_steps": [
+      {
+        "owner": "customer",
+        "action": "Add the platform installation code to the page source of https://www.charitywater.org/ and tell the onboarding team when it is live.",
+        "check_ids": [
+          "fu_code_in_source"
+        ]
+      },
+      {
+        "owner": "onboarding_team",
+        "action": "Re-run this page check after the customer confirms the code is added, and confirm the installation code and widget request appear.",
+        "check_ids": [
+          "fu_code_in_source",
+          "page_reachable"
+        ]
+      },
+      {
+        "owner": "onboarding_team",
+        "action": "Review the page load time with the customer and confirm whether a slower load is acceptable before launch.",
+        "check_ids": [
+          "page_speed"
+        ]
+      }
+    ],
+    "customer_email": {
+      "subject": "Next step to set up donations on your website",
+      "body": "Hello,\n\nThank you for working with us to set up online donations. We checked https://www.charitywater.org/ and found that the donation platform code is not on the page yet.\n\nPlease add the platform installation code to the page source of https://www.charitywater.org/. Once it is added, please let us know so we can run the check again.\n\nWe also noticed the page took about 7.6 seconds to finish loading, which is slower than we would like. Please review this with your web team if you can.\n\nThank you,\nThe Onboarding Team"
+    },
+    "_dropped_uncited": 0,
+    "_usage": {
+      "model": "claude-haiku-5-5",
+      "input_tokens": 2501,
+      "output_tokens": 794,
+      "cost_usd": 0.00065
+    }
+  }
+}

@@ -1,0 +1,256 @@
+{
+  "url": "https://www.childrenshealthfund.org/",
+  "checked_at": "2026-11-20 08:55 UTC",
+  "verdict": {
+    "status": "ready_with_warnings",
+    "reason": "Google Tag Manager container",
+    "blockers": [],
+    "warnings": [
+      "gtm_container"
+    ]
+  },
+  "checklist": [
+    {
+      "id": "page_reachable",
+      "title": "Page loads in a headless browser",
+      "status": "pass",
+      "detail": "HTTP 200, final URL https://www.childrenshealthfund.org/",
+      "evidence": [
+        "https://www.childrenshealthfund.org/"
+      ],
+      "blocking": true
+    },
+    {
+      "id": "fu_code_in_source",
+      "title": "Installation code is in the page source",
+      "status": "pass",
+      "detail": "account ID(s): AVVHNSHB",
+      "evidence": [
+        "on.href;o.l=[]; for(i=0;i<8;i++)o[l[i]]=o(l[i]);w[n]=o} })(window,document,'script','FundraiseUp','AVVHNSHB');</script> <!-- End Fundraise Up --> <style> .e-con.e-p"
+      ],
+      "blocking": true
+    },
+    {
+      "id": "fu_in_head",
+      "title": "Code is in <head>, last script",
+      "status": "pass",
+      "detail": "Found in <head> with no scripts after it.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "fu_single_account",
+      "title": "One account ID on the page",
+      "status": "pass",
+      "detail": "AVVHNSHB",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "fu_widget_loads",
+      "title": "Widget script loads",
+      "status": "pass",
+      "detail": "HTTP 200, 24 requests to vendor hosts.",
+      "evidence": [
+        "https://cdn.fundraiseup.com/widget/AVVHNSHB"
+      ],
+      "blocking": true
+    },
+    {
+      "id": "fu_no_console_errors",
+      "title": "No widget errors in console",
+      "status": "pass",
+      "detail": "None recorded.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "fu_checkout_links",
+      "title": "Donate links open the checkout",
+      "status": "info",
+      "detail": "No '?form=' links on this page. Fine if the page uses Elements or overlays instead.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "gtm_container",
+      "title": "Google Tag Manager container",
+      "status": "warn",
+      "detail": "No GTM container. Checkout events (donation, open, close) reach GA4 through a GTM container template.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "ga4",
+      "title": "GA4 measurement ID",
+      "status": "pass",
+      "detail": "G-SXWX7Z8RFC",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "meta_pixel",
+      "title": "Meta Pixel",
+      "status": "info",
+      "detail": "Not seen (optional; may load after consent).",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "consent_banner",
+      "title": "Cookie consent tool",
+      "status": "info",
+      "detail": "No known consent tool detected. Needed for EU/UK visitors; vendor cookies need a consent setup.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "other_platforms",
+      "title": "No other donation tool on the page",
+      "status": "pass",
+      "detail": "None found.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "page_speed",
+      "title": "Page load under 6 s",
+      "status": "pass",
+      "detail": "load event at 5.2s",
+      "evidence": [],
+      "blocking": false
+    }
+  ],
+  "facts": {
+    "url": "https://www.childrenshealthfund.org/",
+    "page": {
+      "status": 200,
+      "final_url": "https://www.childrenshealthfund.org/",
+      "https": true,
+      "load_error": null,
+      "load_ms": 5151,
+      "dom_content_loaded_ms": 2643,
+      "check_seconds": 9.7,
+      "request_count": 144,
+      "failed_request_count": 0,
+      "console_error_count": 0,
+      "console_errors_sample": [],
+      "page_errors_sample": [],
+      "bot_challenge": false
+    },
+    "fundraiseup": {
+      "installed_in_source": true,
+      "loaded_at_runtime": true,
+      "account_ids": [
+        "AVVHNSHB"
+      ],
+      "snippet_count_in_source": 1,
+      "in_head": true,
+      "scripts_after_in_head": 0,
+      "source_excerpt": "on.href;o.l=[]; for(i=0;i<8;i++)o[l[i]]=o(l[i]);w[n]=o} })(window,document,'script','FundraiseUp','AVVHNSHB');</script> <!-- End Fundraise Up --> <style> .e-con.e-p",
+      "widget_requests": [
+        {
+          "account_id": "AVVHNSHB",
+          "url": "https://cdn.fundraiseup.com/widget/AVVHNSHB",
+          "status": 200
+        }
+      ],
+      "request_count": 24,
+      "failed_requests": [],
+      "console_errors": [],
+      "csp_errors": [],
+      "global_object": "function",
+      "checkout_form_links": [],
+      "inserted_by": {
+        "kind": "script",
+        "container": null,
+        "script": "https://www.childrenshealthfund.org/"
+      }
+    },
+    "tags": {
+      "gtm": {
+        "container_ids": [],
+        "loaded_ids": [],
+        "in_source_ids": [],
+        "dataLayer_entries": 8
+      },
+      "ga4": {
+        "measurement_ids": [
+          "G-SXWX7Z8RFC"
+        ],
+        "collect_hits_for": [
+          "G-SXWX7Z8RFC"
+        ]
+      },
+      "meta_pixel": {
+        "loaded": false,
+        "pixel_ids": []
+      },
+      "consent": []
+    },
+    "other_donation_platforms": []
+  },
+  "ai": {
+    "summary": "The page https://www.childrenshealthfund.org/ loaded with HTTP 200 in the headless browser. The FundraiseUp installation code is in the page source with account ID AVVHNSHB. The code is in the head with no scripts after it. The widget script loaded from cdn.fundraiseup.com with HTTP 200. No console errors were recorded. The page has no Google Tag Manager container, so checkout events may not reach GA4 through a GTM template. GA4 measurement ID G-SXWX7Z8RFC was found. No Meta Pixel was seen. No cookie consent tool was detected. No other donation tool was found. The load event was at 5.2 seconds. The browser did not click any donate button, so checkout behavior was not tested. No '?form=' donate links were found on this page.",
+    "risks": [
+      {
+        "title": "No Google Tag Manager container",
+        "severity": "medium",
+        "detail": "No GTM container was found on the page. Checkout events (donation, open, close) reach GA4 through a GTM container template, so those events may not be tracked.",
+        "check_ids": [
+          "gtm_container"
+        ]
+      },
+      {
+        "title": "No cookie consent tool detected",
+        "severity": "low",
+        "detail": "No known consent tool was detected. Consent is needed for EU and UK visitors, and vendor cookies need a consent setup.",
+        "check_ids": [
+          "consent_banner"
+        ]
+      }
+    ],
+    "next_steps": [
+      {
+        "owner": "customer",
+        "action": "Add a Google Tag Manager container to the website, or confirm with the onboarding team how checkout events should reach GA4.",
+        "check_ids": [
+          "gtm_container"
+        ]
+      },
+      {
+        "owner": "customer",
+        "action": "Install a cookie consent tool if the site has EU or UK visitors, and set up consent for vendor cookies.",
+        "check_ids": [
+          "consent_banner"
+        ]
+      },
+      {
+        "owner": "onboarding_team",
+        "action": "Confirm with the customer which donate links or overlays the site uses, since no '?form=' links were found on the page.",
+        "check_ids": [
+          "fu_checkout_links"
+        ]
+      },
+      {
+        "owner": "onboarding_team",
+        "action": "Re-run this check after the customer makes changes to confirm the results.",
+        "check_ids": [
+          "gtm_container",
+          "consent_banner"
+        ]
+      }
+    ],
+    "customer_email": {
+      "subject": "Next steps for your donation platform setup",
+      "body": "Hello,\n\nWe checked your website at https://www.childrenshealthfund.org/. The donation widget is installed correctly and loads without errors. Your GA4 measurement ID was also found.\n\nTo finish setup, please do the following:\n\n1. Add a Google Tag Manager container to your website. This lets donation events, such as opening and completing a donation, reach your GA4 reports.\n2. If you have visitors in the EU or UK, install a cookie consent tool and set up consent for vendor cookies.\n\nOnce these changes are live, reply to this email and we will run the check again.\n\nThank you,\nOnboarding Team"
+    },
+    "_dropped_uncited": 0,
+    "_usage": {
+      "model": "claude-haiku-5-5",
+      "input_tokens": 3112,
+      "output_tokens": 953,
+      "cost_usd": 0.00079
+    }
+  }
+}

@@ -1,0 +1,278 @@
+{
+  "url": "https://wildaid.org/",
+  "checked_at": "2026-11-20 08:55 UTC",
+  "verdict": {
+    "status": "ready",
+    "reason": "",
+    "blockers": [],
+    "warnings": []
+  },
+  "checklist": [
+    {
+      "id": "page_reachable",
+      "title": "Page loads in a headless browser",
+      "status": "pass",
+      "detail": "HTTP 200, final URL https://wildaid.org/",
+      "evidence": [
+        "https://wildaid.org/"
+      ],
+      "blocking": true
+    },
+    {
+      "id": "fu_code_in_source",
+      "title": "Installation code is in the page source",
+      "status": "pass",
+      "detail": "account ID(s): AQTMUHNH",
+      "evidence": [
+        "on.href;o.l=[]; for(i=0;i<8;i++)o[l[i]]=o(l[i]);w[n]=o} })(window,document,'script','FundraiseUp','AQTMUHNH');</script> <!-- End Fundraise Up --> <link rel=\"stylesheet\" type=\""
+      ],
+      "blocking": true
+    },
+    {
+      "id": "fu_in_head",
+      "title": "Code is in <head>, last script",
+      "status": "pass",
+      "detail": "Found in <head> with no scripts after it.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "fu_single_account",
+      "title": "One account ID on the page",
+      "status": "pass",
+      "detail": "AQTMUHNH",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "fu_widget_loads",
+      "title": "Widget script loads",
+      "status": "pass",
+      "detail": "HTTP 200, 21 requests to vendor hosts.",
+      "evidence": [
+        "https://cdn.fundraiseup.com/widget/AQTMUHNH"
+      ],
+      "blocking": true
+    },
+    {
+      "id": "fu_no_console_errors",
+      "title": "No widget errors in console",
+      "status": "pass",
+      "detail": "None recorded.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "fu_checkout_links",
+      "title": "Donate links open the checkout",
+      "status": "pass",
+      "detail": "2 '?form=' link(s): FUNAUWUZXNA, donate",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "gtm_container",
+      "title": "Google Tag Manager container",
+      "status": "pass",
+      "detail": "GTM-KF7HNF4, GTM-KZW6SPR",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "ga4",
+      "title": "GA4 measurement ID",
+      "status": "pass",
+      "detail": "G-M6T97S534K",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "meta_pixel",
+      "title": "Meta Pixel",
+      "status": "pass",
+      "detail": "loaded, pixel id(s): 862335194865117",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "consent_banner",
+      "title": "Cookie consent tool",
+      "status": "info",
+      "detail": "No known consent tool detected. Needed for EU/UK visitors; vendor cookies need a consent setup.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "other_platforms",
+      "title": "No other donation tool on the page",
+      "status": "pass",
+      "detail": "None found.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "page_speed",
+      "title": "Page load under 6 s",
+      "status": "pass",
+      "detail": "load event at 5.9s",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "console_errors",
+      "title": "Console errors (any source)",
+      "status": "info",
+      "detail": "3 error(s)",
+      "evidence": [
+        "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+        "Failed to load resource: the server responded with a status of 404 ()",
+        "Failed to load resource: the server responded with a status of 404 ()"
+      ],
+      "blocking": false
+    }
+  ],
+  "facts": {
+    "url": "https://wildaid.org/",
+    "page": {
+      "status": 200,
+      "final_url": "https://wildaid.org/",
+      "https": true,
+      "load_error": null,
+      "load_ms": 5922,
+      "dom_content_loaded_ms": 1953,
+      "check_seconds": 10.2,
+      "request_count": 135,
+      "failed_request_count": 1,
+      "console_error_count": 3,
+      "console_errors_sample": [
+        "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+        "Failed to load resource: the server responded with a status of 404 ()",
+        "Failed to load resource: the server responded with a status of 404 ()"
+      ],
+      "page_errors_sample": [
+        "Unexpected token '<'",
+        "Cannot read properties of null (reading 'offsetHeight')"
+      ],
+      "bot_challenge": false
+    },
+    "fundraiseup": {
+      "installed_in_source": true,
+      "loaded_at_runtime": true,
+      "account_ids": [
+        "AQTMUHNH"
+      ],
+      "snippet_count_in_source": 1,
+      "in_head": true,
+      "scripts_after_in_head": 0,
+      "source_excerpt": "on.href;o.l=[]; for(i=0;i<8;i++)o[l[i]]=o(l[i]);w[n]=o} })(window,document,'script','FundraiseUp','AQTMUHNH');</script> <!-- End Fundraise Up --> <link rel=\"stylesheet\" type=\"",
+      "widget_requests": [
+        {
+          "account_id": "AQTMUHNH",
+          "url": "https://cdn.fundraiseup.com/widget/AQTMUHNH",
+          "status": 200
+        }
+      ],
+      "request_count": 21,
+      "failed_requests": [],
+      "console_errors": [],
+      "csp_errors": [],
+      "global_object": "function",
+      "checkout_form_links": [
+        "FUNAUWUZXNA",
+        "donate"
+      ],
+      "inserted_by": {
+        "kind": "script",
+        "container": null,
+        "script": "https://wildaid.org/"
+      }
+    },
+    "tags": {
+      "gtm": {
+        "container_ids": [
+          "GTM-KF7HNF4",
+          "GTM-KZW6SPR"
+        ],
+        "loaded_ids": [
+          "GTM-KF7HNF4"
+        ],
+        "in_source_ids": [
+          "GTM-KF7HNF4",
+          "GTM-KZW6SPR"
+        ],
+        "dataLayer_entries": 7
+      },
+      "ga4": {
+        "measurement_ids": [
+          "G-M6T97S534K"
+        ],
+        "collect_hits_for": [
+          "G-M6T97S534K"
+        ]
+      },
+      "meta_pixel": {
+        "loaded": true,
+        "pixel_ids": [
+          "862335194865117"
+        ]
+      },
+      "consent": []
+    },
+    "other_donation_platforms": []
+  },
+  "ai": {
+    "summary": "The page https://wildaid.org/ loaded in a headless browser with HTTP 200 in 5.9 seconds. The FundraiseUp install code is in the page source once, in the head, with no scripts after it. The widget script loads from account AQTMUHNH with no widget console errors. Two donate links were found that point to checkout forms (FUNAUWUZXNA and donate). The browser did not click these links, so checkout behavior is not verified. Google Tag Manager, GA4, and Meta Pixel were found. No known cookie consent tool was detected. The page has 3 console errors: one failed resource that could not be resolved and two 404 responses.",
+    "risks": [
+      {
+        "title": "No cookie consent tool detected",
+        "severity": "medium",
+        "detail": "No known consent tool was found on the page. Vendor cookies from GTM, GA4, Meta Pixel, and FundraiseUp may need a consent setup for EU and UK visitors.",
+        "check_ids": [
+          "consent_banner"
+        ]
+      },
+      {
+        "title": "Console errors on the page",
+        "severity": "low",
+        "detail": "Three errors were recorded: one resource failed to resolve and two resources returned 404. The source of these resources was not identified in the recorded data.",
+        "check_ids": [
+          "console_errors"
+        ]
+      }
+    ],
+    "next_steps": [
+      {
+        "owner": "onboarding_team",
+        "action": "Confirm with the customer whether they need a cookie consent setup for EU and UK visitors.",
+        "check_ids": [
+          "consent_banner"
+        ]
+      },
+      {
+        "owner": "customer",
+        "action": "Check the page for links or files that return 404 or fail to resolve, and fix or remove them.",
+        "check_ids": [
+          "console_errors"
+        ]
+      },
+      {
+        "owner": "onboarding_team",
+        "action": "Open the FundraiseUp dashboard and confirm that the checkout links FUNAUWUZXNA and donate open the correct forms for this account.",
+        "check_ids": [
+          "fu_checkout_links"
+        ]
+      }
+    ],
+    "customer_email": {
+      "subject": "Next steps for your donation page on wildaid.org",
+      "body": "Hello,\n\nWe checked your donation page at https://wildaid.org/. The FundraiseUp code is installed correctly, and the widget loads on the page. Your Google Tag Manager, GA4, and Meta Pixel tags were also found.\n\nWe need a few fixes from your side:\n\n1. Please check the page for files or links that return a 404 error or fail to load, and fix or remove them. Our check found three console errors.\n2. Please tell us whether you need a cookie consent banner for visitors in the EU or UK. We did not find a consent tool on the page.\n\nOnce these are done, we can run the check again.\n\nThank you,\nThe Onboarding Team"
+    },
+    "_dropped_uncited": 0,
+    "_usage": {
+      "model": "claude-haiku-5-5",
+      "input_tokens": 3273,
+      "output_tokens": 876,
+      "cost_usd": 0.00077
+    }
+  }
+}

@@ -1,0 +1,277 @@
+{
+  "url": "https://www.ifaw.org/",
+  "checked_at": "2026-11-20 08:55 UTC",
+  "verdict": {
+    "status": "ready_with_warnings",
+    "reason": "Code is in <head>, last script; Widget not held back by the consent tool; GA4 measurement ID",
+    "blockers": [],
+    "warnings": [
+      "fu_in_head",
+      "fu_consent_gated",
+      "ga4"
+    ]
+  },
+  "checklist": [
+    {
+      "id": "page_reachable",
+      "title": "Page loads in a headless browser",
+      "status": "pass",
+      "detail": "HTTP 200, final URL https://www.ifaw.org/",
+      "evidence": [
+        "https://www.ifaw.org/"
+      ],
+      "blocking": true
+    },
+    {
+      "id": "fu_code_in_source",
+      "title": "Installation code is in the page source",
+      "status": "pass",
+      "detail": "account ID(s): AWMWZJRX",
+      "evidence": [
+        "tion.href;o.l=[]; for(i=0;i<7;i++)o[l[i]]=o(l[i]);w[n]=o} })(window,document,'script','FundraiseUp','AWMWZJRX');</script> <!-- End Fundraise Up --> <script src=https://www.f"
+      ],
+      "blocking": true
+    },
+    {
+      "id": "fu_in_head",
+      "title": "Code is in <head>, last script",
+      "status": "warn",
+      "detail": "In <head>, but 3 <script> tag(s) follow it. Docs recommend it as the last script.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "fu_single_account",
+      "title": "One account ID on the page",
+      "status": "pass",
+      "detail": "AWMWZJRX",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "fu_widget_loads",
+      "title": "Widget script loads",
+      "status": "pass",
+      "detail": "HTTP 200, 11 requests to vendor hosts.",
+      "evidence": [
+        "https://cdn.fundraiseup.com/widget/AWMWZJRX"
+      ],
+      "blocking": true
+    },
+    {
+      "id": "fu_no_console_errors",
+      "title": "No widget errors in console",
+      "status": "pass",
+      "detail": "None recorded.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "fu_consent_gated",
+      "title": "Widget not held back by the consent tool",
+      "status": "warn",
+      "detail": "The widget script was inserted by Usercentrics, so it depends on consent settings. It loaded in this run; confirm it is set as strictly necessary, or visitors who decline cookies may not get the checkout.",
+      "evidence": [
+        "https://web.cmp.usercentrics.eu/ui/v/4.34.0/WebSdk.lib.fb4e0364.js"
+      ],
+      "blocking": false
+    },
+    {
+      "id": "fu_checkout_links",
+      "title": "Donate links open the checkout",
+      "status": "pass",
+      "detail": "1 '?form=' link(s): join",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "gtm_container",
+      "title": "Google Tag Manager container",
+      "status": "pass",
+      "detail": "GTM-W7GRNP",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "ga4",
+      "title": "GA4 measurement ID",
+      "status": "warn",
+      "detail": "No GA4 property seen loading or sending hits (may load only after consent).",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "meta_pixel",
+      "title": "Meta Pixel",
+      "status": "info",
+      "detail": "Not seen (optional; may load after consent).",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "consent_banner",
+      "title": "Cookie consent tool",
+      "status": "pass",
+      "detail": "Usercentrics",
+      "evidence": [
+        "https://web.cmp.usercentrics.eu/ui/loader.js"
+      ],
+      "blocking": false
+    },
+    {
+      "id": "other_platforms",
+      "title": "No other donation tool on the page",
+      "status": "pass",
+      "detail": "None found.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "page_speed",
+      "title": "Page load under 6 s",
+      "status": "pass",
+      "detail": "load event at 4.2s",
+      "evidence": [],
+      "blocking": false
+    }
+  ],
+  "facts": {
+    "url": "https://www.ifaw.org/",
+    "page": {
+      "status": 200,
+      "final_url": "https://www.ifaw.org/",
+      "https": true,
+      "load_error": null,
+      "load_ms": 4174,
+      "dom_content_loaded_ms": 2169,
+      "check_seconds": 8.6,
+      "request_count": 121,
+      "failed_request_count": 1,
+      "console_error_count": 0,
+      "console_errors_sample": [],
+      "page_errors_sample": [],
+      "bot_challenge": false
+    },
+    "fundraiseup": {
+      "installed_in_source": true,
+      "loaded_at_runtime": true,
+      "account_ids": [
+        "AWMWZJRX"
+      ],
+      "snippet_count_in_source": 1,
+      "in_head": true,
+      "scripts_after_in_head": 3,
+      "source_excerpt": "tion.href;o.l=[]; for(i=0;i<7;i++)o[l[i]]=o(l[i]);w[n]=o} })(window,document,'script','FundraiseUp','AWMWZJRX');</script> <!-- End Fundraise Up --> <script src=https://www.f",
+      "widget_requests": [
+        {
+          "account_id": "AWMWZJRX",
+          "url": "https://cdn.fundraiseup.com/widget/AWMWZJRX",
+          "status": 200
+        }
+      ],
+      "request_count": 11,
+      "failed_requests": [],
+      "console_errors": [],
+      "csp_errors": [],
+      "global_object": "function",
+      "checkout_form_links": [
+        "join"
+      ],
+      "inserted_by": {
+        "kind": "script",
+        "container": null,
+        "script": "https://web.cmp.usercentrics.eu/ui/v/4.34.0/WebSdk.lib.fb4e0364.js"
+      }
+    },
+    "tags": {
+      "gtm": {
+        "container_ids": [
+          "GTM-W7GRNP"
+        ],
+        "loaded_ids": [],
+        "in_source_ids": [
+          "GTM-W7GRNP"
+        ],
+        "dataLayer_entries": 22
+      },
+      "ga4": {
+        "measurement_ids": [],
+        "collect_hits_for": []
+      },
+      "meta_pixel": {
+        "loaded": false,
+        "pixel_ids": []
+      },
+      "consent": [
+        {
+          "name": "Usercentrics",
+          "evidence": "https://web.cmp.usercentrics.eu/ui/loader.js"
+        }
+      ]
+    },
+    "other_donation_platforms": []
+  },
+  "ai": {
+    "summary": "Page https://www.ifaw.org/ loaded (HTTP 200). FundraiseUp code with account ID AWMWZJRX is in the page source and the widget script loaded in this run. No blockers were found. Three warnings: the code is in head but 3 other script tags follow it, the widget is inserted by the Usercentrics consent tool, and no GA4 measurement ID was seen. The browser did not click anything. One donate link with a ?form= parameter was found (join). This does not confirm the checkout works.",
+    "risks": [
+      {
+        "title": "FundraiseUp code is not the last script in head",
+        "severity": "low",
+        "detail": "The FundraiseUp snippet is in head, but 3 script tags follow it. The vendor docs recommend it as the last script.",
+        "check_ids": [
+          "fu_in_head"
+        ]
+      },
+      {
+        "title": "Widget depends on cookie consent settings",
+        "severity": "medium",
+        "detail": "The widget script was inserted by Usercentrics. If visitors decline cookies, the widget may be held back and the checkout may not load for them. It loaded in this run.",
+        "check_ids": [
+          "fu_consent_gated"
+        ]
+      },
+      {
+        "title": "No GA4 measurement ID seen",
+        "severity": "low",
+        "detail": "No GA4 property was seen loading or sending hits. It may load only after consent, so this run could not confirm it.",
+        "check_ids": [
+          "ga4"
+        ]
+      }
+    ],
+    "next_steps": [
+      {
+        "owner": "onboarding_team",
+        "action": "Confirm with the customer whether they use Google Analytics 4 and, if so, which measurement ID they expect to see on the page.",
+        "check_ids": [
+          "ga4"
+        ]
+      },
+      {
+        "owner": "onboarding_team",
+        "action": "Check the Usercentrics settings with the customer to confirm the FundraiseUp widget script is set as strictly necessary, then re-run this check.",
+        "check_ids": [
+          "fu_consent_gated"
+        ]
+      },
+      {
+        "owner": "customer",
+        "action": "Ask your web developer to move the FundraiseUp snippet so it is the last script inside the head section of the page.",
+        "check_ids": [
+          "fu_in_head"
+        ]
+      }
+    ],
+    "customer_email": {
+      "subject": "Next steps for your FundraiseUp setup on ifaw.org",
+      "body": "Hello,\n\nWe checked your page at https://www.ifaw.org/. The FundraiseUp code is installed and the widget loaded. We found three items to fix or confirm.\n\nPlease do the following:\n\n1. Ask your web developer to move the FundraiseUp snippet so it is the last script inside the head section of the page.\n\n2. Confirm that the FundraiseUp widget is set as strictly necessary in your cookie consent tool (Usercentrics). This keeps the donation widget working for visitors who decline cookies.\n\n3. If you use Google Analytics 4, send us your measurement ID so we can confirm it appears on the page.\n\nThank you. Please reply with any questions.\n\nBest regards,\nOnboarding Team"
+    },
+    "_dropped_uncited": 0,
+    "_usage": {
+      "model": "claude-haiku-5-5",
+      "input_tokens": 3365,
+      "output_tokens": 1325,
+      "cost_usd": 0.001
+    }
+  }
+}

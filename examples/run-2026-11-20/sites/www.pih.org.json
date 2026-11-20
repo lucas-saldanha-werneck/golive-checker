@@ -1,0 +1,140 @@
+{
+  "url": "https://www.pih.org/",
+  "checked_at": "2026-11-20 08:56 UTC",
+  "verdict": {
+    "status": "unreachable",
+    "reason": "bot challenge / access denied page (HTTP 403)",
+    "blockers": [
+      "page_reachable"
+    ],
+    "warnings": []
+  },
+  "checklist": [
+    {
+      "id": "page_reachable",
+      "title": "Page loads in a headless browser",
+      "status": "fail",
+      "detail": "bot challenge / access denied page (HTTP 403)",
+      "evidence": [
+        "https://www.pih.org/"
+      ],
+      "blocking": true
+    },
+    {
+      "id": "fu_code_in_source",
+      "title": "Installation code is in the page source",
+      "status": "info",
+      "detail": "No installation code found in the source and no widget request recorded.",
+      "evidence": [],
+      "blocking": true
+    }
+  ],
+  "facts": {
+    "url": "https://www.pih.org/",
+    "page": {
+      "status": 403,
+      "final_url": "https://www.pih.org/",
+      "https": true,
+      "load_error": null,
+      "load_ms": 1068,
+      "dom_content_loaded_ms": 189,
+      "check_seconds": 5.3,
+      "request_count": 18,
+      "failed_request_count": 1,
+      "console_error_count": 10,
+      "console_errors_sample": [
+        "Failed to load resource: the server responded with a status of 403 ()",
+        "Failed to load resource: the server responded with a status of 404 ()",
+        "%c%d font-size:0;color:transparent NaN",
+        "%c%d font-size:0;color:transparent NaN",
+        "%c%o font-size:0;color:transparent {}"
+      ],
+      "page_errors_sample": [],
+      "bot_challenge": true
+    },
+    "fundraiseup": {
+      "installed_in_source": false,
+      "loaded_at_runtime": false,
+      "account_ids": [],
+      "snippet_count_in_source": 0,
+      "in_head": false,
+      "scripts_after_in_head": 0,
+      "source_excerpt": null,
+      "widget_requests": [],
+      "request_count": 0,
+      "failed_requests": [],
+      "console_errors": [],
+      "csp_errors": [],
+      "global_object": "undefined",
+      "checkout_form_links": [],
+      "inserted_by": null
+    },
+    "tags": {
+      "gtm": {
+        "container_ids": [],
+        "loaded_ids": [],
+        "in_source_ids": [],
+        "dataLayer_entries": null
+      },
+      "ga4": {
+        "measurement_ids": [],
+        "collect_hits_for": []
+      },
+      "meta_pixel": {
+        "loaded": false,
+        "pixel_ids": []
+      },
+      "consent": []
+    },
+    "other_donation_platforms": []
+  },
+  "ai": {
+    "summary": "The headless browser could not load https://www.pih.org/. The page returned HTTP 403 with a bot challenge or access denied page. Because the page did not load, the check could not look for the FundraiseUp installation code. No installation code was found in the source, and no widget request was recorded. This does not show whether the code is missing from the live site, since the check never got past the challenge page. No checkout or donate links were found on the page the browser received.",
+    "risks": [
+      {
+        "title": "Page blocked for automated access",
+        "severity": "high",
+        "detail": "The page returned HTTP 403 with a bot challenge or access denied page. The browser could not load the real page content, so the install status is unknown.",
+        "check_ids": [
+          "page_reachable"
+        ]
+      },
+      {
+        "title": "Installation status unknown",
+        "severity": "medium",
+        "detail": "No installation code was found in the source and no widget request was recorded. The page was not loaded, so this result cannot confirm whether the code is installed.",
+        "check_ids": [
+          "fu_code_in_source"
+        ]
+      }
+    ],
+    "next_steps": [
+      {
+        "owner": "customer",
+        "action": "Check whether your website blocks automated visitors or requires a challenge or login for public pages. If it does, allow the check to load the public donation page, or tell us which access rule applies.",
+        "check_ids": [
+          "page_reachable"
+        ]
+      },
+      {
+        "owner": "onboarding_team",
+        "action": "Confirm with the customer that the public page https://www.pih.org/ is meant to be accessible to outside visitors. Then re-run this check once access is confirmed.",
+        "check_ids": [
+          "page_reachable",
+          "fu_code_in_source"
+        ]
+      }
+    ],
+    "customer_email": {
+      "subject": "Next step for your donation platform setup",
+      "body": "Hello,\n\nWe tried to check your website, https://www.pih.org/, as part of setting up your online donation platform. The page returned an access denied message to our check, so we could not review it.\n\nPlease check whether your website blocks automated visitors or uses a challenge page for public pages. If it does, please let us know, or allow access to your public donation page so we can run the check again.\n\nThank you,\nThe Onboarding Team"
+    },
+    "_dropped_uncited": 0,
+    "_usage": {
+      "model": "claude-haiku-5-5",
+      "input_tokens": 1974,
+      "output_tokens": 669,
+      "cost_usd": 0.00053
+    }
+  }
+}

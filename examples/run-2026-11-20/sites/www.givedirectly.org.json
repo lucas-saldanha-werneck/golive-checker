@@ -1,0 +1,235 @@
+{
+  "url": "https://www.givedirectly.org/",
+  "checked_at": "2026-11-20 08:56 UTC",
+  "verdict": {
+    "status": "not_installed",
+    "reason": "installation code missing",
+    "blockers": [
+      "fu_code_in_source"
+    ],
+    "warnings": []
+  },
+  "checklist": [
+    {
+      "id": "page_reachable",
+      "title": "Page loads in a headless browser",
+      "status": "pass",
+      "detail": "HTTP 200, final URL https://www.givedirectly.org/",
+      "evidence": [
+        "https://www.givedirectly.org/"
+      ],
+      "blocking": true
+    },
+    {
+      "id": "fu_code_in_source",
+      "title": "Installation code is in the page source",
+      "status": "fail",
+      "detail": "No installation code found in the source and no widget request recorded.",
+      "evidence": [],
+      "blocking": true
+    },
+    {
+      "id": "gtm_container",
+      "title": "Google Tag Manager container",
+      "status": "pass",
+      "detail": "GTM-PJNMMGH",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "ga4",
+      "title": "GA4 measurement ID",
+      "status": "pass",
+      "detail": "G-GV8XF9FJ16",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "meta_pixel",
+      "title": "Meta Pixel",
+      "status": "pass",
+      "detail": "loaded, pixel id(s): 1507191883453125",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "consent_banner",
+      "title": "Cookie consent tool",
+      "status": "info",
+      "detail": "No known consent tool detected. Needed for EU/UK visitors; vendor cookies need a consent setup.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "other_platforms",
+      "title": "No other donation tool on the page",
+      "status": "pass",
+      "detail": "None found.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "page_speed",
+      "title": "Page load under 6 s",
+      "status": "pass",
+      "detail": "load event at 3.8s",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "console_errors",
+      "title": "Console errors (any source)",
+      "status": "info",
+      "detail": "6 error(s)",
+      "evidence": [
+        "Executing inline script violates the following Content Security Policy directive 'script-src 'self' 'nonce-yRVljQwnCGCiwus1qFgOyUx0OT6pcjxF862rkjqQ' *.js.stripe",
+        "Executing inline script violates the following Content Security Policy directive 'script-src 'self' 'nonce-yRVljQwnCGCiwus1qFgOyUx0OT6pcjxF862rkjqQ' *.js.stripe",
+        "Loading the image 'https://www.linkedin.com/px/li_sync?redirect=https%3A%2F%2Fpx.ads.linkedin.com%2Fcollect%3Fv%3D2%26fmt%3Djs%26pid%3D7359490%26time%3D17951649"
+      ],
+      "blocking": false
+    }
+  ],
+  "facts": {
+    "url": "https://www.givedirectly.org/",
+    "page": {
+      "status": 200,
+      "final_url": "https://www.givedirectly.org/",
+      "https": true,
+      "load_error": null,
+      "load_ms": 3805,
+      "dom_content_loaded_ms": 2136,
+      "check_seconds": 8.4,
+      "request_count": 87,
+      "failed_request_count": 1,
+      "console_error_count": 6,
+      "console_errors_sample": [
+        "Executing inline script violates the following Content Security Policy directive 'script-src 'self' 'nonce-yRVljQwnCGCiwus1qFgOyUx0OT6pcjxF862rkjqQ' *.js.stripe.com js.stripe.com maps.googleapis.com erinaceus.givedirectly.org www.googleadservices.com www.googletagmanager.com connect.facebook.net snap.licdn.com'. Either the 'unsafe-inline' keyword, a hash ('sha256-kLSHfRmK+DF6MxgO4Q9hL4bFOcGwz1wgL740t8Gwz0E='), or a nonce ('nonce-...') is required to enable inline execution. The action has been b",
+        "Executing inline script violates the following Content Security Policy directive 'script-src 'self' 'nonce-yRVljQwnCGCiwus1qFgOyUx0OT6pcjxF862rkjqQ' *.js.stripe.com js.stripe.com maps.googleapis.com erinaceus.givedirectly.org www.googleadservices.com www.googletagmanager.com connect.facebook.net snap.licdn.com'. Either the 'unsafe-inline' keyword, a hash ('sha256-nrZBfrhaNEgIlA1qUYUFLCVz5wHcfA191FHarUQc5n0='), or a nonce ('nonce-...') is required to enable inline execution. The action has been b",
+        "Loading the image 'https://www.linkedin.com/px/li_sync?redirect=https%3A%2F%2Fpx.ads.linkedin.com%2Fcollect%3Fv%3D2%26fmt%3Djs%26pid%3D7359490%26time%3D1795164918448%26li_adsId%3D9dd340d1-fc3d-4900-93ab-84af2eb995e7%26pageLoadId%3D5d7793f6-f823-4820-aacb-ec3eed83a39e%26url%3Dhttps%253A%252F%252Fwww.givedirectly.org%252F%26cookiesTest%3Dtrue%26liSync%3Dtrue' violates the following Content Security Policy directive: \"img-src 'self' *.givedirectly.org *.devdirectly.org doublethedonation.com cdn.jsd",
+        "Executing inline script violates the following Content Security Policy directive 'script-src 'self' 'nonce-yRVljQwnCGCiwus1qFgOyUx0OT6pcjxF862rkjqQ' *.js.stripe.com js.stripe.com maps.googleapis.com erinaceus.givedirectly.org www.googleadservices.com www.googletagmanager.com connect.facebook.net snap.licdn.com'. Either the 'unsafe-inline' keyword, a hash ('sha256-kLSHfRmK+DF6MxgO4Q9hL4bFOcGwz1wgL740t8Gwz0E='), or a nonce ('nonce-...') is required to enable inline execution. The action has been b",
+        "Executing inline script violates the following Content Security Policy directive 'script-src 'self' 'nonce-yRVljQwnCGCiwus1qFgOyUx0OT6pcjxF862rkjqQ' *.js.stripe.com js.stripe.com maps.googleapis.com erinaceus.givedirectly.org www.googleadservices.com www.googletagmanager.com connect.facebook.net snap.licdn.com'. Either the 'unsafe-inline' keyword, a hash ('sha256-nrZBfrhaNEgIlA1qUYUFLCVz5wHcfA191FHarUQc5n0='), or a nonce ('nonce-...') is required to enable inline execution. The action has been b"
+      ],
+      "page_errors_sample": [],
+      "bot_challenge": false
+    },
+    "fundraiseup": {
+      "installed_in_source": false,
+      "loaded_at_runtime": false,
+      "account_ids": [],
+      "snippet_count_in_source": 0,
+      "in_head": false,
+      "scripts_after_in_head": 0,
+      "source_excerpt": null,
+      "widget_requests": [],
+      "request_count": 0,
+      "failed_requests": [],
+      "console_errors": [],
+      "csp_errors": [],
+      "global_object": "undefined",
+      "checkout_form_links": [],
+      "inserted_by": null
+    },
+    "tags": {
+      "gtm": {
+        "container_ids": [
+          "GTM-PJNMMGH"
+        ],
+        "loaded_ids": [
+          "GTM-PJNMMGH"
+        ],
+        "in_source_ids": [
+          "GTM-PJNMMGH"
+        ],
+        "dataLayer_entries": 11
+      },
+      "ga4": {
+        "measurement_ids": [
+          "G-GV8XF9FJ16"
+        ],
+        "collect_hits_for": [
+          "G-GV8XF9FJ16"
+        ]
+      },
+      "meta_pixel": {
+        "loaded": true,
+        "pixel_ids": [
+          "1507191883453125"
+        ]
+      },
+      "consent": []
+    },
+    "other_donation_platforms": []
+  },
+  "ai": {
+    "summary": "The page https://www.givedirectly.org/ loaded in a headless browser with HTTP 200 and no load error. The FundraiseUp installation code was not found in the page source, and no FundraiseUp widget request was recorded. The verdict is not installed, because the installation code is missing. Google Tag Manager (GTM-PJNMMGH), GA4 (G-GV8XF9FJ16), and Meta Pixel (1507191883453125) were found and loaded. No other donation tool was found on the page. No known cookie consent tool was detected. The page load event was at 3.8 s. The browser recorded 6 console errors, including Content Security Policy errors for inline scripts. The browser did not click any buttons, so checkout and donate behavior was not tested. No checkout form links were found.",
+    "risks": [
+      {
+        "title": "FundraiseUp installation code is missing",
+        "severity": "high",
+        "detail": "No installation code was found in the page source and no widget request was recorded. The platform cannot run on this page until the code is added.",
+        "check_ids": [
+          "fu_code_in_source"
+        ]
+      },
+      {
+        "title": "No cookie consent tool detected",
+        "severity": "medium",
+        "detail": "No known consent tool was detected. Vendor cookies from GTM, GA4, and Meta Pixel may need a consent setup for EU and UK visitors.",
+        "check_ids": [
+          "consent_banner"
+        ]
+      },
+      {
+        "title": "Content Security Policy errors in console",
+        "severity": "medium",
+        "detail": "The browser recorded 6 console errors. Some are Content Security Policy errors that block inline scripts. These may stop the installation code from running once it is added.",
+        "check_ids": [
+          "console_errors",
+          "fu_code_in_source"
+        ]
+      }
+    ],
+    "next_steps": [
+      {
+        "owner": "customer",
+        "action": "Add the FundraiseUp installation code to the page source on https://www.givedirectly.org/.",
+        "check_ids": [
+          "fu_code_in_source"
+        ]
+      },
+      {
+        "owner": "customer",
+        "action": "Review the Content Security Policy so the FundraiseUp script is allowed to run.",
+        "check_ids": [
+          "console_errors"
+        ]
+      },
+      {
+        "owner": "customer",
+        "action": "Set up a cookie consent tool for EU and UK visitors if required.",
+        "check_ids": [
+          "consent_banner"
+        ]
+      },
+      {
+        "owner": "onboarding_team",
+        "action": "Confirm with the customer that the installation code has been added, then re-run this check.",
+        "check_ids": [
+          "fu_code_in_source",
+          "page_reachable"
+        ]
+      }
+    ],
+    "customer_email": {
+      "subject": "Next steps to install donation tools on givedirectly.org",
+      "body": "Hello,\n\nThank you for working with us to launch donations on your website. We checked https://www.givedirectly.org/ and the page loads correctly. The donation platform code is not on the page yet.\n\nPlease do the following:\n\n1. Add the FundraiseUp installation code to the page source on https://www.givedirectly.org/. We will send the code to you separately.\n2. Check the Content Security Policy on the site so the donation script is allowed to run. The page currently shows errors about inline scripts being blocked.\n3. Set up a cookie consent tool for visitors in the EU and UK, if this applies to you.\n\nOnce the code is in place, please let us know and we will run the check again.\n\nThank you,\nThe Onboarding Team"
+    },
+    "_dropped_uncited": 0,
+    "_usage": {
+      "model": "claude-haiku-5-5",
+      "input_tokens": 2772,
+      "output_tokens": 1065,
+      "cost_usd": 0.00081
+    }
+  }
+}

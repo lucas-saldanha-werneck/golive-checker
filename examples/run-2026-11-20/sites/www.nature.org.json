@@ -1,0 +1,216 @@
+{
+  "url": "https://www.nature.org/",
+  "checked_at": "2026-11-20 08:56 UTC",
+  "verdict": {
+    "status": "not_installed",
+    "reason": "installation code missing",
+    "blockers": [
+      "fu_code_in_source"
+    ],
+    "warnings": [
+      "gtm_container",
+      "ga4"
+    ]
+  },
+  "checklist": [
+    {
+      "id": "page_reachable",
+      "title": "Page loads in a headless browser",
+      "status": "pass",
+      "detail": "HTTP 200, final URL https://www.nature.org/en-us/",
+      "evidence": [
+        "https://www.nature.org/en-us/"
+      ],
+      "blocking": true
+    },
+    {
+      "id": "fu_code_in_source",
+      "title": "Installation code is in the page source",
+      "status": "fail",
+      "detail": "No installation code found in the source and no widget request recorded.",
+      "evidence": [],
+      "blocking": true
+    },
+    {
+      "id": "gtm_container",
+      "title": "Google Tag Manager container",
+      "status": "warn",
+      "detail": "No GTM container. Checkout events (donation, open, close) reach GA4 through a GTM container template.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "ga4",
+      "title": "GA4 measurement ID",
+      "status": "warn",
+      "detail": "No GA4 property seen loading or sending hits (may load only after consent).",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "meta_pixel",
+      "title": "Meta Pixel",
+      "status": "pass",
+      "detail": "loaded, pixel id(s): not seen",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "consent_banner",
+      "title": "Cookie consent tool",
+      "status": "pass",
+      "detail": "OneTrust",
+      "evidence": [
+        "https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"
+      ],
+      "blocking": false
+    },
+    {
+      "id": "other_platforms",
+      "title": "No other donation tool on the page",
+      "status": "pass",
+      "detail": "None found.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "page_speed",
+      "title": "Page load under 6 s",
+      "status": "pass",
+      "detail": "load event at 1.8s",
+      "evidence": [],
+      "blocking": false
+    }
+  ],
+  "facts": {
+    "url": "https://www.nature.org/",
+    "page": {
+      "status": 200,
+      "final_url": "https://www.nature.org/en-us/",
+      "https": true,
+      "load_error": null,
+      "load_ms": 1805,
+      "dom_content_loaded_ms": 1627,
+      "check_seconds": 6.1,
+      "request_count": 87,
+      "failed_request_count": 0,
+      "console_error_count": 0,
+      "console_errors_sample": [],
+      "page_errors_sample": [],
+      "bot_challenge": false
+    },
+    "fundraiseup": {
+      "installed_in_source": false,
+      "loaded_at_runtime": false,
+      "account_ids": [],
+      "snippet_count_in_source": 0,
+      "in_head": false,
+      "scripts_after_in_head": 0,
+      "source_excerpt": null,
+      "widget_requests": [],
+      "request_count": 0,
+      "failed_requests": [],
+      "console_errors": [],
+      "csp_errors": [],
+      "global_object": "undefined",
+      "checkout_form_links": [],
+      "inserted_by": null
+    },
+    "tags": {
+      "gtm": {
+        "container_ids": [],
+        "loaded_ids": [],
+        "in_source_ids": [],
+        "dataLayer_entries": 5
+      },
+      "ga4": {
+        "measurement_ids": [],
+        "collect_hits_for": []
+      },
+      "meta_pixel": {
+        "loaded": true,
+        "pixel_ids": []
+      },
+      "consent": [
+        {
+          "name": "OneTrust",
+          "evidence": "https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"
+        }
+      ]
+    },
+    "other_donation_platforms": []
+  },
+  "ai": {
+    "summary": "The page https://www.nature.org/ loaded in the headless browser. It returned HTTP 200 and redirected to https://www.nature.org/en-us/. No FundraiseUp installation code was found in the page source, and no FundraiseUp widget request was recorded. The FundraiseUp global object is undefined. No checkout form links were found. The browser did not click anything, so checkout and donate buttons were not tested. No Google Tag Manager container was seen. No GA4 measurement ID was seen loading or sending hits, though GA4 may load only after consent. A Meta Pixel loaded, but no pixel ID was seen. OneTrust cookie consent was found. No other donation tool was found on the page. The page loaded in 1.8 seconds. Verdict: not installed, because the installation code is missing.",
+    "risks": [
+      {
+        "title": "FundraiseUp installation code is missing",
+        "severity": "high",
+        "detail": "No installation code was found in the page source and no widget request was recorded. The FundraiseUp global object is undefined.",
+        "check_ids": [
+          "fu_code_in_source"
+        ]
+      },
+      {
+        "title": "No Google Tag Manager container found",
+        "severity": "medium",
+        "detail": "No GTM container was seen. Checkout events such as donation, open, and close reach GA4 through a GTM container template, so these events may not be tracked.",
+        "check_ids": [
+          "gtm_container"
+        ]
+      },
+      {
+        "title": "No GA4 measurement ID seen",
+        "severity": "medium",
+        "detail": "No GA4 property was seen loading or sending hits. GA4 may load only after consent, so this was not confirmed.",
+        "check_ids": [
+          "ga4"
+        ]
+      }
+    ],
+    "next_steps": [
+      {
+        "owner": "onboarding_team",
+        "action": "Confirm with the customer whether the FundraiseUp installation code was added to the site, and ask for the account ID if it was.",
+        "check_ids": [
+          "fu_code_in_source"
+        ]
+      },
+      {
+        "owner": "customer",
+        "action": "Add the FundraiseUp installation code to every page that should show a donation form, in the head section of the page.",
+        "check_ids": [
+          "fu_code_in_source"
+        ]
+      },
+      {
+        "owner": "onboarding_team",
+        "action": "Confirm with the customer whether a Google Tag Manager container and a GA4 property exist, and check whether GA4 loads only after cookie consent.",
+        "check_ids": [
+          "gtm_container",
+          "ga4"
+        ]
+      },
+      {
+        "owner": "onboarding_team",
+        "action": "Re-run this check after the customer confirms changes to the site.",
+        "check_ids": [
+          "fu_code_in_source",
+          "gtm_container",
+          "ga4"
+        ]
+      }
+    ],
+    "customer_email": {
+      "subject": "Next steps for your FundraiseUp setup on nature.org",
+      "body": "Hello,\n\nThank you for working with us to set up online donations. We checked https://www.nature.org/en-us/ and found that the FundraiseUp installation code is not on the page yet.\n\nPlease do the following:\n\n1. Add the FundraiseUp installation code to the head section of each page that should show a donation form. We will send you the code snippet and your account ID.\n2. Let us know if you already have a Google Tag Manager container and a GA4 property. If you do, please send the container ID and the GA4 measurement ID.\n\nOnce the code is added, reply to this email and we will run the check again.\n\nThank you,\nThe Onboarding Team"
+    },
+    "_dropped_uncited": 0,
+    "_usage": {
+      "model": "claude-haiku-5-5",
+      "input_tokens": 2471,
+      "output_tokens": 1072,
+      "cost_usd": 0.00078
+    }
+  }
+}
