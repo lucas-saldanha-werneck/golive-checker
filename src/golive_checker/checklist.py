@@ -125,8 +125,10 @@ def build_checklist(facts: dict[str, Any]) -> list[Item]:
         cmp = next((name for name, sigs in CMP_SIGNATURES.items() if any(s in ib["script"] for s in sigs)), None)
         if cmp:
             items.append(Item("fu_consent_gated", "Widget not held back by the consent tool", WARN,
-                              f"The widget script was inserted by {cmp}, so it depends on consent settings. It loaded in this run; "
-                              "confirm it is set as strictly necessary, or visitors who decline cookies may not get the checkout.",
+                              (f"The install code is in the page source, but {cmp} sits in the call stack that inserted the widget script "
+                               "(consent tools can intercept and block scripts by domain). " if fu["snippet_count_in_source"] else
+                               f"The widget script was inserted by {cmp}, so it depends on consent settings. ")
+                              + "It loaded in this run; confirm it is set as strictly necessary, or visitors who decline cookies may not get the checkout.",
                               [ib["script"][:160]], False))
 
     # 7. Checkout links

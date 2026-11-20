@@ -72,7 +72,7 @@
       "id": "fu_consent_gated",
       "title": "Widget not held back by the consent tool",
       "status": "warn",
-      "detail": "The widget script was inserted by Usercentrics, so it depends on consent settings. It loaded in this run; confirm it is set as strictly necessary, or visitors who decline cookies may not get the checkout.",
+      "detail": "The install code is in the page source, but Usercentrics sits in the call stack that inserted the widget script (consent tools can intercept and block scripts by domain). It loaded in this run; confirm it is set as strictly necessary, or visitors who decline cookies may not get the checkout.",
       "evidence": [
         "https://web.cmp.usercentrics.eu/ui/v/4.34.0/WebSdk.lib.fb4e0364.js"
       ],
@@ -275,12 +275,12 @@
     }
   },
   "ai": {
-    "summary": "The page https://www.ifaw.org/ loaded in the headless browser with HTTP 200 and no load error. The FundraiseUp installation code for account AWMWZJRX is in the page source, and the widget script loaded at runtime from cdn.fundraiseup.com with HTTP 200. The verdict is ready with warnings and no blockers. The browser did not click any buttons, so it did not test whether checkout works. It found one donate link to the checkout form (?form=join), and that link returns donation content in the HTML without JavaScript. The code sits in the head, but 3 script tags follow it. The widget was inserted by the Usercentrics consent tool, so visitors who decline cookies may not get the widget. The page load event took 8.9 seconds. No GA4 measurement ID was seen loading or sending hits, which may be because it loads only after consent. The Meta Pixel was not seen, and it is optional.",
+    "summary": "The page https://www.ifaw.org/ loaded in the headless browser with HTTP 200 and no load error. The FundraiseUp installation code for account AWMWZJRX is in the page source, and the widget script loaded at runtime from cdn.fundraiseup.com with HTTP 200. The verdict is ready with warnings and no blockers. The browser did not click any buttons, so it did not test whether checkout works. It found one donate link to the checkout form (?form=join), and that link returns donation content in the HTML without JavaScript. The code sits in the head, but 3 script tags follow it. Usercentrics sits in the call stack that inserted the widget script, so visitors who decline cookies may not get the widget unless it is set as strictly necessary. The page load event took 8.9 seconds. No GA4 measurement ID was seen loading or sending hits, which may be because it loads only after consent. The Meta Pixel was not seen, and it is optional.",
     "risks": [
       {
         "title": "Widget may depend on cookie consent",
         "severity": "medium",
-        "detail": "Usercentrics inserted the widget script. Visitors who decline cookies may not get the donation widget. Confirm the script is set as strictly necessary.",
+        "detail": "Usercentrics sits in the call stack that inserted the widget script. Visitors who decline cookies may not get the donation widget. Confirm the script is set as strictly necessary.",
         "check_ids": [
           "fu_consent_gated"
         ]

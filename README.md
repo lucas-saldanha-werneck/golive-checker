@@ -79,7 +79,7 @@ Run: 2026-11-20 09:05 UTC | sites: 19 | total run time: 106.6s | median browser 
 What the warnings were, on the 9 sites with the widget:
 
 - 3 sites load the widget at runtime instead of from the page source. On `mercyforanimals.org` the recorded initiator is a WordPress plugin file (`mfa-fundraiseup.min.js`), not GTM.
-- On `ifaw.org` the widget script was inserted by Usercentrics, so whether it loads depends on consent settings.
+- On `ifaw.org` the install code is in the page source, but Usercentrics sits in the call stack that inserted the widget script. It loaded in this run; whether it loads for visitors who decline cookies depends on the consent settings (not tested).
 - 3 sites have scripts after the install code in `<head>`; 2 have no GTM container; 2 had no GA4 property seen on the page.
 - 6 had a load event over 6 s. This run used a shared 4-core server with 3 pages at a time, so treat load times as relative, not as field data.
 

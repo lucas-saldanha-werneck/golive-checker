@@ -14,7 +14,7 @@
 | PASS | One account ID on the page | AWMWZJRX |
 | PASS | Widget script loads | HTTP 200, 11 requests to vendor hosts. |
 | PASS | No widget errors in console | None recorded. |
-| WARN | Widget not held back by the consent tool | The widget script was inserted by Usercentrics, so it depends on consent settings. It loaded in this run; confirm it is set as strictly necessary, or visitors who decline cookies may not get the checkout. |
+| WARN | Widget not held back by the consent tool | The install code is in the page source, but Usercentrics sits in the call stack that inserted the widget script (consent tools can intercept and block scripts by domain). It loaded in this run; confirm it is set as strictly necessary, or visitors who decline cookies may not get the checkout. |
 | PASS | Donate links open the checkout | 1 '?form=' link(s): join |
 | PASS | Google Tag Manager container | GTM-W7GRNP |
 | WARN | GA4 measurement ID | No GA4 property seen loading or sending hits (may load only after consent). |
@@ -36,11 +36,11 @@ Not part of the go-live verdict. Can AI assistants and AI search read the organi
 
 ## Summary (AI, from the facts above)
 
-The page https://www.ifaw.org/ loaded in the headless browser with HTTP 200 and no load error. The FundraiseUp installation code for account AWMWZJRX is in the page source, and the widget script loaded at runtime from cdn.fundraiseup.com with HTTP 200. The verdict is ready with warnings and no blockers. The browser did not click any buttons, so it did not test whether checkout works. It found one donate link to the checkout form (?form=join), and that link returns donation content in the HTML without JavaScript. The code sits in the head, but 3 script tags follow it. The widget was inserted by the Usercentrics consent tool, so visitors who decline cookies may not get the widget. The page load event took 8.9 seconds. No GA4 measurement ID was seen loading or sending hits, which may be because it loads only after consent. The Meta Pixel was not seen, and it is optional.
+The page https://www.ifaw.org/ loaded in the headless browser with HTTP 200 and no load error. The FundraiseUp installation code for account AWMWZJRX is in the page source, and the widget script loaded at runtime from cdn.fundraiseup.com with HTTP 200. The verdict is ready with warnings and no blockers. The browser did not click any buttons, so it did not test whether checkout works. It found one donate link to the checkout form (?form=join), and that link returns donation content in the HTML without JavaScript. The code sits in the head, but 3 script tags follow it. Usercentrics sits in the call stack that inserted the widget script, so visitors who decline cookies may not get the widget unless it is set as strictly necessary. The page load event took 8.9 seconds. No GA4 measurement ID was seen loading or sending hits, which may be because it loads only after consent. The Meta Pixel was not seen, and it is optional.
 
 ### Risks
 
-- **medium** Widget may depend on cookie consent: Usercentrics inserted the widget script. Visitors who decline cookies may not get the donation widget. Confirm the script is set as strictly necessary. _(checks: fu_consent_gated)_
+- **medium** Widget may depend on cookie consent: Usercentrics sits in the call stack that inserted the widget script. Visitors who decline cookies may not get the donation widget. Confirm the script is set as strictly necessary. _(checks: fu_consent_gated)_
 - **low** Installation code is not last in head: Three script tags come after the FundraiseUp code in the head. The vendor docs recommend it as the last script. _(checks: fu_in_head)_
 - **low** Slow page load: The load event fired at 8.9 seconds, above the 6 second target. This was one headless run. _(checks: page_speed)_
 - **low** No GA4 hits seen: No GA4 measurement ID was seen loading or sending hits. It may load only after consent, so this is not confirmed either way. _(checks: ga4)_
