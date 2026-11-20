@@ -1,7 +1,7 @@
 # https://www.ifaw.org/
 
-**Status:** Ready, with warnings (Code is in <head>, last script; Widget not held back by the consent tool; GA4 measurement ID)
-**Checked:** 2026-11-20 08:55 UTC in 8.6s
+**Status:** Ready, with warnings (Code is in <head>, last script; Widget not held back by the consent tool; GA4 measurement ID; Page load under 6 s)
+**Checked:** 2026-11-20 09:07 UTC in 15.5s
 **Account ID(s):** AWMWZJRX
 
 ## Checklist
@@ -21,45 +21,57 @@
 | INFO | Meta Pixel | Not seen (optional; may load after consent). |
 | PASS | Cookie consent tool | Usercentrics |
 | PASS | No other donation tool on the page | None found. |
-| PASS | Page load under 6 s | load event at 4.2s |
+| WARN | Page load under 6 s | load event at 8.9s |
+
+## AI agent readiness
+
+Not part of the go-live verdict. Can AI assistants and AI search read the organization and reach the donate page?
+
+| Status | Check | Detail |
+|---|---|---|
+| PASS | AI assistants and AI search can read the pages | robots.txt allows all listed AI bots. |
+| INFO | llms.txt published | No /llms.txt (optional, still a proposal). |
+| PASS | schema.org organization markup | JSON-LD types: Organization; DonateAction: no. |
+| PASS | Donate page readable without JavaScript | https://www.ifaw.org/?form=join returns HTTP 200 with donation content in the HTML. |
 
 ## Summary (AI, from the facts above)
 
-Page https://www.ifaw.org/ loaded (HTTP 200). FundraiseUp code with account ID AWMWZJRX is in the page source and the widget script loaded in this run. No blockers were found. Three warnings: the code is in head but 3 other script tags follow it, the widget is inserted by the Usercentrics consent tool, and no GA4 measurement ID was seen. The browser did not click anything. One donate link with a ?form= parameter was found (join). This does not confirm the checkout works.
+The page https://www.ifaw.org/ loaded in the headless browser with HTTP 200 and no load error. The FundraiseUp installation code for account AWMWZJRX is in the page source, and the widget script loaded at runtime from cdn.fundraiseup.com with HTTP 200. The verdict is ready with warnings and no blockers. The browser did not click any buttons, so it did not test whether checkout works. It found one donate link to the checkout form (?form=join), and that link returns donation content in the HTML without JavaScript. The code sits in the head, but 3 script tags follow it. The widget was inserted by the Usercentrics consent tool, so visitors who decline cookies may not get the widget. The page load event took 8.9 seconds. No GA4 measurement ID was seen loading or sending hits, which may be because it loads only after consent. The Meta Pixel was not seen, and it is optional.
 
 ### Risks
 
-- **low** FundraiseUp code is not the last script in head: The FundraiseUp snippet is in head, but 3 script tags follow it. The vendor docs recommend it as the last script. _(checks: fu_in_head)_
-- **medium** Widget depends on cookie consent settings: The widget script was inserted by Usercentrics. If visitors decline cookies, the widget may be held back and the checkout may not load for them. It loaded in this run. _(checks: fu_consent_gated)_
-- **low** No GA4 measurement ID seen: No GA4 property was seen loading or sending hits. It may load only after consent, so this run could not confirm it. _(checks: ga4)_
+- **medium** Widget may depend on cookie consent: Usercentrics inserted the widget script. Visitors who decline cookies may not get the donation widget. Confirm the script is set as strictly necessary. _(checks: fu_consent_gated)_
+- **low** Installation code is not last in head: Three script tags come after the FundraiseUp code in the head. The vendor docs recommend it as the last script. _(checks: fu_in_head)_
+- **low** Slow page load: The load event fired at 8.9 seconds, above the 6 second target. This was one headless run. _(checks: page_speed)_
+- **low** No GA4 hits seen: No GA4 measurement ID was seen loading or sending hits. It may load only after consent, so this is not confirmed either way. _(checks: ga4)_
 
 ### Next steps
 
-- [onboarding_team] Confirm with the customer whether they use Google Analytics 4 and, if so, which measurement ID they expect to see on the page. _(checks: ga4)_
-- [onboarding_team] Check the Usercentrics settings with the customer to confirm the FundraiseUp widget script is set as strictly necessary, then re-run this check. _(checks: fu_consent_gated)_
-- [customer] Ask your web developer to move the FundraiseUp snippet so it is the last script inside the head section of the page. _(checks: fu_in_head)_
+- [customer] Ask your web developer to move the FundraiseUp code so it is the last script in the head, after the other three script tags. _(checks: fu_in_head)_
+- [customer] Ask your web developer or consent tool administrator to mark the FundraiseUp widget as strictly necessary in Usercentrics, so it loads for visitors who decline cookies. _(checks: fu_consent_gated)_
+- [onboarding_team] Confirm with the customer that the FundraiseUp widget and the donate link to the checkout form work when a visitor declines cookies. The browser did not click any buttons. _(checks: fu_consent_gated, fu_checkout_links)_
+- [onboarding_team] Confirm with the customer whether they use a GA4 property and whether it loads after consent. Check the dashboard settings if needed. _(checks: ga4)_
+- [onboarding_team] Re-run this check after the customer makes changes to confirm the warnings are cleared. _(checks: fu_in_head, fu_consent_gated, page_speed, ga4)_
 
 ### Draft email to the customer
 
-**Subject:** Next steps for your FundraiseUp setup on ifaw.org
+**Subject:** Three quick fixes for your donation widget on ifaw.org
 
 ```text
 Hello,
 
-We checked your page at https://www.ifaw.org/. The FundraiseUp code is installed and the widget loaded. We found three items to fix or confirm.
+Thank you for working with us to launch donations on your website. Your FundraiseUp donation widget is installed and loads on https://www.ifaw.org/. Before launch, please make these three changes.
 
-Please do the following:
+1. Move the FundraiseUp code so it is the last script in the page head. Right now, three other scripts load after it.
 
-1. Ask your web developer to move the FundraiseUp snippet so it is the last script inside the head section of the page.
+2. Ask your web developer or consent tool administrator to set the FundraiseUp widget as strictly necessary in Usercentrics. This makes sure visitors who decline cookies still see the donation widget.
 
-2. Confirm that the FundraiseUp widget is set as strictly necessary in your cookie consent tool (Usercentrics). This keeps the donation widget working for visitors who decline cookies.
+3. Let us know whether you use a Google Analytics 4 property, so we can confirm it is set up on the page.
 
-3. If you use Google Analytics 4, send us your measurement ID so we can confirm it appears on the page.
+After you make these changes, reply to this email and we will run the check again.
 
-Thank you. Please reply with any questions.
-
-Best regards,
-Onboarding Team
+Thank you,
+The Onboarding Team
 ```
 
 ## Evidence
@@ -69,3 +81,4 @@ Onboarding Team
 - fu_widget_loads: https://cdn.fundraiseup.com/widget/AWMWZJRX
 - fu_consent_gated: https://web.cmp.usercentrics.eu/ui/v/4.34.0/WebSdk.lib.fb4e0364.js
 - consent_banner: https://web.cmp.usercentrics.eu/ui/loader.js
+- donate_no_js: https://www.ifaw.org/?form=join

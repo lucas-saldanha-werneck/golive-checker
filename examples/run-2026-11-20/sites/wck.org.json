@@ -1,6 +1,6 @@
 {
   "url": "https://wck.org/",
-  "checked_at": "2026-11-20 08:56 UTC",
+  "checked_at": "2026-11-20 09:07 UTC",
   "verdict": {
     "status": "not_installed",
     "reason": "installation code missing",
@@ -9,6 +9,9 @@
     ],
     "warnings": [
       "page_speed"
+    ],
+    "agent_warnings": [
+      "donate_no_js"
     ]
   },
   "checklist": [
@@ -76,7 +79,7 @@
       "id": "page_speed",
       "title": "Page load under 6 s",
       "status": "warn",
-      "detail": "load event at 9.2s",
+      "detail": "load event at 10.4s",
       "evidence": [],
       "blocking": false
     },
@@ -89,6 +92,40 @@
         "Failed to load resource: the server responded with a status of 451 ()"
       ],
       "blocking": false
+    },
+    {
+      "id": "ai_crawlers",
+      "title": "AI assistants and AI search can read the pages",
+      "status": "pass",
+      "detail": "robots.txt allows all listed AI bots.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "llms_txt",
+      "title": "llms.txt published",
+      "status": "info",
+      "detail": "No /llms.txt (optional, still a proposal).",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "structured_data",
+      "title": "schema.org organization markup",
+      "status": "pass",
+      "detail": "JSON-LD types: Organization; DonateAction: no.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "donate_no_js",
+      "title": "Donate page readable without JavaScript",
+      "status": "warn",
+      "detail": "https://donate.wck.org/campaign/749360/donate?c_src=site-navbar is blocked or errors for a plain HTTP client (HTTP 403).",
+      "evidence": [
+        "https://donate.wck.org/campaign/749360/donate?c_src=site-navbar"
+      ],
+      "blocking": false
     }
   ],
   "facts": {
@@ -98,10 +135,10 @@
       "final_url": "https://wck.org/",
       "https": true,
       "load_error": null,
-      "load_ms": 9221,
-      "dom_content_loaded_ms": 1135,
-      "check_seconds": 14.3,
-      "request_count": 170,
+      "load_ms": 10435,
+      "dom_content_loaded_ms": 823,
+      "check_seconds": 16.9,
+      "request_count": 168,
       "failed_request_count": 0,
       "console_error_count": 1,
       "console_errors_sample": [
@@ -161,31 +198,75 @@
         }
       ]
     },
-    "other_donation_platforms": []
+    "other_donation_platforms": [],
+    "agent_readiness": {
+      "robots": {
+        "present": true,
+        "bots": {
+          "GPTBot": "allowed",
+          "ClaudeBot": "allowed",
+          "Google-Extended": "allowed",
+          "Claude-User": "allowed",
+          "OAI-SearchBot": "allowed",
+          "PerplexityBot": "allowed"
+        }
+      },
+      "llms_txt": false,
+      "jsonld_types": [
+        "WebPage",
+        "ReadAction",
+        "ImageObject",
+        "BreadcrumbList",
+        "ListItem",
+        "WebSite",
+        "SearchAction",
+        "EntryPoint",
+        "PropertyValueSpecification",
+        "Organization",
+        "Person"
+      ],
+      "organization_markup": [
+        "Organization"
+      ],
+      "donate_action_markup": false,
+      "donate_page": {
+        "url": "https://donate.wck.org/campaign/749360/donate?c_src=site-navbar",
+        "http_status": 403,
+        "without_javascript": "blocked"
+      }
+    }
   },
   "ai": {
-    "summary": "The page https://wck.org/ loaded in a headless browser with HTTP 200 over HTTPS. The FundraiseUp installation code was not found in the page source, and no FundraiseUp widget request was recorded. The verdict is not installed, with the installation code missing. Google Tag Manager (GTM-MKV74FD), GA4 (G-5WKVY8503C), and Meta Pixel (2145340818891888) were found. OneTrust was found as the cookie consent tool. No other donation tool was found. The page load event took 9.2 seconds, which is above the 6 second target. The browser recorded one console error, a 451 status response. The browser did not click any buttons, so checkout behavior was not tested. No checkout form links were found.",
+    "summary": "The page https://wck.org/ loaded in a headless browser with HTTP 200 and no load error. No installation code was found in the page source, and no widget request was recorded. The verdict is not installed. Google Tag Manager (GTM-MKV74FD), GA4 (G-5WKVY8503C), and the Meta Pixel (2145340818891888) were found. OneTrust is the cookie consent tool. No other donation tool was found. The page took 10.4 s to load its load event, above the 6 s check. One console error was recorded, a 451 status on a resource. The donate link https://donate.wck.org/campaign/749360/donate?c_src=site-navbar returned HTTP 403 to a plain HTTP client. The browser did not click any button, so checkout behavior was not tested. Only the links were found.",
     "risks": [
       {
-        "title": "Installation code is missing",
+        "title": "Installation code missing from page source",
         "severity": "high",
-        "detail": "No installation code was found in the page source and no widget request was recorded. The page cannot accept donations through the platform until the code is added.",
+        "detail": "No installation code was found in the source and no widget request was recorded. The install is not present on this page.",
         "check_ids": [
           "fu_code_in_source"
         ]
       },
       {
-        "title": "Page load is slow",
+        "title": "Page load time above 6 s",
         "severity": "medium",
-        "detail": "The load event fired at 9.2 seconds. The check target is under 6 seconds.",
+        "detail": "The load event was recorded at 10.4 s.",
         "check_ids": [
           "page_speed"
         ]
       },
       {
-        "title": "Console error on the page",
+        "title": "Donate page returned HTTP 403 to a plain HTTP client",
+        "severity": "medium",
+        "detail": "The donate link https://donate.wck.org/campaign/749360/donate?c_src=site-navbar returned HTTP 403 to a plain HTTP client. The check cannot read this page without JavaScript.",
+        "check_ids": [
+          "donate_no_js"
+        ]
+      },
+      {
+        "title": "One console error recorded",
         "severity": "low",
-        "detail": "The browser recorded one resource failure with a 451 status. The resource was not identified in the recorded data.",
+        "detail": "A resource returned status 451 during page load. The source of the resource was not identified.",
         "check_ids": [
           "console_errors"
         ]
@@ -194,44 +275,50 @@
     "next_steps": [
       {
         "owner": "customer",
-        "action": "Add the FundraiseUp installation code to the page source of https://wck.org/, then tell the onboarding team when it is live.",
-        "check_ids": [
-          "fu_code_in_source"
-        ]
-      },
-      {
-        "owner": "onboarding_team",
-        "action": "Confirm the FundraiseUp account ID with the customer and check it in the dashboard settings once the code is added.",
+        "action": "Add the installation code to the page source of https://wck.org/ and confirm it appears in the head of the page.",
         "check_ids": [
           "fu_code_in_source"
         ]
       },
       {
         "owner": "customer",
-        "action": "Review the page load time and reduce the scripts or assets that slow the load event below 6 seconds.",
+        "action": "Review the page load time of https://wck.org/ and reduce the load event time below 6 s.",
         "check_ids": [
           "page_speed"
         ]
       },
       {
-        "owner": "onboarding_team",
-        "action": "Re-run this check after the customer reports the code is added, and confirm the widget request appears.",
+        "owner": "customer",
+        "action": "Check that https://donate.wck.org/campaign/749360/donate?c_src=site-navbar is reachable for visitors and does not block plain HTTP requests with HTTP 403.",
         "check_ids": [
-          "fu_code_in_source",
-          "page_speed"
+          "donate_no_js"
+        ]
+      },
+      {
+        "owner": "onboarding_team",
+        "action": "Confirm with the customer that the installation code was added, then re-run this check.",
+        "check_ids": [
+          "fu_code_in_source"
+        ]
+      },
+      {
+        "owner": "onboarding_team",
+        "action": "Confirm the 451 console error source with the customer and note whether it affects donations.",
+        "check_ids": [
+          "console_errors"
         ]
       }
     ],
     "customer_email": {
-      "subject": "Next steps to set up donations on wck.org",
-      "body": "Hello,\n\nWe checked https://wck.org/ to prepare your donation platform setup. The page loads, but the donation installation code was not found in the page source.\n\nPlease do the following:\n\n1. Add the donation installation code to the page source of https://wck.org/. We will send the exact code and placement details separately if you need them.\n2. Reduce the page load time. The main page currently takes about 9 seconds to finish loading. Please aim for under 6 seconds.\n3. Let us know when the code is live, and we will confirm it.\n\nThank you,\nThe Onboarding Team"
+      "subject": "Next steps to finish your donation page setup",
+      "body": "Hello,\n\nThank you for working with us. We checked https://wck.org/ and found that the donation installation code is not in the page yet. Please add the installation code to the page source so it appears in the head of the page. We will confirm once it is in place.\n\nWe also found two items to review on your site:\n\n1. The page takes about 10.4 seconds to load. Please review it and aim for under 6 seconds.\n2. The donate page at https://donate.wck.org/campaign/749360/donate?c_src=site-navbar returned an access error (HTTP 403) to our check. Please confirm that visitors can open this page.\n\nOnce these changes are made, reply to this email and we will run the check again.\n\nThank you,\nOnboarding Team"
     },
     "_dropped_uncited": 0,
     "_usage": {
       "model": "claude-haiku-5-5",
-      "input_tokens": 2562,
-      "output_tokens": 967,
-      "cost_usd": 0.00074
+      "input_tokens": 3226,
+      "output_tokens": 1186,
+      "cost_usd": 0.00092
     }
   }
 }

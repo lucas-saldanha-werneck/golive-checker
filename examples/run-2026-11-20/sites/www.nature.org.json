@@ -1,6 +1,6 @@
 {
   "url": "https://www.nature.org/",
-  "checked_at": "2026-11-20 08:56 UTC",
+  "checked_at": "2026-11-20 09:07 UTC",
   "verdict": {
     "status": "not_installed",
     "reason": "installation code missing",
@@ -10,7 +10,8 @@
     "warnings": [
       "gtm_container",
       "ga4"
-    ]
+    ],
+    "agent_warnings": []
   },
   "checklist": [
     {
@@ -77,8 +78,42 @@
       "id": "page_speed",
       "title": "Page load under 6 s",
       "status": "pass",
-      "detail": "load event at 1.8s",
+      "detail": "load event at 2.4s",
       "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "ai_crawlers",
+      "title": "AI assistants and AI search can read the pages",
+      "status": "pass",
+      "detail": "robots.txt allows all listed AI bots.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "llms_txt",
+      "title": "llms.txt published",
+      "status": "info",
+      "detail": "No /llms.txt (optional, still a proposal).",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "structured_data",
+      "title": "schema.org organization markup",
+      "status": "info",
+      "detail": "No Organization/NGO JSON-LD on the home or donate page (types seen: none).",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "donate_no_js",
+      "title": "Donate page readable without JavaScript",
+      "status": "pass",
+      "detail": "https://tnc.colabore.org/analytics-test/single_step returns HTTP 200 with donation content in the HTML.",
+      "evidence": [
+        "https://tnc.colabore.org/analytics-test/single_step"
+      ],
       "blocking": false
     }
   ],
@@ -89,9 +124,9 @@
       "final_url": "https://www.nature.org/en-us/",
       "https": true,
       "load_error": null,
-      "load_ms": 1805,
-      "dom_content_loaded_ms": 1627,
-      "check_seconds": 6.1,
+      "load_ms": 2362,
+      "dom_content_loaded_ms": 2104,
+      "check_seconds": 8.4,
       "request_count": 87,
       "failed_request_count": 0,
       "console_error_count": 0,
@@ -138,31 +173,53 @@
         }
       ]
     },
-    "other_donation_platforms": []
+    "other_donation_platforms": [],
+    "agent_readiness": {
+      "robots": {
+        "present": true,
+        "bots": {
+          "GPTBot": "allowed",
+          "ClaudeBot": "allowed",
+          "Google-Extended": "allowed",
+          "Claude-User": "allowed",
+          "OAI-SearchBot": "allowed",
+          "PerplexityBot": "allowed"
+        }
+      },
+      "llms_txt": false,
+      "jsonld_types": [],
+      "organization_markup": [],
+      "donate_action_markup": false,
+      "donate_page": {
+        "url": "https://tnc.colabore.org/analytics-test/single_step",
+        "http_status": 200,
+        "without_javascript": "readable"
+      }
+    }
   },
   "ai": {
-    "summary": "The page https://www.nature.org/ loaded in the headless browser. It returned HTTP 200 and redirected to https://www.nature.org/en-us/. No FundraiseUp installation code was found in the page source, and no FundraiseUp widget request was recorded. The FundraiseUp global object is undefined. No checkout form links were found. The browser did not click anything, so checkout and donate buttons were not tested. No Google Tag Manager container was seen. No GA4 measurement ID was seen loading or sending hits, though GA4 may load only after consent. A Meta Pixel loaded, but no pixel ID was seen. OneTrust cookie consent was found. No other donation tool was found on the page. The page loaded in 1.8 seconds. Verdict: not installed, because the installation code is missing.",
+    "summary": "The page https://www.nature.org/en-us/ loaded with HTTP 200 in a headless browser. No FundraiseUp installation code was found in the page source, and no FundraiseUp widget request was recorded. The FundraiseUp global object is not defined at runtime. No Google Tag Manager container and no GA4 measurement ID were seen loading or sending hits. A Meta Pixel and a OneTrust consent tool were found. No other donation tool was found. The browser did not click any buttons, so checkout behavior was not tested. A donate page at https://tnc.colabore.org/analytics-test/single_step returned HTTP 200 with donation content in the HTML. Verdict: not installed, because installation code is missing.",
     "risks": [
       {
         "title": "FundraiseUp installation code is missing",
         "severity": "high",
-        "detail": "No installation code was found in the page source and no widget request was recorded. The FundraiseUp global object is undefined.",
+        "detail": "No installation code was found in the page source and no widget request was recorded. The verdict is not installed.",
         "check_ids": [
           "fu_code_in_source"
         ]
       },
       {
-        "title": "No Google Tag Manager container found",
+        "title": "No Google Tag Manager container seen",
         "severity": "medium",
-        "detail": "No GTM container was seen. Checkout events such as donation, open, and close reach GA4 through a GTM container template, so these events may not be tracked.",
+        "detail": "No GTM container was found. Checkout events such as donation, open, and close reach GA4 through a GTM container template.",
         "check_ids": [
           "gtm_container"
         ]
       },
       {
-        "title": "No GA4 measurement ID seen",
+        "title": "No GA4 property seen",
         "severity": "medium",
-        "detail": "No GA4 property was seen loading or sending hits. GA4 may load only after consent, so this was not confirmed.",
+        "detail": "No GA4 measurement ID was seen loading or sending hits. GA4 may load only after consent, so this may need a check with consent accepted.",
         "check_ids": [
           "ga4"
         ]
@@ -170,22 +227,15 @@
     ],
     "next_steps": [
       {
-        "owner": "onboarding_team",
-        "action": "Confirm with the customer whether the FundraiseUp installation code was added to the site, and ask for the account ID if it was.",
+        "owner": "customer",
+        "action": "Add the FundraiseUp installation code to the page source of https://www.nature.org/en-us/ as provided by the onboarding team.",
         "check_ids": [
           "fu_code_in_source"
         ]
       },
       {
         "owner": "customer",
-        "action": "Add the FundraiseUp installation code to every page that should show a donation form, in the head section of the page.",
-        "check_ids": [
-          "fu_code_in_source"
-        ]
-      },
-      {
-        "owner": "onboarding_team",
-        "action": "Confirm with the customer whether a Google Tag Manager container and a GA4 property exist, and check whether GA4 loads only after cookie consent.",
+        "action": "Confirm whether a Google Tag Manager container and a GA4 measurement ID are in use on the site, and share the IDs if so.",
         "check_ids": [
           "gtm_container",
           "ga4"
@@ -193,7 +243,7 @@
       },
       {
         "owner": "onboarding_team",
-        "action": "Re-run this check after the customer confirms changes to the site.",
+        "action": "Confirm with the customer which GA4 and GTM setup they use, then re-run this check after the installation code is added.",
         "check_ids": [
           "fu_code_in_source",
           "gtm_container",
@@ -202,15 +252,15 @@
       }
     ],
     "customer_email": {
-      "subject": "Next steps for your FundraiseUp setup on nature.org",
-      "body": "Hello,\n\nThank you for working with us to set up online donations. We checked https://www.nature.org/en-us/ and found that the FundraiseUp installation code is not on the page yet.\n\nPlease do the following:\n\n1. Add the FundraiseUp installation code to the head section of each page that should show a donation form. We will send you the code snippet and your account ID.\n2. Let us know if you already have a Google Tag Manager container and a GA4 property. If you do, please send the container ID and the GA4 measurement ID.\n\nOnce the code is added, reply to this email and we will run the check again.\n\nThank you,\nThe Onboarding Team"
+      "subject": "Next steps to connect donations on your website",
+      "body": "Hello,\n\nThank you for working with us to set up online donations. We checked your page at https://www.nature.org/en-us/. The check did not find the donation installation code in the page source, so donations cannot be connected yet.\n\nPlease do the following:\n\n1. Add the installation code to the page source. We will send you the code.\n2. Share your Google Tag Manager container ID and your GA4 measurement ID, if you use them. If you do not use them, please let us know.\n\nOnce these are in place, we will run the check again.\n\nThank you,\nOnboarding Team"
     },
     "_dropped_uncited": 0,
     "_usage": {
       "model": "claude-haiku-5-5",
-      "input_tokens": 2471,
-      "output_tokens": 1072,
-      "cost_usd": 0.00078
+      "input_tokens": 3021,
+      "output_tokens": 943,
+      "cost_usd": 0.00077
     }
   }
 }

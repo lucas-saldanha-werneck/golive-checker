@@ -7,7 +7,9 @@ in tests without a network connection.
 from __future__ import annotations
 
 import asyncio
+import re
 import time
+from urllib.parse import urlparse
 from typing import Any
 
 from playwright.async_api import Browser, async_playwright
@@ -50,6 +52,55 @@ NAV_TIMING_JS = """
 """
 
 
+LINKS_JS = """
+() => Array.from(document.querySelectorAll('a[href]')).slice(0, 2000)
+  .map(a => ({href: a.href, text: (a.innerText || a.getAttribute('aria-label') || '').trim().slice(0, 60)}))
+"""
+
+BUTTON_TEXT = re.compile(r"^(donate|give)( now| today| monthly)?!?$", re.I)
+DONATE_WORDS = re.compile(r"\bdonat|\bgive\b|\bgive now|\bgiving\b", re.I)
+
+
+def pick_donate_link(page_url: str, links: list[dict]) -> str | None:
+    """First link that looks like a donate page. Prefers links whose text says donate."""
+    page = urlparse(page_url)
+    scored = []
+    for i, l in enumerate(links or []):
+        href = l.get("href") or ""
+        u = urlparse(href)
+        if u.scheme not in ("http", "https"):
+            continue
+        if u._replace(fragment="").geturl() == page._replace(fragment="").geturl():
+            continue
+        text_hit = bool(DONATE_WORDS.search(l.get("text") or ""))
+        href_hit = bool(DONATE_WORDS.search(u.path + "?" + u.query)) or "form=" in u.query
+        if text_hit or href_hit:
+            text = (l.get("text") or "").strip()
+            button = bool(BUTTON_TEXT.match(text))  # "Donate", "Give now", "Donate today"
+            says_donate = "donat" in (text + u.path).lower()
+            scored.append((0 if button else 1, 0 if says_donate else 1, 0 if text_hit and href_hit else 1 if text_hit else 2, i, href))
+    return min(scored)[4] if scored else None
+
+
+async def _get(context, url: str, limit: int = 300_000) -> dict:
+    try:
+        r = await context.request.get(url, timeout=15000, max_redirects=5)
+        body = (await r.text())[:limit]
+        return {"url": url, "status": r.status, "final_url": r.url, "content_type": r.headers.get("content-type", ""), "body": body}
+    except Exception as e:
+        return {"url": url, "status": None, "error": str(e).splitlines()[0][:200], "body": ""}
+
+
+async def fetch_agent_files(context, page_url: str, links: list[dict]) -> dict:
+    """What an AI agent or crawler sees without running JavaScript."""
+    origin = "{0.scheme}://{0.netloc}".format(urlparse(page_url))
+    out = {"robots": await _get(context, origin + "/robots.txt", 100_000),
+           "llms": await _get(context, origin + "/llms.txt", 2_000)}
+    donate = pick_donate_link(page_url, links)
+    out["donate"] = await _get(context, donate) if donate else None
+    return out
+
+
 async def capture_page(browser: Browser, url: str, timeout_s: float = 45.0, settle_ms: int = 4000) -> dict[str, Any]:
     """Load `url` and return a capture dict. Never raises for page problems; records them."""
     started = time.monotonic()
@@ -67,6 +118,7 @@ async def capture_page(browser: Browser, url: str, timeout_s: float = 45.0, sett
         "globals": {},
         "timing": {},
         "initiators": {},  # vendor script URL -> script that inserted it (from Chrome DevTools Protocol)
+        "agent": {},  # robots.txt, llms.txt, donate page fetched without JavaScript
     }
     context = await browser.new_context(user_agent=USER_AGENT, viewport={"width": 1366, "height": 900}, locale="en-US")
     page = await context.new_page()
@@ -128,6 +180,8 @@ async def capture_page(browser: Browser, url: str, timeout_s: float = 45.0, sett
         cap["rendered_html"] = await page.content()
         cap["globals"] = await page.evaluate(GLOBALS_JS)
         cap["timing"] = await page.evaluate(NAV_TIMING_JS) or {}
+        links = await page.evaluate(LINKS_JS)
+        cap["agent"] = await fetch_agent_files(context, page.url, links)
     except Exception as e:
         cap["error"] = f"{type(e).__name__}: {str(e).splitlines()[0][:300]}"
         try:

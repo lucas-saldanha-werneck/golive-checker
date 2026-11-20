@@ -1,13 +1,15 @@
 {
   "url": "https://mercyforanimals.org/",
-  "checked_at": "2026-11-20 08:55 UTC",
+  "checked_at": "2026-11-20 09:07 UTC",
   "verdict": {
     "status": "ready_with_warnings",
-    "reason": "Installation code is in the page source",
+    "reason": "Installation code is in the page source; Page load under 6 s",
     "blockers": [],
     "warnings": [
-      "fu_code_in_source"
-    ]
+      "fu_code_in_source",
+      "page_speed"
+    ],
+    "agent_warnings": []
   },
   "checklist": [
     {
@@ -108,8 +110,8 @@
     {
       "id": "page_speed",
       "title": "Page load under 6 s",
-      "status": "pass",
-      "detail": "load event at 5.6s",
+      "status": "warn",
+      "detail": "load event at 10.1s",
       "evidence": [],
       "blocking": false
     },
@@ -124,6 +126,40 @@
         "Connecting to 'https://kw-f5e5ef3e54fb4122a3ba09a55357f9ab.ecs.us-west-1.on.aws/events?cee=no' violates the following Content Security Policy directive: \"connec"
       ],
       "blocking": false
+    },
+    {
+      "id": "ai_crawlers",
+      "title": "AI assistants and AI search can read the pages",
+      "status": "pass",
+      "detail": "robots.txt allows all listed AI bots.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "llms_txt",
+      "title": "llms.txt published",
+      "status": "info",
+      "detail": "No /llms.txt (optional, still a proposal).",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "structured_data",
+      "title": "schema.org organization markup",
+      "status": "pass",
+      "detail": "JSON-LD types: Organization; DonateAction: no.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "donate_no_js",
+      "title": "Donate page readable without JavaScript",
+      "status": "pass",
+      "detail": "https://mercyforanimals.org/?form=donate returns HTTP 200 with donation content in the HTML.",
+      "evidence": [
+        "https://mercyforanimals.org/?form=donate"
+      ],
+      "blocking": false
     }
   ],
   "facts": {
@@ -133,9 +169,9 @@
       "final_url": "https://mercyforanimals.org/",
       "https": true,
       "load_error": null,
-      "load_ms": 5639,
-      "dom_content_loaded_ms": 678,
-      "check_seconds": 9.9,
+      "load_ms": 10076,
+      "dom_content_loaded_ms": 1669,
+      "check_seconds": 15.7,
       "request_count": 119,
       "failed_request_count": 0,
       "console_error_count": 4,
@@ -222,86 +258,127 @@
       },
       "consent": []
     },
-    "other_donation_platforms": []
+    "other_donation_platforms": [],
+    "agent_readiness": {
+      "robots": {
+        "present": true,
+        "bots": {
+          "GPTBot": "allowed",
+          "ClaudeBot": "allowed",
+          "Google-Extended": "allowed",
+          "Claude-User": "allowed",
+          "OAI-SearchBot": "allowed",
+          "PerplexityBot": "allowed"
+        }
+      },
+      "llms_txt": false,
+      "jsonld_types": [
+        "WebPage",
+        "ReadAction",
+        "BreadcrumbList",
+        "ListItem",
+        "WebSite",
+        "SearchAction",
+        "EntryPoint",
+        "PropertyValueSpecification",
+        "Organization",
+        "ImageObject"
+      ],
+      "organization_markup": [
+        "Organization"
+      ],
+      "donate_action_markup": false,
+      "donate_page": {
+        "url": "https://mercyforanimals.org/?form=donate",
+        "http_status": 200,
+        "without_javascript": "readable"
+      }
+    }
   },
   "ai": {
-    "summary": "The page at https://mercyforanimals.org/ loaded in a headless browser with HTTP 200. The FundraiseUp widget loads at runtime for account AVGENVAN, but its code is not in the server HTML. A JavaScript file from the site's mfa-blocks-2024 plugin inserts it. The browser found one donate link with a '?form=' checkout parameter. The browser did not click it, so checkout behavior was not tested. The verdict is ready with warnings, with no blockers. Four console errors were recorded, all about Content Security Policy blocking connections to two external event endpoints. No cookie consent tool was detected.",
+    "summary": "The page https://mercyforanimals.org/ loaded with HTTP 200 in the headless browser. The FundraiseUp widget script loads at runtime with account ID AVGENVAN. The widget code is not in the server HTML. A site script inserts it after load, and the vendor asks for the code in the global head and confirmation in the page source. The page load event took 10.1 seconds, above the 6 second target. Four console errors were recorded, all Content Security Policy refusals of connections to two external event endpoints. The browser did not click anything. One '?form=' donate link was found. The donate page returns readable HTML without JavaScript. Google Tag Manager, GA4, and Meta Pixel were found on the page. No consent tool was detected. The checklist verdict is ready with warnings, with no blockers.",
     "risks": [
       {
-        "title": "FundraiseUp code is not in the page source",
+        "title": "Widget code is not in the page source",
         "severity": "medium",
-        "detail": "The widget is inserted by JavaScript from the site's plugin, not by code in the global head. The vendor asks for the code in the global head and confirmation through the page source. The snippet count in source is 0.",
+        "detail": "The FundraiseUp code is added by a site script at runtime, not in the server HTML. The vendor asks for the code in the global head and a source check to confirm it.",
         "check_ids": [
           "fu_code_in_source"
         ]
       },
       {
-        "title": "No cookie consent tool detected",
+        "title": "Slow page load",
         "severity": "medium",
-        "detail": "No known consent tool was found. A consent setup is needed for EU and UK visitors because vendor cookies are set on the page.",
+        "detail": "The load event fired at 10.1 seconds. The check target is under 6 seconds.",
         "check_ids": [
-          "consent_banner"
+          "page_speed"
         ]
       },
       {
-        "title": "Content Security Policy blocks two event endpoints",
+        "title": "Content Security Policy blocks event requests",
         "severity": "low",
-        "detail": "The browser recorded four console errors. Two Content Security Policy errors refused connections to an external Cloud Run endpoint and an AWS endpoint. These errors do not involve the FundraiseUp widget, which had no console errors.",
+        "detail": "Four console errors were recorded. Connections to two external event endpoints were refused by the page's Content Security Policy.",
         "check_ids": [
-          "console_errors",
-          "fu_no_console_errors"
+          "console_errors"
+        ]
+      },
+      {
+        "title": "No consent tool detected",
+        "severity": "low",
+        "detail": "No known cookie consent tool was found. Vendor cookies need a consent setup for EU and UK visitors.",
+        "check_ids": [
+          "consent_banner"
         ]
       }
     ],
     "next_steps": [
       {
         "owner": "customer",
-        "action": "Add the FundraiseUp snippet for account AVGENVAN to the global head of the site, then view the page source to confirm it appears.",
+        "action": "Ask your web developer to add the FundraiseUp installation code to the global head of the site, so it appears in the server HTML. Then view the page source to confirm it is there.",
         "check_ids": [
           "fu_code_in_source"
         ]
       },
       {
         "owner": "customer",
-        "action": "Set up a cookie consent tool for EU and UK visitors, since vendor cookies are used on the page.",
+        "action": "Ask your web developer to review the page load time, which was 10.1 seconds, against the 6 second target.",
+        "check_ids": [
+          "page_speed"
+        ]
+      },
+      {
+        "owner": "customer",
+        "action": "Ask your web developer to review the Content Security Policy so the two external event endpoints named in the console errors are allowed, or confirm they are not needed.",
+        "check_ids": [
+          "console_errors"
+        ]
+      },
+      {
+        "owner": "onboarding_team",
+        "action": "Confirm with the customer whether they use a cookie consent tool for EU and UK visitors and whether one is needed.",
         "check_ids": [
           "consent_banner"
         ]
       },
       {
-        "owner": "customer",
-        "action": "Review the Content Security Policy connect-src setting and decide whether the two blocked event endpoints should be allowed.",
-        "check_ids": [
-          "console_errors"
-        ]
-      },
-      {
         "owner": "onboarding_team",
-        "action": "Confirm with the customer which plugin inserts the widget script and whether it can be changed.",
-        "check_ids": [
-          "fu_code_in_source"
-        ]
-      },
-      {
-        "owner": "onboarding_team",
-        "action": "Re-run this check after the customer's changes and confirm the snippet appears in the page source.",
+        "action": "Re-run this check after the customer updates the page to confirm the installation code appears in the page source.",
         "check_ids": [
           "fu_code_in_source",
-          "consent_banner",
-          "console_errors"
+          "page_speed"
         ]
       }
     ],
     "customer_email": {
-      "subject": "Action needed: add FundraiseUp code to your site head",
-      "body": "Hello,\n\nThank you for working with us to launch your donation page. We checked https://mercyforanimals.org/ and found your FundraiseUp widget loads, but its code is not in the global head of your site. Please take these steps:\n\n1. Add the FundraiseUp snippet for account AVGENVAN to the global head of your site.\n2. View the page source and confirm the snippet appears there.\n3. Set up a cookie consent tool for EU and UK visitors, since vendor cookies are used on the page.\n4. Review your Content Security Policy connect-src setting. Two external event endpoints were blocked, and you should decide whether to allow them.\n\nOnce these are done, let us know and we will run the check again.\n\nThank you,\nOnboarding Team"
+      "subject": "Next steps for your donation page at mercyforanimals.org",
+      "body": "Hello,\n\nThank you for working with us to launch your online donations. Your donation page loads and the FundraiseUp widget is active. A few items need attention before we can mark the launch complete.\n\n1. Add the FundraiseUp installation code to the global head of your website, so it appears in the page source. Please check the page source afterward to confirm it is there.\n\n2. Ask your web developer to review page speed. The main page took about 10 seconds to finish loading. Our target is under 6 seconds.\n\n3. Ask your web developer to review your Content Security Policy. Two external event endpoints were blocked, which caused console errors.\n\n4. Let us know whether you use a cookie consent tool for visitors in the EU or UK.\n\nOnce these are updated, reply to this email and we will re-run the check.\n\nThank you,\nThe Onboarding Team"
     },
     "_dropped_uncited": 0,
     "_usage": {
       "model": "claude-haiku-5-5",
-      "input_tokens": 3624,
-      "output_tokens": 1652,
-      "cost_usd": 0.00119
+      "input_tokens": 4250,
+      "output_tokens": 1267,
+      "cost_usd": 0.00106
     }
   }
 }

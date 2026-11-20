@@ -1,6 +1,6 @@
 {
   "url": "https://www.edf.org/",
-  "checked_at": "2026-11-20 08:55 UTC",
+  "checked_at": "2026-11-20 09:07 UTC",
   "verdict": {
     "status": "ready_with_warnings",
     "reason": "Installation code is in the page source; Google Tag Manager container; GA4 measurement ID",
@@ -9,6 +9,9 @@
       "fu_code_in_source",
       "gtm_container",
       "ga4"
+    ],
+    "agent_warnings": [
+      "donate_no_js"
     ]
   },
   "checklist": [
@@ -114,6 +117,40 @@
       "detail": "load event at 2.4s",
       "evidence": [],
       "blocking": false
+    },
+    {
+      "id": "ai_crawlers",
+      "title": "AI assistants and AI search can read the pages",
+      "status": "pass",
+      "detail": "robots.txt allows all listed AI bots.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "llms_txt",
+      "title": "llms.txt published",
+      "status": "info",
+      "detail": "No /llms.txt (optional, still a proposal).",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "structured_data",
+      "title": "schema.org organization markup",
+      "status": "pass",
+      "detail": "JSON-LD types: NonprofitOrganization; DonateAction: yes.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "donate_no_js",
+      "title": "Donate page readable without JavaScript",
+      "status": "warn",
+      "detail": "https://give.edf.org/page/web-donate?page_id=e8b8f91b-1127-4e66-9c2f-b868edb21004&session_id=40fa8fdf-0f36-420b-a8ea-3acb73e3ea9a&page_id=e8b8f91b-1127-4e66-9c2f-b868edb21004&session_id=40fa8fdf-0f36-420b-a8ea-3acb73e3ea9a returns HTTP 200 but no form, checkout link or install code in the HTML; agents that do not run JavaScript see no way to give.",
+      "evidence": [
+        "https://give.edf.org/page/web-donate?page_id=e8b8f91b-1127-4e66-9c2f-b868edb21004&session_id=40fa8fdf-0f36-420b-a8ea-3acb73e3ea9a&page_id=e8b8f91b-1127-4e66-9c2f-b868edb21004&session_id=40fa8fdf-0f36-420b-a8ea-3acb73e3ea9a"
+      ],
+      "blocking": false
     }
   ],
   "facts": {
@@ -123,10 +160,10 @@
       "final_url": "https://www.edf.org/",
       "https": true,
       "load_error": null,
-      "load_ms": 2437,
-      "dom_content_loaded_ms": 841,
-      "check_seconds": 7.2,
-      "request_count": 125,
+      "load_ms": 2350,
+      "dom_content_loaded_ms": 921,
+      "check_seconds": 6.9,
+      "request_count": 123,
       "failed_request_count": 0,
       "console_error_count": 0,
       "console_errors_sample": [],
@@ -181,15 +218,44 @@
       },
       "consent": []
     },
-    "other_donation_platforms": []
+    "other_donation_platforms": [],
+    "agent_readiness": {
+      "robots": {
+        "present": true,
+        "bots": {
+          "GPTBot": "allowed",
+          "ClaudeBot": "allowed",
+          "Google-Extended": "allowed",
+          "Claude-User": "allowed",
+          "OAI-SearchBot": "allowed",
+          "PerplexityBot": "allowed"
+        }
+      },
+      "llms_txt": false,
+      "jsonld_types": [
+        "NonprofitOrganization",
+        "WebPage",
+        "DonateAction",
+        "EntryPoint"
+      ],
+      "organization_markup": [
+        "NonprofitOrganization"
+      ],
+      "donate_action_markup": true,
+      "donate_page": {
+        "url": "https://give.edf.org/page/web-donate?page_id=e8b8f91b-1127-4e66-9c2f-b868edb21004&session_id=40fa8fdf-0f36-420b-a8ea-3acb73e3ea9a&page_id=e8b8f91b-1127-4e66-9c2f-b868edb21004&session_id=40fa8fdf-0f36-420b-a8ea-3acb73e3ea9a",
+        "http_status": 200,
+        "without_javascript": "needs_javascript"
+      }
+    }
   },
   "ai": {
-    "summary": "The page https://www.edf.org/ loaded with HTTP 200 in the headless browser. The FundraiseUp widget for account AQBHBSYR loads at runtime from cdn.fundraiseup.com with HTTP 200. The installation code is not in the server HTML. It is inserted by JavaScript from assets.edfcdn.org (utilities.min.js), not by a tag manager. No GTM container was found. No GA4 measurement ID was seen loading or sending hits, though GA4 may load only after consent. No Meta Pixel was seen. No cookie consent tool was detected. One donate link was found with the form parameter eoy-match-web. The browser did not click any link, so the checkout was not tested. No other donation tool was found. The page loaded in 2.4 seconds. The verdict is ready with warnings and no blockers.",
+    "summary": "The page https://www.edf.org/ loaded with HTTP 200 in the headless browser. The FundraiseUp widget script loads at runtime for account AQBHBSYR, and one checkout-style link was found (?form=eoy-match-web). The install code is not in the server HTML. It is inserted by a JavaScript file from assets.edfcdn.org, not by a tag manager. No Google Tag Manager container was found. No GA4 measurement ID was seen sending hits, though it may load after consent. The donate page at give.edf.org returns HTTP 200 but its HTML has no form, checkout link, or install code, so it needs JavaScript to show a way to give. The browser did not click any link, so this check does not show whether the checkout works. Verdict: ready with warnings.",
     "risks": [
       {
-        "title": "Install code is not in the page source",
+        "title": "Install code not in page source",
         "severity": "medium",
-        "detail": "The widget is added by JavaScript at runtime from a site script, not in the global head. Vendor docs ask for the code in the head and a page source check.",
+        "detail": "The FundraiseUp code is added by JavaScript at runtime, not in the server HTML. The vendor asks for the code in the global head and a page source check to confirm it.",
         "check_ids": [
           "fu_code_in_source"
         ]
@@ -197,7 +263,7 @@
       {
         "title": "No Google Tag Manager container found",
         "severity": "medium",
-        "detail": "Checkout events such as donation, open, and close do not reach GA4 through a GTM container template as recorded.",
+        "detail": "Checkout events such as donation, open, and close are not confirmed to reach GA4 because no GTM container was seen.",
         "check_ids": [
           "gtm_container"
         ]
@@ -205,15 +271,23 @@
       {
         "title": "No GA4 measurement ID seen",
         "severity": "medium",
-        "detail": "No GA4 property was seen loading or sending hits. It may load only after consent, so this needs confirmation.",
+        "detail": "No GA4 property was seen loading or sending hits. It may load only after consent, so this is not confirmed.",
         "check_ids": [
           "ga4"
         ]
       },
       {
-        "title": "No cookie consent tool detected",
+        "title": "Donate page needs JavaScript",
         "severity": "low",
-        "detail": "No known consent tool was found. EU and UK visitors need one for vendor cookies.",
+        "detail": "The give.edf.org donate page returns HTML with no form, checkout link, or install code. Agents that do not run JavaScript cannot see a way to give.",
+        "check_ids": [
+          "donate_no_js"
+        ]
+      },
+      {
+        "title": "No consent tool detected",
+        "severity": "low",
+        "detail": "No known consent tool was found. Visitors in the EU and UK may need one because vendor cookies are set.",
         "check_ids": [
           "consent_banner"
         ]
@@ -221,52 +295,55 @@
     ],
     "next_steps": [
       {
-        "owner": "onboarding_team",
-        "action": "Confirm with the customer whether GA4 loads only after consent, and check the GA4 property in the dashboard for the measurement ID.",
-        "check_ids": [
-          "ga4"
-        ]
-      },
-      {
-        "owner": "onboarding_team",
-        "action": "Confirm with the customer whether they use a tag manager and whether a GTM container is set up for checkout events.",
-        "check_ids": [
-          "gtm_container"
-        ]
-      },
-      {
         "owner": "customer",
-        "action": "Ask your web team to place the FundraiseUp install code in the global head of the page instead of loading it through the site script, then view the page source to confirm it is there.",
+        "action": "Add the FundraiseUp installation code to the global head of the website so it appears in the page source, then confirm it in the page source.",
         "check_ids": [
           "fu_code_in_source"
         ]
       },
       {
         "owner": "customer",
-        "action": "Ask your web team to add a cookie consent tool for EU and UK visitors and set up the vendor cookies to respect it.",
+        "action": "Set up a Google Tag Manager container on the website, or confirm that GA4 is already loaded and sending donation events.",
+        "check_ids": [
+          "gtm_container",
+          "ga4"
+        ]
+      },
+      {
+        "owner": "customer",
+        "action": "Confirm whether a cookie consent tool is needed for EU and UK visitors and set one up if so.",
         "check_ids": [
           "consent_banner"
         ]
       },
       {
-        "owner": "onboarding_team",
-        "action": "Re-run this check after the customer makes changes and test the donate link with the checkout in a normal browser.",
+        "owner": "customer",
+        "action": "Make the give.edf.org donate page show its donation form or a checkout link in the server HTML, so it can be read without JavaScript.",
         "check_ids": [
-          "fu_checkout_links",
-          "fu_code_in_source"
+          "donate_no_js"
+        ]
+      },
+      {
+        "owner": "onboarding_team",
+        "action": "Check the FundraiseUp and GA4 dashboard settings with the customer, then re-run this check after the customer changes the site.",
+        "check_ids": [
+          "fu_code_in_source",
+          "gtm_container",
+          "ga4",
+          "donate_no_js"
         ]
       }
     ],
     "customer_email": {
-      "subject": "A few fixes before your donation page is ready",
-      "body": "Hello,\n\nThank you for working with us to launch your donation page. We checked https://www.edf.org/ and found a few items to fix.\n\nPlease ask your web team to:\n\n1. Place the donation widget code in the global head of the page, not added by a site script. After the change, view the page source to confirm the code is there.\n\n2. Add a cookie consent tool for visitors in the EU and UK, and set up the donation vendor cookies to respect it.\n\nOnce these are done, let us know and we will run the check again.\n\nThank you,\nThe Onboarding Team"
+      "subject": "A few fixes for your donation setup on edf.org",
+      "body": "Hi there,\n\nThanks for working with us on your online donation setup. We checked https://www.edf.org/ and the donate page at give.edf.org. The donation widget loads, and we found a donation link. There are a few fixes that only your team can make on the website:\n\n1. Add the FundraiseUp installation code to the global head of the site, so it appears in the page source. Right now it is added by a script at load time.\n2. Set up a Google Tag Manager container, or confirm that Google Analytics 4 is sending donation events.\n3. Confirm whether you need a cookie consent tool for EU and UK visitors, and set one up if so.\n4. Make the give.edf.org donate page show its donation form or a checkout link in the page HTML, so it can be read without JavaScript.\n\nOnce these changes are live, reply to this email and we will run the check again.\n\nThank you,\nThe Onboarding Team"
     },
     "_dropped_uncited": 0,
     "_usage": {
       "model": "claude-haiku-5-5",
-      "input_tokens": 3013,
-      "output_tokens": 1188,
-      "cost_usd": 0.0009
+      "input_tokens": 4021,
+      "output_tokens": 1384,
+      "cost_usd": 0.00109
     }
   }
 }

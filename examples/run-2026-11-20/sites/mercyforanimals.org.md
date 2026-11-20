@@ -1,7 +1,7 @@
 # https://mercyforanimals.org/
 
-**Status:** Ready, with warnings (Installation code is in the page source)
-**Checked:** 2026-11-20 08:55 UTC in 9.9s
+**Status:** Ready, with warnings (Installation code is in the page source; Page load under 6 s)
+**Checked:** 2026-11-20 09:07 UTC in 15.7s
 **Account ID(s):** AVGENVAN
 
 ## Checklist
@@ -19,45 +19,60 @@
 | PASS | Meta Pixel | loaded, pixel id(s): 1516273432023152, 796754017021217, 822324977878230 |
 | INFO | Cookie consent tool | No known consent tool detected. Needed for EU/UK visitors; vendor cookies need a consent setup. |
 | PASS | No other donation tool on the page | None found. |
-| PASS | Page load under 6 s | load event at 5.6s |
+| WARN | Page load under 6 s | load event at 10.1s |
 | INFO | Console errors (any source) | 4 error(s) |
+
+## AI agent readiness
+
+Not part of the go-live verdict. Can AI assistants and AI search read the organization and reach the donate page?
+
+| Status | Check | Detail |
+|---|---|---|
+| PASS | AI assistants and AI search can read the pages | robots.txt allows all listed AI bots. |
+| INFO | llms.txt published | No /llms.txt (optional, still a proposal). |
+| PASS | schema.org organization markup | JSON-LD types: Organization; DonateAction: no. |
+| PASS | Donate page readable without JavaScript | https://mercyforanimals.org/?form=donate returns HTTP 200 with donation content in the HTML. |
 
 ## Summary (AI, from the facts above)
 
-The page at https://mercyforanimals.org/ loaded in a headless browser with HTTP 200. The FundraiseUp widget loads at runtime for account AVGENVAN, but its code is not in the server HTML. A JavaScript file from the site's mfa-blocks-2024 plugin inserts it. The browser found one donate link with a '?form=' checkout parameter. The browser did not click it, so checkout behavior was not tested. The verdict is ready with warnings, with no blockers. Four console errors were recorded, all about Content Security Policy blocking connections to two external event endpoints. No cookie consent tool was detected.
+The page https://mercyforanimals.org/ loaded with HTTP 200 in the headless browser. The FundraiseUp widget script loads at runtime with account ID AVGENVAN. The widget code is not in the server HTML. A site script inserts it after load, and the vendor asks for the code in the global head and confirmation in the page source. The page load event took 10.1 seconds, above the 6 second target. Four console errors were recorded, all Content Security Policy refusals of connections to two external event endpoints. The browser did not click anything. One '?form=' donate link was found. The donate page returns readable HTML without JavaScript. Google Tag Manager, GA4, and Meta Pixel were found on the page. No consent tool was detected. The checklist verdict is ready with warnings, with no blockers.
 
 ### Risks
 
-- **medium** FundraiseUp code is not in the page source: The widget is inserted by JavaScript from the site's plugin, not by code in the global head. The vendor asks for the code in the global head and confirmation through the page source. The snippet count in source is 0. _(checks: fu_code_in_source)_
-- **medium** No cookie consent tool detected: No known consent tool was found. A consent setup is needed for EU and UK visitors because vendor cookies are set on the page. _(checks: consent_banner)_
-- **low** Content Security Policy blocks two event endpoints: The browser recorded four console errors. Two Content Security Policy errors refused connections to an external Cloud Run endpoint and an AWS endpoint. These errors do not involve the FundraiseUp widget, which had no console errors. _(checks: console_errors, fu_no_console_errors)_
+- **medium** Widget code is not in the page source: The FundraiseUp code is added by a site script at runtime, not in the server HTML. The vendor asks for the code in the global head and a source check to confirm it. _(checks: fu_code_in_source)_
+- **medium** Slow page load: The load event fired at 10.1 seconds. The check target is under 6 seconds. _(checks: page_speed)_
+- **low** Content Security Policy blocks event requests: Four console errors were recorded. Connections to two external event endpoints were refused by the page's Content Security Policy. _(checks: console_errors)_
+- **low** No consent tool detected: No known cookie consent tool was found. Vendor cookies need a consent setup for EU and UK visitors. _(checks: consent_banner)_
 
 ### Next steps
 
-- [customer] Add the FundraiseUp snippet for account AVGENVAN to the global head of the site, then view the page source to confirm it appears. _(checks: fu_code_in_source)_
-- [customer] Set up a cookie consent tool for EU and UK visitors, since vendor cookies are used on the page. _(checks: consent_banner)_
-- [customer] Review the Content Security Policy connect-src setting and decide whether the two blocked event endpoints should be allowed. _(checks: console_errors)_
-- [onboarding_team] Confirm with the customer which plugin inserts the widget script and whether it can be changed. _(checks: fu_code_in_source)_
-- [onboarding_team] Re-run this check after the customer's changes and confirm the snippet appears in the page source. _(checks: fu_code_in_source, consent_banner, console_errors)_
+- [customer] Ask your web developer to add the FundraiseUp installation code to the global head of the site, so it appears in the server HTML. Then view the page source to confirm it is there. _(checks: fu_code_in_source)_
+- [customer] Ask your web developer to review the page load time, which was 10.1 seconds, against the 6 second target. _(checks: page_speed)_
+- [customer] Ask your web developer to review the Content Security Policy so the two external event endpoints named in the console errors are allowed, or confirm they are not needed. _(checks: console_errors)_
+- [onboarding_team] Confirm with the customer whether they use a cookie consent tool for EU and UK visitors and whether one is needed. _(checks: consent_banner)_
+- [onboarding_team] Re-run this check after the customer updates the page to confirm the installation code appears in the page source. _(checks: fu_code_in_source, page_speed)_
 
 ### Draft email to the customer
 
-**Subject:** Action needed: add FundraiseUp code to your site head
+**Subject:** Next steps for your donation page at mercyforanimals.org
 
 ```text
 Hello,
 
-Thank you for working with us to launch your donation page. We checked https://mercyforanimals.org/ and found your FundraiseUp widget loads, but its code is not in the global head of your site. Please take these steps:
+Thank you for working with us to launch your online donations. Your donation page loads and the FundraiseUp widget is active. A few items need attention before we can mark the launch complete.
 
-1. Add the FundraiseUp snippet for account AVGENVAN to the global head of your site.
-2. View the page source and confirm the snippet appears there.
-3. Set up a cookie consent tool for EU and UK visitors, since vendor cookies are used on the page.
-4. Review your Content Security Policy connect-src setting. Two external event endpoints were blocked, and you should decide whether to allow them.
+1. Add the FundraiseUp installation code to the global head of your website, so it appears in the page source. Please check the page source afterward to confirm it is there.
 
-Once these are done, let us know and we will run the check again.
+2. Ask your web developer to review page speed. The main page took about 10 seconds to finish loading. Our target is under 6 seconds.
+
+3. Ask your web developer to review your Content Security Policy. Two external event endpoints were blocked, which caused console errors.
+
+4. Let us know whether you use a cookie consent tool for visitors in the EU or UK.
+
+Once these are updated, reply to this email and we will re-run the check.
 
 Thank you,
-Onboarding Team
+The Onboarding Team
 ```
 
 ## Evidence
@@ -69,3 +84,4 @@ Onboarding Team
 - console_errors: Connecting to 'https://mpc-pilot-1-s6uit34pua-uc.a.run.app/events?cee=no' violates the following Content Security Policy directive: "connect-src 'self' doubleth
 - console_errors: Fetch API cannot load https://mpc-pilot-1-s6uit34pua-uc.a.run.app/events?cee=no. Refused to connect because it violates the document's Content Security Policy.
 - console_errors: Connecting to 'https://kw-f5e5ef3e54fb4122a3ba09a55357f9ab.ecs.us-west-1.on.aws/events?cee=no' violates the following Content Security Policy directive: "connec
+- donate_no_js: https://mercyforanimals.org/?form=donate

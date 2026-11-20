@@ -1,13 +1,14 @@
 {
   "url": "https://www.givewell.org/",
-  "checked_at": "2026-11-20 08:56 UTC",
+  "checked_at": "2026-11-20 09:07 UTC",
   "verdict": {
     "status": "not_installed",
     "reason": "installation code missing",
     "blockers": [
       "fu_code_in_source"
     ],
-    "warnings": []
+    "warnings": [],
+    "agent_warnings": []
   },
   "checklist": [
     {
@@ -72,7 +73,7 @@
       "id": "page_speed",
       "title": "Page load under 6 s",
       "status": "pass",
-      "detail": "load event at 2.1s",
+      "detail": "load event at 2.3s",
       "evidence": [],
       "blocking": false
     },
@@ -86,6 +87,40 @@
         "Failed to load resource: the server responded with a status of 403 ()"
       ],
       "blocking": false
+    },
+    {
+      "id": "ai_crawlers",
+      "title": "AI assistants and AI search can read the pages",
+      "status": "pass",
+      "detail": "robots.txt allows all listed AI bots.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "llms_txt",
+      "title": "llms.txt published",
+      "status": "info",
+      "detail": "No /llms.txt (optional, still a proposal).",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "structured_data",
+      "title": "schema.org organization markup",
+      "status": "info",
+      "detail": "No Organization/NGO JSON-LD on the home or donate page (types seen: none).",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "donate_no_js",
+      "title": "Donate page readable without JavaScript",
+      "status": "pass",
+      "detail": "https://secure.givewell.org/ returns HTTP 200 with donation content in the HTML.",
+      "evidence": [
+        "https://secure.givewell.org/"
+      ],
+      "blocking": false
     }
   ],
   "facts": {
@@ -95,8 +130,8 @@
       "final_url": "https://www.givewell.org/",
       "https": true,
       "load_error": null,
-      "load_ms": 2065,
-      "dom_content_loaded_ms": 1054,
+      "load_ms": 2287,
+      "dom_content_loaded_ms": 1171,
       "check_seconds": 7.7,
       "request_count": 160,
       "failed_request_count": 1,
@@ -152,15 +187,37 @@
       },
       "consent": []
     },
-    "other_donation_platforms": []
+    "other_donation_platforms": [],
+    "agent_readiness": {
+      "robots": {
+        "present": true,
+        "bots": {
+          "GPTBot": "allowed",
+          "ClaudeBot": "allowed",
+          "Google-Extended": "allowed",
+          "Claude-User": "allowed",
+          "OAI-SearchBot": "allowed",
+          "PerplexityBot": "allowed"
+        }
+      },
+      "llms_txt": false,
+      "jsonld_types": [],
+      "organization_markup": [],
+      "donate_action_markup": false,
+      "donate_page": {
+        "url": "https://secure.givewell.org/",
+        "http_status": 200,
+        "without_javascript": "readable"
+      }
+    }
   },
   "ai": {
-    "summary": "The page https://www.givewell.org/ loaded in the headless browser with HTTP 200 and no bot challenge. The load event was at 2.1 seconds. No FundraiseUp installation code was found in the page source, and no FundraiseUp widget request was recorded at runtime. The verdict is not installed, because the installation code is missing. Google Tag Manager container GTM-MKLT9TL and GA4 measurement ID G-5Y1K5KX9ZG were found. No other donation tool was found on the page. The Meta Pixel was not seen, and no cookie consent tool was detected. The browser recorded 2 console errors and 1 failed request. The browser did not click any buttons, so checkout behavior was not tested. Only links that were found are reported.",
+    "summary": "The page at https://www.givewell.org/ loaded with HTTP 200 in the headless browser. No FundraiseUp installation code was found in the page source, and no FundraiseUp widget request was recorded. The verdict is not installed, because the installation code is missing. Google Tag Manager container GTM-MKLT9TL and GA4 measurement ID G-5Y1K5KX9ZG were found and loaded. No other donation tool was found on the page. The donate page at https://secure.givewell.org/ returned HTTP 200 with donation content in the HTML. The browser did not click any buttons, so checkout behavior was not tested. The page logged 2 console errors and 1 failed request.",
     "risks": [
       {
         "title": "FundraiseUp installation code is missing",
         "severity": "high",
-        "detail": "No installation code was found in the page source and no widget request was recorded. The donation widget does not load on this page.",
+        "detail": "No installation code was found in the page source and no widget request was recorded. This is the only blocking item.",
         "check_ids": [
           "fu_code_in_source"
         ]
@@ -168,7 +225,7 @@
       {
         "title": "No cookie consent tool detected",
         "severity": "medium",
-        "detail": "No known consent tool was detected. Visitors from the EU and UK need a consent setup for vendor cookies.",
+        "detail": "No known consent tool was detected. Visitors from the EU or UK may need one before vendor cookies are set.",
         "check_ids": [
           "consent_banner"
         ]
@@ -176,7 +233,7 @@
       {
         "title": "Console errors and a failed request on the page",
         "severity": "low",
-        "detail": "The browser recorded 2 console errors: a permissions policy violation for unload, and a 403 response from a resource. One request failed.",
+        "detail": "The page logged 2 console errors, including a permissions policy violation and a 403 response for one resource.",
         "check_ids": [
           "console_errors"
         ]
@@ -185,45 +242,44 @@
     "next_steps": [
       {
         "owner": "customer",
-        "action": "Add the FundraiseUp installation code to the page source of https://www.givewell.org/ and confirm the code is in the served HTML.",
+        "action": "Add the FundraiseUp installation code to the website source on the home page and make sure it loads on the page.",
         "check_ids": [
           "fu_code_in_source"
         ]
       },
       {
         "owner": "customer",
-        "action": "Confirm whether a cookie consent tool is in use for EU and UK visitors. If one is needed, set it up so vendor cookies wait for consent.",
+        "action": "Decide whether a cookie consent tool is needed for EU and UK visitors, and set one up if so.",
         "check_ids": [
           "consent_banner"
         ]
       },
       {
         "owner": "onboarding_team",
-        "action": "Confirm with the customer which FundraiseUp account the installation code should use, then re-run this check after the customer updates the page.",
+        "action": "Confirm with the customer which 403 resource and permissions policy issue come from their site.",
         "check_ids": [
-          "fu_code_in_source",
-          "gtm_container",
-          "ga4"
+          "console_errors"
         ]
       },
       {
         "owner": "onboarding_team",
-        "action": "Review the 403 response and the permissions policy message with the customer to see if they affect donation forms.",
+        "action": "Re-run this check after the customer confirms the installation code is added.",
         "check_ids": [
-          "console_errors"
+          "fu_code_in_source",
+          "page_reachable"
         ]
       }
     ],
     "customer_email": {
-      "subject": "Next steps to launch donations on givewell.org",
-      "body": "Hello,\n\nThank you for working with us to set up online donations. We checked your homepage at https://www.givewell.org/. The page loads correctly. We did not find the donation installation code on the page yet.\n\nPlease do the following:\n\n1. Add the donation installation code to the page source of https://www.givewell.org/. We will send you the exact code and where to place it.\n2. Confirm whether you use a cookie consent tool for visitors in the EU and UK. If you do, make sure vendor cookies wait for consent.\n3. Let us know if the 403 error on the page is expected. It may affect donation forms.\n\nOnce the code is in place, reply to this email and we will run the check again.\n\nThank you,\nOnboarding Team"
+      "subject": "Next steps to connect your donation platform to givewell.org",
+      "body": "Hello,\n\nThank you for working with us to set up online donations. We checked https://www.givewell.org/ and found that the donation platform code is not on the page yet. Please add the installation code to the source of your home page. We will run the check again once it is in place.\n\nPlease also confirm whether you need a cookie consent tool for visitors from the EU or UK. If you do, let us know and we will help you choose a setup.\n\nWe also saw two console errors on the page, including a 403 response for one resource. Please check whether this comes from your site.\n\nThank you,\nThe Onboarding Team"
     },
     "_dropped_uncited": 0,
     "_usage": {
       "model": "claude-haiku-5-5",
-      "input_tokens": 2540,
-      "output_tokens": 1078,
-      "cost_usd": 0.00079
+      "input_tokens": 3062,
+      "output_tokens": 940,
+      "cost_usd": 0.00078
     }
   }
 }

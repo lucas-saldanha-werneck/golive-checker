@@ -1,7 +1,7 @@
 # https://www.rainforesttrust.org/
 
 **Status:** Ready, with warnings (Page load under 6 s)
-**Checked:** 2026-11-20 08:55 UTC in 10.7s
+**Checked:** 2026-11-20 09:07 UTC in 15.4s
 **Account ID(s):** ACMRCWPB
 
 ## Checklist
@@ -20,44 +20,50 @@
 | PASS | Meta Pixel | loaded, pixel id(s): 162328464462089, 5913213552134911 |
 | PASS | Cookie consent tool | CookieYes |
 | PASS | No other donation tool on the page | None found. |
-| WARN | Page load under 6 s | load event at 6.3s |
+| WARN | Page load under 6 s | load event at 9.9s |
 | INFO | Console errors (any source) | 1 error(s) |
+
+## AI agent readiness
+
+Not part of the go-live verdict. Can AI assistants and AI search read the organization and reach the donate page?
+
+| Status | Check | Detail |
+|---|---|---|
+| PASS | AI assistants and AI search can read the pages | robots.txt allows all listed AI bots. |
+| INFO | llms.txt published | No /llms.txt (optional, still a proposal). |
+| PASS | schema.org organization markup | JSON-LD types: Organization; DonateAction: no. |
+| PASS | Donate page readable without JavaScript | https://rainforesttrust.donorsupport.co/-/XUZXSDTH returns HTTP 200 with donation content in the HTML. |
 
 ## Summary (AI, from the facts above)
 
-The page https://www.rainforesttrust.org/ loaded with HTTP 200 in the headless browser. The FundraiseUp code is in the page source once, in the head, with account ID ACMRCWPB. The widget script loaded from the vendor host with HTTP 200. Two donate links with form IDs FUNAQFHNLKJ and FUNRGCCWCNJ were found. The browser did not click these links, so checkout behavior was not tested. Google Tag Manager (GTM-TQZN89M), GA4 (G-MVP5KC1KV6), Meta Pixel (two pixel IDs), and CookieYes were found. No other donation tool was found. The page load event took 6.3 seconds, which is over the 6 second limit. The verdict is ready with warnings. One console error was recorded: a 400 response from a resource.
+The page https://www.rainforesttrust.org/ loaded with HTTP 200 in the headless browser. The FundraiseUp snippet is in the page source with account ID ACMRCWPB, placed in the head with no scripts after it. The widget script loaded with HTTP 200. Two donate links with form IDs FUNAQFHNLKJ and FUNRGCCWCNJ were found. The browser did not click these links, so checkout behavior was not tested. The page load event took 9.9 s, which is over the 6 s limit and is a warning, not a blocker. One console error was recorded, a 400 response with no source named. The GTM container, GA4 ID, Meta Pixel, and CookieYes consent tool were found. No other donation tool was found. AI crawlers are allowed in robots.txt. No llms.txt file exists, which is optional. Donate page https://rainforesttrust.donorsupport.co/-/XUZXSDTH returns HTTP 200 with donation content in the HTML.
 
 ### Risks
 
-- **medium** Page load is slow: The load event finished at 6.3 seconds. The limit is 6 seconds. The verdict is ready with warnings, not blocked. _(checks: page_speed)_
-- **low** One console error on the page: The browser recorded one console error: a failed resource with HTTP status 400. The source of the resource was not recorded. The FundraiseUp widget reported no console errors. _(checks: console_errors, fu_no_console_errors)_
+- **medium** Slow page load: The load event took 9.9 s. The check limit is 6 s. The verdict is ready with warnings, with no blockers. _(checks: page_speed)_
+- **low** Console error on page: One console error was recorded: a resource returned HTTP 400. The source was not identified. The FundraiseUp widget reported no console errors. _(checks: console_errors)_
 
 ### Next steps
 
-- [customer] Review the page load time and reduce the load event time below 6 seconds. Check large scripts or images on the homepage. _(checks: page_speed)_
-- [customer] Find the resource that returns a 400 error on the homepage and fix or remove it. _(checks: console_errors)_
-- [onboarding_team] Confirm with the customer that the FundraiseUp donate links FUNAQFHNLKJ and FUNRGCCWCNJ open the correct checkout. The browser did not test this. _(checks: fu_checkout_links)_
-- [onboarding_team] Re-run this check after the customer makes changes to confirm the load time and console error are resolved. _(checks: page_speed, console_errors)_
+- [onboarding_team] Confirm with the customer which page resource returns HTTP 400 and whether it is expected. Re-run this check after any change to the page. _(checks: console_errors)_
+- [customer] Review page load time for the home page and reduce the load event time to under 6 s. Re-run this check after the change. _(checks: page_speed)_
+- [onboarding_team] Confirm in the FundraiseUp dashboard that the two form IDs FUNAQFHNLKJ and FUNRGCCWCNJ are the intended donation forms. _(checks: fu_checkout_links)_
 
 ### Draft email to the customer
 
-**Subject:** A few fixes before your donation page goes live
+**Subject:** Next steps for your donation page
 
 ```text
 Hello,
 
-Thanks for setting up your FundraiseUp donation tools on rainforesttrust.org. Most of the setup looks good. The page loads, the FundraiseUp code and widget are in place, and your tracking tools were found.
+Thank you for working with us to set up online donations. We checked your home page at https://www.rainforesttrust.org/ and the donation code is installed correctly.
 
-Please make two fixes on your homepage:
+One item needs your attention. The home page takes about 9.9 seconds to finish loading. Please review the page for large images, scripts, or other items that slow it down, and aim for under 6 seconds. Your web team can help with this.
 
-1. Speed up the page. It currently takes about 6.3 seconds to finish loading. Please bring it under 6 seconds. Large images and extra scripts are common causes.
-
-2. Fix one failing resource. The page returns a 400 error when loading one file. Please find that file and fix or remove it.
-
-Once these are done, let us know and we will run the check again.
+We will re-check the page after the change. If you have questions, reply to this email.
 
 Thank you,
-Onboarding Team
+The Onboarding Team
 ```
 
 ## Evidence
@@ -67,3 +73,4 @@ Onboarding Team
 - fu_widget_loads: https://cdn.fundraiseup.com/widget/ACMRCWPB
 - consent_banner: https://cdn-cookieyes.com/client_data/bce0e242974d3ef4aada5386/script.js
 - console_errors: Failed to load resource: the server responded with a status of 400 ()
+- donate_no_js: https://rainforesttrust.donorsupport.co/-/XUZXSDTH

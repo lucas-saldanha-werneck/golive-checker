@@ -1,20 +1,20 @@
-url,status,reason,account_ids,gtm,ga4,meta_pixel,consent,other_donation_tools,load_ms,check_seconds
-https://www.rainforesttrust.org/,ready_with_warnings,Page load under 6 s,ACMRCWPB,GTM-TQZN89M,G-MVP5KC1KV6,True,CookieYes,,6267,10.7
-https://wildaid.org/,ready,,AQTMUHNH,GTM-KF7HNF4 GTM-KZW6SPR,G-M6T97S534K,True,,,5922,10.2
-https://mercyforanimals.org/,ready_with_warnings,Installation code is in the page source,AVGENVAN,GTM-K524TFT GTM-M3LDFJ GTM-MGT2PJQJ GTM-YV5D9SSG31,G-B35EWX8EQ4 G-EN2Y9H0GJ5,True,,,5639,9.9
-https://bestfriends.org/,ready_with_warnings,"Code is in <head>, last script",AFZUYXBL,GTM-NMXDTP,G-7X412QBZQC G-JDV4SZ13C8,True,,,4750,9.0
-https://www.ifaw.org/,ready_with_warnings,"Code is in <head>, last script; Widget not held back by the consent tool; GA4 measurement ID",AWMWZJRX,GTM-W7GRNP,,False,Usercentrics,,4174,8.6
-https://www.childrenshealthfund.org/,ready_with_warnings,Google Tag Manager container,AVVHNSHB,,G-SXWX7Z8RFC,False,,,5151,9.7
-https://www.edf.org/,ready_with_warnings,Installation code is in the page source; Google Tag Manager container; GA4 measurement ID,AQBHBSYR,,,False,,,2437,7.2
-https://oceana.org/,not_installed,installation code missing,,GTM-NGMV83,G-05PMM8GBNZ G-9HNNDLLPKR G-HT8KYEQFRH,True,CookieYes,Engaging Networks,4739,9.0
-https://www.hrw.org/,not_installed,installation code missing,,GTM-W5D7ZP,G-7G2G6XTV4C G-8G7WH8R2Z8,True,,,3319,7.7
-https://earthjustice.org/,not_installed,installation code missing,,GTM-MXDNZTW,,False,Civic Cookie Control,,731,5.2
-https://www.givedirectly.org/,not_installed,installation code missing,,GTM-PJNMMGH,G-GV8XF9FJ16,True,,,3805,8.4
-https://www.charitywater.org/,not_installed,installation code missing,,GTM-P6DJRR,G-SKG6MDYX1T,False,CookieScript,,7609,12.2
-https://wck.org/,not_installed,installation code missing,,GTM-MKV74FD,G-5WKVY8503C,True,OneTrust,,9221,14.3
-https://www.thetrevorproject.org/,not_installed,installation code missing,,GTM-K652FKQ,G-A2ABC2ABCD G-BD80V9CE2Q G-DZG3N29WTN,True,,,7982,12.2
-https://www.nature.org/,not_installed,installation code missing,,,,True,OneTrust,,1805,6.1
-https://www.rescue.org/,ready_with_warnings,Installation code is in the page source,AFGSSTXA,GTM-5JH3VLS,G-DDZCWB8N2Y G-MCH4QLVDRD,True,OneTrust,,2606,7.0
-https://www.care.org/,not_installed,installation code missing,,GTM-WMMPLB,G-BE6GP7SC1M,True,,Blackbaud Luminate Online,7332,11.9
-https://www.givewell.org/,not_installed,installation code missing,,GTM-MKLT9TL,G-5Y1K5KX9ZG,False,,,2065,7.7
-https://www.pih.org/,unreachable,bot challenge / access denied page (HTTP 403),,,,False,,,1068,5.3
+url,status,reason,account_ids,gtm,ga4,meta_pixel,consent,other_donation_tools,ai_bots_blocked,llms_txt,org_jsonld,donate_action_jsonld,donate_url,donate_without_js,load_ms,check_seconds
+https://www.rainforesttrust.org/,ready_with_warnings,Page load under 6 s,ACMRCWPB,GTM-TQZN89M,G-MVP5KC1KV6,True,CookieYes,,,False,Organization,False,https://rainforesttrust.donorsupport.co/-/XUZXSDTH,readable,9898,15.4
+https://wildaid.org/,ready_with_warnings,Page load under 6 s,AQTMUHNH,GTM-KF7HNF4 GTM-KZW6SPR,G-M6T97S534K,True,,,,True,Organization,False,https://wildaid.org/?form=donate,readable,8864,13.9
+https://mercyforanimals.org/,ready_with_warnings,Installation code is in the page source; Page load under 6 s,AVGENVAN,GTM-K524TFT GTM-M3LDFJ GTM-MGT2PJQJ GTM-YV5D9SSG31,G-B35EWX8EQ4 G-EN2Y9H0GJ5,True,,,,False,Organization,False,https://mercyforanimals.org/?form=donate,readable,10076,15.7
+https://bestfriends.org/,ready_with_warnings,"Code is in <head>, last script; Page load under 6 s",AFZUYXBL,GTM-NMXDTP,G-7X412QBZQC G-JDV4SZ13C8,True,,,,False,Organization,False,https://bestfriends.org/donate,readable,8867,13.8
+https://www.ifaw.org/,ready_with_warnings,"Code is in <head>, last script; Widget not held back by the consent tool; GA4 measurement ID; Page load under 6 s",AWMWZJRX,GTM-W7GRNP,,False,Usercentrics,,,False,Organization,False,https://www.ifaw.org/?form=join,readable,8862,15.5
+https://www.childrenshealthfund.org/,ready_with_warnings,Google Tag Manager container; Page load under 6 s,AVVHNSHB,,G-SXWX7Z8RFC,False,,,,False,Organization,False,https://www.childrenshealthfund.org/donation/,readable,10569,19.6
+https://www.edf.org/,ready_with_warnings,Installation code is in the page source; Google Tag Manager container; GA4 measurement ID,AQBHBSYR,,,False,,,,False,NonprofitOrganization,True,https://give.edf.org/page/web-donate?page_id=e8b8f91b-1127-4e66-9c2f-b868edb21004&session_id=40fa8fdf-0f36-420b-a8ea-3acb73e3ea9a&page_id=e8b8f91b-1127-4e66-9c2f-b868edb21004&session_id=40fa8fdf-0f36-420b-a8ea-3acb73e3ea9a,needs_javascript,2350,6.9
+https://oceana.org/,not_installed,installation code missing,,GTM-NGMV83,G-05PMM8GBNZ G-9HNNDLLPKR G-HT8KYEQFRH,True,CookieYes,Engaging Networks,,False,Organization,False,https://oceana.org/resources/ways-to-give-donate-now/,readable,3356,7.8
+https://www.hrw.org/,not_installed,installation code missing,,GTM-W5D7ZP,G-7G2G6XTV4C G-8G7WH8R2Z8,True,,,,False,,False,https://donate.hrw.org/page/107245/donate/1?ea.tracking.id=EP2022EVpgdonate&promo_id=1000,blocked,2471,7.2
+https://earthjustice.org/,not_installed,installation code missing,,GTM-MXDNZTW,,False,Civic Cookie Control,,,True,Organization,False,https://act.earthjustice.org/a/givetoday?ms=web_menu_header,blocked,881,5.5
+https://www.givedirectly.org/,not_installed,installation code missing,,GTM-PJNMMGH,G-GV8XF9FJ16,True,,,,False,Organization,True,https://donate.givedirectly.org/,needs_javascript,2859,10.0
+https://www.charitywater.org/,not_installed,installation code missing,,GTM-P6DJRR,G-SKG6MDYX1T,False,CookieScript,,,False,,False,https://www.charitywater.org/donate,needs_javascript,8974,14.3
+https://wck.org/,not_installed,installation code missing,,GTM-MKV74FD,G-5WKVY8503C,True,OneTrust,,,False,Organization,False,https://donate.wck.org/campaign/749360/donate?c_src=site-navbar,blocked,10435,16.9
+https://www.thetrevorproject.org/,not_installed,installation code missing,,GTM-K652FKQ,G-A2ABC2ABCD G-BD80V9CE2Q G-DZG3N29WTN,True,,,,False,Organization,False,https://give.thetrevorproject.org/campaign/867704/donate?c_src=UCGOF271150105&c_src2=dt-20261116-28-c-FY27-WEBHeader-Footer-4x-225kMatch-donate-button&utm_medium=fundraising&utm_source=websitebutton6&utm_campaign=yearend,blocked,7472,13.4
+https://www.nature.org/,not_installed,installation code missing,,,,True,OneTrust,,,False,,False,https://tnc.colabore.org/analytics-test/single_step,readable,2362,8.4
+https://www.rescue.org/,ready_with_warnings,Installation code is in the page source,AFGSSTXA,GTM-5JH3VLS,G-DDZCWB8N2Y G-MCH4QLVDRD,True,OneTrust,,,False,NGO,False,https://www.rescue.org/?form=donate&ms=ws_resq_top_nav_btn_fy27_q1_mmus_oct,readable,2880,7.7
+https://www.care.org/,not_installed,installation code missing,,GTM-WMMPLB,G-BE6GP7SC1M,True,,Blackbaud Luminate Online,,False,Organization,False,https://my.care.org/site/Donation2?df_id=53752&mfc_pref=T&53752.donation=form1&s_src=1727230NNC00&s_subsrc=FY27DFWEBNOVGAZALB,readable,5959,12.7
+https://www.givewell.org/,not_installed,installation code missing,,GTM-MKLT9TL,G-5Y1K5KX9ZG,False,,,,False,,False,https://secure.givewell.org/,readable,2287,7.7
+https://www.pih.org/,ready_with_warnings,"Code is in <head>, last script",AJDEFYWC,GTM-N2SDGSGB,G-76XL6SD9RS,True,CookieYes,,,False,,False,https://www.pih.org/?form=donate&source=web_header_topright,blocked,2997,7.3

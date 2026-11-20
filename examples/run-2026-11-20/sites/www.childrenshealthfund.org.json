@@ -1,13 +1,15 @@
 {
   "url": "https://www.childrenshealthfund.org/",
-  "checked_at": "2026-11-20 08:55 UTC",
+  "checked_at": "2026-11-20 09:07 UTC",
   "verdict": {
     "status": "ready_with_warnings",
-    "reason": "Google Tag Manager container",
+    "reason": "Google Tag Manager container; Page load under 6 s",
     "blockers": [],
     "warnings": [
-      "gtm_container"
-    ]
+      "gtm_container",
+      "page_speed"
+    ],
+    "agent_warnings": []
   },
   "checklist": [
     {
@@ -50,7 +52,7 @@
       "id": "fu_widget_loads",
       "title": "Widget script loads",
       "status": "pass",
-      "detail": "HTTP 200, 24 requests to vendor hosts.",
+      "detail": "HTTP 200, 26 requests to vendor hosts.",
       "evidence": [
         "https://cdn.fundraiseup.com/widget/AVVHNSHB"
       ],
@@ -115,9 +117,43 @@
     {
       "id": "page_speed",
       "title": "Page load under 6 s",
-      "status": "pass",
-      "detail": "load event at 5.2s",
+      "status": "warn",
+      "detail": "load event at 10.6s",
       "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "ai_crawlers",
+      "title": "AI assistants and AI search can read the pages",
+      "status": "pass",
+      "detail": "robots.txt allows all listed AI bots.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "llms_txt",
+      "title": "llms.txt published",
+      "status": "info",
+      "detail": "No /llms.txt (optional, still a proposal).",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "structured_data",
+      "title": "schema.org organization markup",
+      "status": "pass",
+      "detail": "JSON-LD types: Organization; DonateAction: no.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "donate_no_js",
+      "title": "Donate page readable without JavaScript",
+      "status": "pass",
+      "detail": "https://www.childrenshealthfund.org/donation/ returns HTTP 200 with donation content in the HTML.",
+      "evidence": [
+        "https://www.childrenshealthfund.org/donation/"
+      ],
       "blocking": false
     }
   ],
@@ -128,10 +164,10 @@
       "final_url": "https://www.childrenshealthfund.org/",
       "https": true,
       "load_error": null,
-      "load_ms": 5151,
-      "dom_content_loaded_ms": 2643,
-      "check_seconds": 9.7,
-      "request_count": 144,
+      "load_ms": 10569,
+      "dom_content_loaded_ms": 3251,
+      "check_seconds": 19.6,
+      "request_count": 149,
       "failed_request_count": 0,
       "console_error_count": 0,
       "console_errors_sample": [],
@@ -155,7 +191,7 @@
           "status": 200
         }
       ],
-      "request_count": 24,
+      "request_count": 26,
       "failed_requests": [],
       "console_errors": [],
       "csp_errors": [],
@@ -188,23 +224,66 @@
       },
       "consent": []
     },
-    "other_donation_platforms": []
+    "other_donation_platforms": [],
+    "agent_readiness": {
+      "robots": {
+        "present": true,
+        "bots": {
+          "GPTBot": "allowed",
+          "ClaudeBot": "allowed",
+          "Google-Extended": "allowed",
+          "Claude-User": "allowed",
+          "OAI-SearchBot": "allowed",
+          "PerplexityBot": "allowed"
+        }
+      },
+      "llms_txt": false,
+      "jsonld_types": [
+        "WebPage",
+        "ReadAction",
+        "ImageObject",
+        "BreadcrumbList",
+        "ListItem",
+        "WebSite",
+        "SearchAction",
+        "EntryPoint",
+        "PropertyValueSpecification",
+        "Organization"
+      ],
+      "organization_markup": [
+        "Organization"
+      ],
+      "donate_action_markup": false,
+      "donate_page": {
+        "url": "https://www.childrenshealthfund.org/donation/",
+        "http_status": 200,
+        "without_javascript": "readable"
+      }
+    }
   },
   "ai": {
-    "summary": "The page https://www.childrenshealthfund.org/ loaded with HTTP 200 in the headless browser. The FundraiseUp installation code is in the page source with account ID AVVHNSHB. The code is in the head with no scripts after it. The widget script loaded from cdn.fundraiseup.com with HTTP 200. No console errors were recorded. The page has no Google Tag Manager container, so checkout events may not reach GA4 through a GTM template. GA4 measurement ID G-SXWX7Z8RFC was found. No Meta Pixel was seen. No cookie consent tool was detected. No other donation tool was found. The load event was at 5.2 seconds. The browser did not click any donate button, so checkout behavior was not tested. No '?form=' donate links were found on this page.",
+    "summary": "The page https://www.childrenshealthfund.org/ loaded with HTTP 200 in a headless browser. The FundraiseUp install code is in the page source once, in the head, with no scripts after it. The widget script loaded from cdn.fundraiseup.com with account ID AVVHNSHB and no console errors. No '?form=' donate links were found on this page, and the browser did not click anything, so the checkout itself was not tested. No Google Tag Manager container was found, so checkout events are not routed through GTM. GA4 measurement ID G-SXWX7Z8RFC was found. The page load event took 10.6 seconds, above the 6 second target. The donate page at /donation/ returns readable content without JavaScript. Overall status: ready with warnings.",
     "risks": [
       {
         "title": "No Google Tag Manager container",
         "severity": "medium",
-        "detail": "No GTM container was found on the page. Checkout events (donation, open, close) reach GA4 through a GTM container template, so those events may not be tracked.",
+        "detail": "No GTM container was found on the page. The checklist notes that checkout events (donation, open, close) reach GA4 through a GTM container template. Without it, those events may not be recorded in GA4 from this page.",
         "check_ids": [
           "gtm_container"
         ]
       },
       {
+        "title": "Slow page load",
+        "severity": "medium",
+        "detail": "The load event fired at 10.6 seconds. The check target is under 6 seconds. Slow pages can lower donation completion.",
+        "check_ids": [
+          "page_speed"
+        ]
+      },
+      {
         "title": "No cookie consent tool detected",
         "severity": "low",
-        "detail": "No known consent tool was detected. Consent is needed for EU and UK visitors, and vendor cookies need a consent setup.",
+        "detail": "No known consent tool was detected. Visitors from the EU or UK may need one, and vendor cookies need a consent setup.",
         "check_ids": [
           "consent_banner"
         ]
@@ -212,45 +291,54 @@
     ],
     "next_steps": [
       {
-        "owner": "customer",
-        "action": "Add a Google Tag Manager container to the website, or confirm with the onboarding team how checkout events should reach GA4.",
+        "owner": "onboarding_team",
+        "action": "Confirm with the customer whether their GA4 setup uses a GTM container, and check whether donation events are arriving in GA4.",
         "check_ids": [
-          "gtm_container"
+          "gtm_container",
+          "ga4"
         ]
       },
       {
         "owner": "customer",
-        "action": "Install a cookie consent tool if the site has EU or UK visitors, and set up consent for vendor cookies.",
+        "action": "Ask your web developer to review the page load time, which measured 10.6 seconds, and reduce it below 6 seconds.",
         "check_ids": [
-          "consent_banner"
+          "page_speed"
         ]
       },
       {
         "owner": "onboarding_team",
-        "action": "Confirm with the customer which donate links or overlays the site uses, since no '?form=' links were found on the page.",
+        "action": "Manually click the donate buttons on the live page to confirm the FundraiseUp checkout opens, since the headless check did not click anything.",
         "check_ids": [
-          "fu_checkout_links"
+          "fu_checkout_links",
+          "fu_widget_loads"
+        ]
+      },
+      {
+        "owner": "customer",
+        "action": "If you have visitors from the EU or UK, tell us which cookie consent tool you use, or ask your web developer about adding one.",
+        "check_ids": [
+          "consent_banner"
         ]
       },
       {
         "owner": "onboarding_team",
         "action": "Re-run this check after the customer makes changes to confirm the results.",
         "check_ids": [
-          "gtm_container",
-          "consent_banner"
+          "page_speed",
+          "gtm_container"
         ]
       }
     ],
     "customer_email": {
-      "subject": "Next steps for your donation platform setup",
-      "body": "Hello,\n\nWe checked your website at https://www.childrenshealthfund.org/. The donation widget is installed correctly and loads without errors. Your GA4 measurement ID was also found.\n\nTo finish setup, please do the following:\n\n1. Add a Google Tag Manager container to your website. This lets donation events, such as opening and completing a donation, reach your GA4 reports.\n2. If you have visitors in the EU or UK, install a cookie consent tool and set up consent for vendor cookies.\n\nOnce these changes are live, reply to this email and we will run the check again.\n\nThank you,\nOnboarding Team"
+      "subject": "Next steps for your donation page setup",
+      "body": "Hello,\n\nThank you for working with us to set up donations on your website. Your FundraiseUp code is installed correctly on https://www.childrenshealthfund.org/, and the donation widget loads without errors.\n\nA few items need your attention:\n\n1. Page speed: The home page took about 10.6 seconds to load. Please ask your web developer to bring this under 6 seconds.\n\n2. Google Tag Manager: We did not find a Google Tag Manager container on the page. If you use GTM with your Google Analytics, please let us know. If not, we can help you decide next steps.\n\n3. Cookie consent: If you have visitors in the EU or UK, please tell us which cookie consent tool you use, or ask your web developer about adding one.\n\nPlease reply with any questions. We will follow up after these items are reviewed.\n\nThank you,\nOnboarding Team"
     },
     "_dropped_uncited": 0,
     "_usage": {
       "model": "claude-haiku-5-5",
-      "input_tokens": 3112,
-      "output_tokens": 953,
-      "cost_usd": 0.00079
+      "input_tokens": 3741,
+      "output_tokens": 1207,
+      "cost_usd": 0.00098
     }
   }
 }

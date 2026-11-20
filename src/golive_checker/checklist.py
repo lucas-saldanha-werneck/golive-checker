@@ -15,6 +15,7 @@ from typing import Any
 from .detect import CMP_SIGNATURES
 
 PASS, WARN, FAIL, INFO = "pass", "warn", "fail", "info"
+AGENT_IDS = {"ai_crawlers", "llms_txt", "structured_data", "donate_no_js"}
 
 
 @dataclass
@@ -181,13 +182,61 @@ def build_checklist(facts: dict[str, Any]) -> list[Item]:
             items.append(Item("console_errors", "Console errors (any source)", INFO,
                               f"{page['console_error_count']} error(s)", [e[:160] for e in page["console_errors_sample"][:3]], False))
 
+        items += agent_items(facts["agent_readiness"])
+
     return items
+
+
+def agent_items(ag: dict[str, Any]) -> list[Item]:
+    """AI agent readiness: can assistants and AI search read the org and reach the donate page?"""
+    from .detect import AI_BOTS
+
+    out: list[Item] = []
+    bots = ag["robots"]["bots"]
+    blocked = [b for b, s in bots.items() if s == "blocked"]
+    fetchers = [b for b in blocked if AI_BOTS[b] != "training"]
+    summary = ", ".join(f"{b}: {s}" for b, s in bots.items())
+    if fetchers:
+        out.append(Item("ai_crawlers", "AI assistants and AI search can read the pages", WARN,
+                        f"robots.txt blocks {', '.join(fetchers)} (bots that fetch pages when a person asks an assistant or AI search). {summary}", [], False))
+    elif blocked:
+        out.append(Item("ai_crawlers", "AI assistants and AI search can read the pages", INFO,
+                        f"Only training crawlers are blocked ({', '.join(blocked)}); a policy choice. {summary}", [], False))
+    else:
+        out.append(Item("ai_crawlers", "AI assistants and AI search can read the pages", PASS,
+                        "robots.txt allows all listed AI bots." if ag["robots"]["present"] else "No robots.txt, so no bot is blocked.", [], False))
+
+    out.append(Item("llms_txt", "llms.txt published", PASS if ag["llms_txt"] else INFO,
+                    "/llms.txt found." if ag["llms_txt"] else "No /llms.txt (optional, still a proposal).", [], False))
+
+    org, da = ag["organization_markup"], ag["donate_action_markup"]
+    if org:
+        out.append(Item("structured_data", "schema.org organization markup", PASS,
+                        f"JSON-LD types: {', '.join(org)}; DonateAction: {'yes' if da else 'no'}.", [], False))
+    else:
+        out.append(Item("structured_data", "schema.org organization markup", INFO,
+                        f"No Organization/NGO JSON-LD on the home or donate page (types seen: {', '.join(ag['jsonld_types'][:5]) or 'none'}).", [], False))
+
+    dp = ag["donate_page"]
+    state = dp["without_javascript"]
+    if state is None:
+        out.append(Item("donate_no_js", "Donate page readable without JavaScript", INFO, "No donate link found on this page.", [], False))
+    elif state == "readable":
+        out.append(Item("donate_no_js", "Donate page readable without JavaScript", PASS,
+                        f"{dp['url']} returns HTTP {dp['http_status']} with donation content in the HTML.", [dp["url"]], False))
+    elif state == "needs_javascript":
+        out.append(Item("donate_no_js", "Donate page readable without JavaScript", WARN,
+                        f"{dp['url']} returns HTTP {dp['http_status']} but no form, checkout link or install code in the HTML; agents that do not run JavaScript see no way to give.", [dp["url"]], False))
+    else:
+        out.append(Item("donate_no_js", "Donate page readable without JavaScript", WARN,
+                        f"{dp['url']} is blocked or errors for a plain HTTP client (HTTP {dp['http_status']}).", [dp["url"] or ""], False))
+    return out
 
 
 def verdict(items: list[Item], facts: dict[str, Any]) -> dict[str, Any]:
     by_id = {i.id: i for i in items}
     blockers = [i for i in items if i.blocking and i.status == FAIL]
-    warns = [i for i in items if i.status == WARN]
+    warns = [i for i in items if i.status == WARN and i.id not in AGENT_IDS]
     if by_id["page_reachable"].status == FAIL:
         status, reason = "unreachable", by_id["page_reachable"].detail
     elif by_id.get("fu_code_in_source") and by_id["fu_code_in_source"].status == FAIL:
@@ -198,7 +247,9 @@ def verdict(items: list[Item], facts: dict[str, Any]) -> dict[str, Any]:
         status, reason = "ready_with_warnings", "; ".join(w.title for w in warns)
     else:
         status, reason = "ready", ""
-    return {"status": status, "reason": reason, "blockers": [b.id for b in blockers], "warnings": [w.id for w in warns]}
+    agent_warns = [i.id for i in items if i.id in AGENT_IDS and i.status == WARN]
+    return {"status": status, "reason": reason, "blockers": [b.id for b in blockers], "warnings": [w.id for w in warns],
+            "agent_warnings": agent_warns}
 
 
 def to_dicts(items: list[Item]) -> list[dict[str, Any]]:

@@ -1,11 +1,14 @@
 {
   "url": "https://wildaid.org/",
-  "checked_at": "2026-11-20 08:55 UTC",
+  "checked_at": "2026-11-20 09:07 UTC",
   "verdict": {
-    "status": "ready",
-    "reason": "",
+    "status": "ready_with_warnings",
+    "reason": "Page load under 6 s",
     "blockers": [],
-    "warnings": []
+    "warnings": [
+      "page_speed"
+    ],
+    "agent_warnings": []
   },
   "checklist": [
     {
@@ -113,8 +116,8 @@
     {
       "id": "page_speed",
       "title": "Page load under 6 s",
-      "status": "pass",
-      "detail": "load event at 5.9s",
+      "status": "warn",
+      "detail": "load event at 8.9s",
       "evidence": [],
       "blocking": false
     },
@@ -129,6 +132,40 @@
         "Failed to load resource: the server responded with a status of 404 ()"
       ],
       "blocking": false
+    },
+    {
+      "id": "ai_crawlers",
+      "title": "AI assistants and AI search can read the pages",
+      "status": "pass",
+      "detail": "robots.txt allows all listed AI bots.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "llms_txt",
+      "title": "llms.txt published",
+      "status": "pass",
+      "detail": "/llms.txt found.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "structured_data",
+      "title": "schema.org organization markup",
+      "status": "pass",
+      "detail": "JSON-LD types: Organization; DonateAction: no.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "donate_no_js",
+      "title": "Donate page readable without JavaScript",
+      "status": "pass",
+      "detail": "https://wildaid.org/?form=donate returns HTTP 200 with donation content in the HTML.",
+      "evidence": [
+        "https://wildaid.org/?form=donate"
+      ],
+      "blocking": false
     }
   ],
   "facts": {
@@ -138,10 +175,10 @@
       "final_url": "https://wildaid.org/",
       "https": true,
       "load_error": null,
-      "load_ms": 5922,
-      "dom_content_loaded_ms": 1953,
-      "check_seconds": 10.2,
-      "request_count": 135,
+      "load_ms": 8864,
+      "dom_content_loaded_ms": 2739,
+      "check_seconds": 13.9,
+      "request_count": 134,
       "failed_request_count": 1,
       "console_error_count": 3,
       "console_errors_sample": [
@@ -218,29 +255,76 @@
       },
       "consent": []
     },
-    "other_donation_platforms": []
+    "other_donation_platforms": [],
+    "agent_readiness": {
+      "robots": {
+        "present": true,
+        "bots": {
+          "GPTBot": "allowed",
+          "ClaudeBot": "allowed",
+          "Google-Extended": "allowed",
+          "Claude-User": "allowed",
+          "OAI-SearchBot": "allowed",
+          "PerplexityBot": "allowed"
+        }
+      },
+      "llms_txt": true,
+      "jsonld_types": [
+        "BreadcrumbList",
+        "ListItem",
+        "Organization",
+        "ImageObject",
+        "WebPage",
+        "WebSite"
+      ],
+      "organization_markup": [
+        "Organization"
+      ],
+      "donate_action_markup": false,
+      "donate_page": {
+        "url": "https://wildaid.org/?form=donate",
+        "http_status": 200,
+        "without_javascript": "readable"
+      }
+    }
   },
   "ai": {
-    "summary": "The page https://wildaid.org/ loaded in a headless browser with HTTP 200 in 5.9 seconds. The FundraiseUp install code is in the page source once, in the head, with no scripts after it. The widget script loads from account AQTMUHNH with no widget console errors. Two donate links were found that point to checkout forms (FUNAUWUZXNA and donate). The browser did not click these links, so checkout behavior is not verified. Google Tag Manager, GA4, and Meta Pixel were found. No known cookie consent tool was detected. The page has 3 console errors: one failed resource that could not be resolved and two 404 responses.",
+    "summary": "The page https://wildaid.org/ loaded in a headless browser with HTTP 200. The FundraiseUp install code is in the page source once, in the head, with no scripts after it. The widget script loaded from account ID AQTMUHNH. The browser did not click anything, so the checkout itself was not tested. Two donate links with form parameters were found. The page load event took 8.9 seconds, which is over the 6 second limit and is a warning, not a blocker. Three console errors were recorded, including one failed request and two 404 responses. No known cookie consent tool was detected. The Meta Pixel, GA4, and GTM containers were found in the page. The robots.txt allows the listed AI bots, llms.txt is present, and Organization markup is present. DonateAction markup is not present.",
     "risks": [
       {
-        "title": "No cookie consent tool detected",
+        "title": "Page load is slow",
         "severity": "medium",
-        "detail": "No known consent tool was found on the page. Vendor cookies from GTM, GA4, Meta Pixel, and FundraiseUp may need a consent setup for EU and UK visitors.",
+        "detail": "The load event fired at 8.9 seconds. The check limit is 6 seconds.",
         "check_ids": [
-          "consent_banner"
+          "page_speed"
         ]
       },
       {
-        "title": "Console errors on the page",
+        "title": "Failed requests and 404 errors on the page",
         "severity": "low",
-        "detail": "Three errors were recorded: one resource failed to resolve and two resources returned 404. The source of these resources was not identified in the recorded data.",
+        "detail": "Three console errors were recorded: one name resolution failure and two 404 responses. The source of these requests was not identified.",
         "check_ids": [
           "console_errors"
+        ]
+      },
+      {
+        "title": "No cookie consent tool detected",
+        "severity": "medium",
+        "detail": "No known consent tool was found. Visitors from the EU or UK may need a consent setup because vendor cookies are set.",
+        "check_ids": [
+          "consent_banner"
         ]
       }
     ],
     "next_steps": [
+      {
+        "owner": "onboarding_team",
+        "action": "Confirm with the customer which page elements produce the three console errors and the 404 responses, and whether the page speed issue is known.",
+        "check_ids": [
+          "page_speed",
+          "console_errors"
+        ]
+      },
       {
         "owner": "onboarding_team",
         "action": "Confirm with the customer whether they need a cookie consent setup for EU and UK visitors.",
@@ -249,30 +333,38 @@
         ]
       },
       {
-        "owner": "customer",
-        "action": "Check the page for links or files that return 404 or fail to resolve, and fix or remove them.",
+        "owner": "onboarding_team",
+        "action": "Test a donate link in a normal browser to confirm the checkout opens. The headless check did not click anything.",
         "check_ids": [
+          "fu_checkout_links"
+        ]
+      },
+      {
+        "owner": "customer",
+        "action": "Fix the 404 and failed resource references on the page, and reduce page load time to under 6 seconds.",
+        "check_ids": [
+          "page_speed",
           "console_errors"
         ]
       },
       {
-        "owner": "onboarding_team",
-        "action": "Open the FundraiseUp dashboard and confirm that the checkout links FUNAUWUZXNA and donate open the correct forms for this account.",
+        "owner": "customer",
+        "action": "Decide whether to set up a cookie consent tool for EU and UK visitors.",
         "check_ids": [
-          "fu_checkout_links"
+          "consent_banner"
         ]
       }
     ],
     "customer_email": {
-      "subject": "Next steps for your donation page on wildaid.org",
-      "body": "Hello,\n\nWe checked your donation page at https://wildaid.org/. The FundraiseUp code is installed correctly, and the widget loads on the page. Your Google Tag Manager, GA4, and Meta Pixel tags were also found.\n\nWe need a few fixes from your side:\n\n1. Please check the page for files or links that return a 404 error or fail to load, and fix or remove them. Our check found three console errors.\n2. Please tell us whether you need a cookie consent banner for visitors in the EU or UK. We did not find a consent tool on the page.\n\nOnce these are done, we can run the check again.\n\nThank you,\nThe Onboarding Team"
+      "subject": "Next steps for your donation page at wildaid.org",
+      "body": "Hello,\n\nThanks for working with us to set up donations on wildaid.org. The donation widget is installed correctly and loads on your page. We found a few items to fix:\n\n1. Reduce page load time. Your page took 8.9 seconds to finish loading. Please aim for under 6 seconds. Large images and scripts are common causes.\n\n2. Fix broken resource links. We found three errors, including two 404 responses and one failed request. Please find the missing files or update the links that point to them.\n\n3. Decide on cookie consent. If you have visitors in the EU or UK, you may need a cookie consent tool. Please let us know if you want help choosing one.\n\nOnce these are fixed, reply to this email and we will run the check again.\n\nThank you,\nThe Onboarding Team"
     },
     "_dropped_uncited": 0,
     "_usage": {
       "model": "claude-haiku-5-5",
-      "input_tokens": 3273,
-      "output_tokens": 876,
-      "cost_usd": 0.00077
+      "input_tokens": 3853,
+      "output_tokens": 1115,
+      "cost_usd": 0.00094
     }
   }
 }

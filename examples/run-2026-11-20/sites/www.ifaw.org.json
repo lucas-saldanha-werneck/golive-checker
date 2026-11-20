@@ -1,15 +1,17 @@
 {
   "url": "https://www.ifaw.org/",
-  "checked_at": "2026-11-20 08:55 UTC",
+  "checked_at": "2026-11-20 09:07 UTC",
   "verdict": {
     "status": "ready_with_warnings",
-    "reason": "Code is in <head>, last script; Widget not held back by the consent tool; GA4 measurement ID",
+    "reason": "Code is in <head>, last script; Widget not held back by the consent tool; GA4 measurement ID; Page load under 6 s",
     "blockers": [],
     "warnings": [
       "fu_in_head",
       "fu_consent_gated",
-      "ga4"
-    ]
+      "ga4",
+      "page_speed"
+    ],
+    "agent_warnings": []
   },
   "checklist": [
     {
@@ -129,9 +131,43 @@
     {
       "id": "page_speed",
       "title": "Page load under 6 s",
-      "status": "pass",
-      "detail": "load event at 4.2s",
+      "status": "warn",
+      "detail": "load event at 8.9s",
       "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "ai_crawlers",
+      "title": "AI assistants and AI search can read the pages",
+      "status": "pass",
+      "detail": "robots.txt allows all listed AI bots.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "llms_txt",
+      "title": "llms.txt published",
+      "status": "info",
+      "detail": "No /llms.txt (optional, still a proposal).",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "structured_data",
+      "title": "schema.org organization markup",
+      "status": "pass",
+      "detail": "JSON-LD types: Organization; DonateAction: no.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "donate_no_js",
+      "title": "Donate page readable without JavaScript",
+      "status": "pass",
+      "detail": "https://www.ifaw.org/?form=join returns HTTP 200 with donation content in the HTML.",
+      "evidence": [
+        "https://www.ifaw.org/?form=join"
+      ],
       "blocking": false
     }
   ],
@@ -142,10 +178,10 @@
       "final_url": "https://www.ifaw.org/",
       "https": true,
       "load_error": null,
-      "load_ms": 4174,
-      "dom_content_loaded_ms": 2169,
-      "check_seconds": 8.6,
-      "request_count": 121,
+      "load_ms": 8862,
+      "dom_content_loaded_ms": 2949,
+      "check_seconds": 15.5,
+      "request_count": 122,
       "failed_request_count": 1,
       "console_error_count": 0,
       "console_errors_sample": [],
@@ -209,31 +245,66 @@
         }
       ]
     },
-    "other_donation_platforms": []
+    "other_donation_platforms": [],
+    "agent_readiness": {
+      "robots": {
+        "present": true,
+        "bots": {
+          "GPTBot": "allowed",
+          "ClaudeBot": "allowed",
+          "Google-Extended": "allowed",
+          "Claude-User": "allowed",
+          "OAI-SearchBot": "allowed",
+          "PerplexityBot": "allowed"
+        }
+      },
+      "llms_txt": false,
+      "jsonld_types": [
+        "Organization",
+        "ContactPoint"
+      ],
+      "organization_markup": [
+        "Organization"
+      ],
+      "donate_action_markup": false,
+      "donate_page": {
+        "url": "https://www.ifaw.org/?form=join",
+        "http_status": 200,
+        "without_javascript": "readable"
+      }
+    }
   },
   "ai": {
-    "summary": "Page https://www.ifaw.org/ loaded (HTTP 200). FundraiseUp code with account ID AWMWZJRX is in the page source and the widget script loaded in this run. No blockers were found. Three warnings: the code is in head but 3 other script tags follow it, the widget is inserted by the Usercentrics consent tool, and no GA4 measurement ID was seen. The browser did not click anything. One donate link with a ?form= parameter was found (join). This does not confirm the checkout works.",
+    "summary": "The page https://www.ifaw.org/ loaded in the headless browser with HTTP 200 and no load error. The FundraiseUp installation code for account AWMWZJRX is in the page source, and the widget script loaded at runtime from cdn.fundraiseup.com with HTTP 200. The verdict is ready with warnings and no blockers. The browser did not click any buttons, so it did not test whether checkout works. It found one donate link to the checkout form (?form=join), and that link returns donation content in the HTML without JavaScript. The code sits in the head, but 3 script tags follow it. The widget was inserted by the Usercentrics consent tool, so visitors who decline cookies may not get the widget. The page load event took 8.9 seconds. No GA4 measurement ID was seen loading or sending hits, which may be because it loads only after consent. The Meta Pixel was not seen, and it is optional.",
     "risks": [
       {
-        "title": "FundraiseUp code is not the last script in head",
-        "severity": "low",
-        "detail": "The FundraiseUp snippet is in head, but 3 script tags follow it. The vendor docs recommend it as the last script.",
-        "check_ids": [
-          "fu_in_head"
-        ]
-      },
-      {
-        "title": "Widget depends on cookie consent settings",
+        "title": "Widget may depend on cookie consent",
         "severity": "medium",
-        "detail": "The widget script was inserted by Usercentrics. If visitors decline cookies, the widget may be held back and the checkout may not load for them. It loaded in this run.",
+        "detail": "Usercentrics inserted the widget script. Visitors who decline cookies may not get the donation widget. Confirm the script is set as strictly necessary.",
         "check_ids": [
           "fu_consent_gated"
         ]
       },
       {
-        "title": "No GA4 measurement ID seen",
+        "title": "Installation code is not last in head",
         "severity": "low",
-        "detail": "No GA4 property was seen loading or sending hits. It may load only after consent, so this run could not confirm it.",
+        "detail": "Three script tags come after the FundraiseUp code in the head. The vendor docs recommend it as the last script.",
+        "check_ids": [
+          "fu_in_head"
+        ]
+      },
+      {
+        "title": "Slow page load",
+        "severity": "low",
+        "detail": "The load event fired at 8.9 seconds, above the 6 second target. This was one headless run.",
+        "check_ids": [
+          "page_speed"
+        ]
+      },
+      {
+        "title": "No GA4 hits seen",
+        "severity": "low",
+        "detail": "No GA4 measurement ID was seen loading or sending hits. It may load only after consent, so this is not confirmed either way.",
         "check_ids": [
           "ga4"
         ]
@@ -241,37 +312,55 @@
     ],
     "next_steps": [
       {
+        "owner": "customer",
+        "action": "Ask your web developer to move the FundraiseUp code so it is the last script in the head, after the other three script tags.",
+        "check_ids": [
+          "fu_in_head"
+        ]
+      },
+      {
+        "owner": "customer",
+        "action": "Ask your web developer or consent tool administrator to mark the FundraiseUp widget as strictly necessary in Usercentrics, so it loads for visitors who decline cookies.",
+        "check_ids": [
+          "fu_consent_gated"
+        ]
+      },
+      {
         "owner": "onboarding_team",
-        "action": "Confirm with the customer whether they use Google Analytics 4 and, if so, which measurement ID they expect to see on the page.",
+        "action": "Confirm with the customer that the FundraiseUp widget and the donate link to the checkout form work when a visitor declines cookies. The browser did not click any buttons.",
+        "check_ids": [
+          "fu_consent_gated",
+          "fu_checkout_links"
+        ]
+      },
+      {
+        "owner": "onboarding_team",
+        "action": "Confirm with the customer whether they use a GA4 property and whether it loads after consent. Check the dashboard settings if needed.",
         "check_ids": [
           "ga4"
         ]
       },
       {
         "owner": "onboarding_team",
-        "action": "Check the Usercentrics settings with the customer to confirm the FundraiseUp widget script is set as strictly necessary, then re-run this check.",
+        "action": "Re-run this check after the customer makes changes to confirm the warnings are cleared.",
         "check_ids": [
-          "fu_consent_gated"
-        ]
-      },
-      {
-        "owner": "customer",
-        "action": "Ask your web developer to move the FundraiseUp snippet so it is the last script inside the head section of the page.",
-        "check_ids": [
-          "fu_in_head"
+          "fu_in_head",
+          "fu_consent_gated",
+          "page_speed",
+          "ga4"
         ]
       }
     ],
     "customer_email": {
-      "subject": "Next steps for your FundraiseUp setup on ifaw.org",
-      "body": "Hello,\n\nWe checked your page at https://www.ifaw.org/. The FundraiseUp code is installed and the widget loaded. We found three items to fix or confirm.\n\nPlease do the following:\n\n1. Ask your web developer to move the FundraiseUp snippet so it is the last script inside the head section of the page.\n\n2. Confirm that the FundraiseUp widget is set as strictly necessary in your cookie consent tool (Usercentrics). This keeps the donation widget working for visitors who decline cookies.\n\n3. If you use Google Analytics 4, send us your measurement ID so we can confirm it appears on the page.\n\nThank you. Please reply with any questions.\n\nBest regards,\nOnboarding Team"
+      "subject": "Three quick fixes for your donation widget on ifaw.org",
+      "body": "Hello,\n\nThank you for working with us to launch donations on your website. Your FundraiseUp donation widget is installed and loads on https://www.ifaw.org/. Before launch, please make these three changes.\n\n1. Move the FundraiseUp code so it is the last script in the page head. Right now, three other scripts load after it.\n\n2. Ask your web developer or consent tool administrator to set the FundraiseUp widget as strictly necessary in Usercentrics. This makes sure visitors who decline cookies still see the donation widget.\n\n3. Let us know whether you use a Google Analytics 4 property, so we can confirm it is set up on the page.\n\nAfter you make these changes, reply to this email and we will run the check again.\n\nThank you,\nThe Onboarding Team"
     },
     "_dropped_uncited": 0,
     "_usage": {
       "model": "claude-haiku-5-5",
-      "input_tokens": 3365,
-      "output_tokens": 1325,
-      "cost_usd": 0.001
+      "input_tokens": 3923,
+      "output_tokens": 1331,
+      "cost_usd": 0.00106
     }
   }
 }

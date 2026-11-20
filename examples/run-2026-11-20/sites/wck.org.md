@@ -1,7 +1,7 @@
 # https://wck.org/
 
 **Status:** Not installed (installation code missing)
-**Checked:** 2026-11-20 08:56 UTC in 14.3s
+**Checked:** 2026-11-20 09:07 UTC in 16.9s
 **Account ID(s):** none found
 
 ## Checklist
@@ -15,43 +15,57 @@
 | PASS | Meta Pixel | loaded, pixel id(s): 2145340818891888 |
 | PASS | Cookie consent tool | OneTrust |
 | PASS | No other donation tool on the page | None found. |
-| WARN | Page load under 6 s | load event at 9.2s |
+| WARN | Page load under 6 s | load event at 10.4s |
 | INFO | Console errors (any source) | 1 error(s) |
+
+## AI agent readiness
+
+Not part of the go-live verdict. Can AI assistants and AI search read the organization and reach the donate page?
+
+| Status | Check | Detail |
+|---|---|---|
+| PASS | AI assistants and AI search can read the pages | robots.txt allows all listed AI bots. |
+| INFO | llms.txt published | No /llms.txt (optional, still a proposal). |
+| PASS | schema.org organization markup | JSON-LD types: Organization; DonateAction: no. |
+| WARN | Donate page readable without JavaScript | https://donate.wck.org/campaign/749360/donate?c_src=site-navbar is blocked or errors for a plain HTTP client (HTTP 403). |
 
 ## Summary (AI, from the facts above)
 
-The page https://wck.org/ loaded in a headless browser with HTTP 200 over HTTPS. The FundraiseUp installation code was not found in the page source, and no FundraiseUp widget request was recorded. The verdict is not installed, with the installation code missing. Google Tag Manager (GTM-MKV74FD), GA4 (G-5WKVY8503C), and Meta Pixel (2145340818891888) were found. OneTrust was found as the cookie consent tool. No other donation tool was found. The page load event took 9.2 seconds, which is above the 6 second target. The browser recorded one console error, a 451 status response. The browser did not click any buttons, so checkout behavior was not tested. No checkout form links were found.
+The page https://wck.org/ loaded in a headless browser with HTTP 200 and no load error. No installation code was found in the page source, and no widget request was recorded. The verdict is not installed. Google Tag Manager (GTM-MKV74FD), GA4 (G-5WKVY8503C), and the Meta Pixel (2145340818891888) were found. OneTrust is the cookie consent tool. No other donation tool was found. The page took 10.4 s to load its load event, above the 6 s check. One console error was recorded, a 451 status on a resource. The donate link https://donate.wck.org/campaign/749360/donate?c_src=site-navbar returned HTTP 403 to a plain HTTP client. The browser did not click any button, so checkout behavior was not tested. Only the links were found.
 
 ### Risks
 
-- **high** Installation code is missing: No installation code was found in the page source and no widget request was recorded. The page cannot accept donations through the platform until the code is added. _(checks: fu_code_in_source)_
-- **medium** Page load is slow: The load event fired at 9.2 seconds. The check target is under 6 seconds. _(checks: page_speed)_
-- **low** Console error on the page: The browser recorded one resource failure with a 451 status. The resource was not identified in the recorded data. _(checks: console_errors)_
+- **high** Installation code missing from page source: No installation code was found in the source and no widget request was recorded. The install is not present on this page. _(checks: fu_code_in_source)_
+- **medium** Page load time above 6 s: The load event was recorded at 10.4 s. _(checks: page_speed)_
+- **medium** Donate page returned HTTP 403 to a plain HTTP client: The donate link https://donate.wck.org/campaign/749360/donate?c_src=site-navbar returned HTTP 403 to a plain HTTP client. The check cannot read this page without JavaScript. _(checks: donate_no_js)_
+- **low** One console error recorded: A resource returned status 451 during page load. The source of the resource was not identified. _(checks: console_errors)_
 
 ### Next steps
 
-- [customer] Add the FundraiseUp installation code to the page source of https://wck.org/, then tell the onboarding team when it is live. _(checks: fu_code_in_source)_
-- [onboarding_team] Confirm the FundraiseUp account ID with the customer and check it in the dashboard settings once the code is added. _(checks: fu_code_in_source)_
-- [customer] Review the page load time and reduce the scripts or assets that slow the load event below 6 seconds. _(checks: page_speed)_
-- [onboarding_team] Re-run this check after the customer reports the code is added, and confirm the widget request appears. _(checks: fu_code_in_source, page_speed)_
+- [customer] Add the installation code to the page source of https://wck.org/ and confirm it appears in the head of the page. _(checks: fu_code_in_source)_
+- [customer] Review the page load time of https://wck.org/ and reduce the load event time below 6 s. _(checks: page_speed)_
+- [customer] Check that https://donate.wck.org/campaign/749360/donate?c_src=site-navbar is reachable for visitors and does not block plain HTTP requests with HTTP 403. _(checks: donate_no_js)_
+- [onboarding_team] Confirm with the customer that the installation code was added, then re-run this check. _(checks: fu_code_in_source)_
+- [onboarding_team] Confirm the 451 console error source with the customer and note whether it affects donations. _(checks: console_errors)_
 
 ### Draft email to the customer
 
-**Subject:** Next steps to set up donations on wck.org
+**Subject:** Next steps to finish your donation page setup
 
 ```text
 Hello,
 
-We checked https://wck.org/ to prepare your donation platform setup. The page loads, but the donation installation code was not found in the page source.
+Thank you for working with us. We checked https://wck.org/ and found that the donation installation code is not in the page yet. Please add the installation code to the page source so it appears in the head of the page. We will confirm once it is in place.
 
-Please do the following:
+We also found two items to review on your site:
 
-1. Add the donation installation code to the page source of https://wck.org/. We will send the exact code and placement details separately if you need them.
-2. Reduce the page load time. The main page currently takes about 9 seconds to finish loading. Please aim for under 6 seconds.
-3. Let us know when the code is live, and we will confirm it.
+1. The page takes about 10.4 seconds to load. Please review it and aim for under 6 seconds.
+2. The donate page at https://donate.wck.org/campaign/749360/donate?c_src=site-navbar returned an access error (HTTP 403) to our check. Please confirm that visitors can open this page.
+
+Once these changes are made, reply to this email and we will run the check again.
 
 Thank you,
-The Onboarding Team
+Onboarding Team
 ```
 
 ## Evidence
@@ -59,3 +73,4 @@ The Onboarding Team
 - page_reachable: https://wck.org/
 - consent_banner: https://cdn.cookielaw.org/scripttemplates/otSDKStub.js
 - console_errors: Failed to load resource: the server responded with a status of 451 ()
+- donate_no_js: https://donate.wck.org/campaign/749360/donate?c_src=site-navbar

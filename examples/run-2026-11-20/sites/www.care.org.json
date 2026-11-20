@@ -1,15 +1,14 @@
 {
   "url": "https://www.care.org/",
-  "checked_at": "2026-11-20 08:56 UTC",
+  "checked_at": "2026-11-20 09:07 UTC",
   "verdict": {
     "status": "not_installed",
     "reason": "installation code missing",
     "blockers": [
       "fu_code_in_source"
     ],
-    "warnings": [
-      "page_speed"
-    ]
+    "warnings": [],
+    "agent_warnings": []
   },
   "checklist": [
     {
@@ -75,8 +74,8 @@
     {
       "id": "page_speed",
       "title": "Page load under 6 s",
-      "status": "warn",
-      "detail": "load event at 7.3s",
+      "status": "pass",
+      "detail": "load event at 6.0s",
       "evidence": [],
       "blocking": false
     },
@@ -91,6 +90,40 @@
         "Permissions policy violation: unload is not allowed in this document."
       ],
       "blocking": false
+    },
+    {
+      "id": "ai_crawlers",
+      "title": "AI assistants and AI search can read the pages",
+      "status": "pass",
+      "detail": "robots.txt allows all listed AI bots.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "llms_txt",
+      "title": "llms.txt published",
+      "status": "info",
+      "detail": "No /llms.txt (optional, still a proposal).",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "structured_data",
+      "title": "schema.org organization markup",
+      "status": "pass",
+      "detail": "JSON-LD types: Organization; DonateAction: no.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "donate_no_js",
+      "title": "Donate page readable without JavaScript",
+      "status": "pass",
+      "detail": "https://my.care.org/site/Donation2?df_id=53752&mfc_pref=T&53752.donation=form1&s_src=1727230NNC00&s_subsrc=FY27DFWEBNOVGAZALB returns HTTP 200 with donation content in the HTML.",
+      "evidence": [
+        "https://my.care.org/site/Donation2?df_id=53752&mfc_pref=T&53752.donation=form1&s_src=1727230NNC00&s_subsrc=FY27DFWEBNOVGAZALB"
+      ],
+      "blocking": false
     }
   ],
   "facts": {
@@ -100,11 +133,11 @@
       "final_url": "https://www.care.org/",
       "https": true,
       "load_error": null,
-      "load_ms": 7332,
-      "dom_content_loaded_ms": 2368,
-      "check_seconds": 11.9,
-      "request_count": 213,
-      "failed_request_count": 1,
+      "load_ms": 5959,
+      "dom_content_loaded_ms": 2344,
+      "check_seconds": 12.7,
+      "request_count": 221,
+      "failed_request_count": 0,
       "console_error_count": 5,
       "console_errors_sample": [
         "requestStorageAccess: Permission denied.",
@@ -170,91 +203,121 @@
         "how": "linked from page",
         "evidence": "https://my.care.org/site/Donation2?df_id=53752&amp;mfc_pref=T&amp;53752.donation=form1&amp;s_src=1727230NNC00&amp;s_subsrc=FY27DFWEBNOVGAZALB"
       }
-    ]
+    ],
+    "agent_readiness": {
+      "robots": {
+        "present": true,
+        "bots": {
+          "GPTBot": "allowed",
+          "ClaudeBot": "allowed",
+          "Google-Extended": "allowed",
+          "Claude-User": "allowed",
+          "OAI-SearchBot": "allowed",
+          "PerplexityBot": "allowed"
+        }
+      },
+      "llms_txt": false,
+      "jsonld_types": [
+        "WebPage",
+        "ReadAction",
+        "ImageObject",
+        "BreadcrumbList",
+        "ListItem",
+        "WebSite",
+        "SearchAction",
+        "EntryPoint",
+        "PropertyValueSpecification",
+        "Organization"
+      ],
+      "organization_markup": [
+        "Organization"
+      ],
+      "donate_action_markup": false,
+      "donate_page": {
+        "url": "https://my.care.org/site/Donation2?df_id=53752&mfc_pref=T&53752.donation=form1&s_src=1727230NNC00&s_subsrc=FY27DFWEBNOVGAZALB",
+        "http_status": 200,
+        "without_javascript": "readable"
+      }
+    }
   },
   "ai": {
-    "summary": "The check loaded https://www.care.org/ in a headless browser (HTTP 200, load time 7.3 s). No FundraiseUp installation code was found in the page source, and no FundraiseUp widget request was recorded. The verdict is not installed because the installation code is missing. Google Tag Manager (GTM-WMMPLB), GA4 (G-BE6GP7SC1M), and Meta Pixel (312340198960624) were found. No cookie consent tool was detected. The page links to a Blackbaud Luminate Online donation form. The browser did not click anything, so the donation form and checkout were not tested.",
+    "summary": "The FundraiseUp installation code was not found on https://www.care.org/. The page loaded (HTTP 200) in the headless browser. No installation code appeared in the page source, and no FundraiseUp widget request was recorded. The verdict is not installed, with the reason: installation code missing. The browser did not click any button, so it did not test whether the donate flow works. Links found: the page links to a Blackbaud Luminate Online donation form at my.care.org. That donation form returned HTTP 200 without JavaScript. Google Tag Manager (GTM-WMMPLB), GA4 (G-BE6GP7SC1M), and the Meta Pixel (312340198960624) were found and loaded. No known cookie consent tool was detected. The page load event was at 6.0 seconds. Five console errors were recorded.",
     "risks": [
       {
         "title": "FundraiseUp installation code is missing",
         "severity": "high",
-        "detail": "No installation code was found in the page source and no widget request was recorded. The platform cannot run on this page until the code is added.",
+        "detail": "No installation code was found in the page source and no widget request was recorded. This blocks the install.",
         "check_ids": [
           "fu_code_in_source"
         ]
       },
       {
-        "title": "Donation form links to another platform",
+        "title": "Donate links point to another platform",
         "severity": "medium",
-        "detail": "The page links to a Blackbaud Luminate Online donation form. Donors may be sent there instead of a FundraiseUp form.",
+        "detail": "The page links to a Blackbaud Luminate Online donation form, not a FundraiseUp form. The browser did not test whether that form works.",
         "check_ids": [
-          "other_platforms"
-        ]
-      },
-      {
-        "title": "Page load is slow",
-        "severity": "low",
-        "detail": "The load event was recorded at 7.3 s, above the 6 s target.",
-        "check_ids": [
-          "page_speed"
+          "other_platforms",
+          "donate_no_js"
         ]
       },
       {
         "title": "No cookie consent tool detected",
-        "severity": "low",
-        "detail": "No known consent tool was found. Visitors in the EU and UK need a consent setup for vendor cookies.",
+        "severity": "medium",
+        "detail": "No known consent tool was found. Visitors in the EU and UK may need a consent setup for vendor cookies.",
         "check_ids": [
           "consent_banner"
+        ]
+      },
+      {
+        "title": "Page load is close to the limit",
+        "severity": "low",
+        "detail": "The load event fired at 6.0 seconds, just over the 6 second target.",
+        "check_ids": [
+          "page_speed"
         ]
       }
     ],
     "next_steps": [
       {
         "owner": "customer",
-        "action": "Add the FundraiseUp installation code to the page source of https://www.care.org/ and confirm the code is in the page HTML.",
+        "action": "Add the FundraiseUp installation code to the page source of https://www.care.org/ and tell the onboarding team when it is live.",
         "check_ids": [
           "fu_code_in_source"
         ]
       },
       {
-        "owner": "customer",
-        "action": "Tell us whether the Blackbaud Luminate Online donation link on the page should stay, be removed, or be replaced.",
+        "owner": "onboarding_team",
+        "action": "Confirm with the customer which donation form should be used on the site, since the page links to a Blackbaud Luminate Online form.",
         "check_ids": [
           "other_platforms"
         ]
       },
       {
         "owner": "customer",
-        "action": "Set up a cookie consent tool if EU or UK visitors are in scope.",
+        "action": "Decide whether a cookie consent tool is needed for EU and UK visitors, and add one if so.",
         "check_ids": [
           "consent_banner"
         ]
       },
       {
         "owner": "onboarding_team",
-        "action": "Confirm with the customer which donation form is intended for the page and whether the Blackbaud link is still in use.",
+        "action": "Re-run this check after the installation code is added.",
         "check_ids": [
-          "other_platforms"
-        ]
-      },
-      {
-        "owner": "onboarding_team",
-        "action": "Re-run this check after the customer adds the installation code.",
-        "check_ids": [
-          "fu_code_in_source"
+          "fu_code_in_source",
+          "page_reachable"
         ]
       }
     ],
     "customer_email": {
-      "subject": "Next steps to connect your donation form on care.org",
-      "body": "Hello,\n\nThank you for working with us to set up donations on your website. We checked https://www.care.org/ and found that the donation software code is not on the page yet.\n\nPlease do the following:\n\n1. Add the donation software installation code to the page source of https://www.care.org/. We will send the code and placement details separately.\n2. Let us know whether the Blackbaud Luminate Online donation link on the page should stay, be removed, or be replaced.\n3. If you have visitors in the EU or UK, set up a cookie consent tool for them.\n\nOnce the code is in place, we will run the check again and confirm the result with you.\n\nThank you,\nOnboarding Team"
+      "subject": "Next steps for installing donations on care.org",
+      "body": "Hello,\n\nThank you for working with us on your online donation setup. We checked https://www.care.org/ and found that the donation installation code is not on the page yet.\n\nPlease do the following:\n\n1. Add the installation code to the page source of https://www.care.org/. We will send the exact code separately.\n2. Let us know which donation form you want visitors to use. The page currently links to a Blackbaud Luminate Online form.\n3. If you have visitors in the EU or UK, consider adding a cookie consent tool.\n\nOnce the code is live, reply to this email and we will run the check again.\n\nThank you,\nThe Onboarding Team"
     },
     "_dropped_uncited": 0,
     "_usage": {
       "model": "claude-haiku-5-5",
-      "input_tokens": 2777,
-      "output_tokens": 1085,
-      "cost_usd": 0.00082
+      "input_tokens": 3554,
+      "output_tokens": 1095,
+      "cost_usd": 0.0009
     }
   }
 }

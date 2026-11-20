@@ -263,6 +263,96 @@ def _looks_like_challenge(cap: dict[str, Any]) -> bool:
     return any(s in html for s in ("just a moment...", "cf-chl", "verify you are human", "attention required! | cloudflare", "access denied"))
 
 
+# --- AI agent readiness ---------------------------------------------------------
+# Training crawlers vs. bots that fetch a page when a person asks an assistant/search engine.
+AI_BOTS = {
+    "GPTBot": "training",
+    "ClaudeBot": "training",
+    "Google-Extended": "training",
+    "Claude-User": "user_fetch",
+    "OAI-SearchBot": "search",
+    "PerplexityBot": "search",
+}
+JSONLD_RE = re.compile(r"<script[^>]+type=[\"']application/ld\+json[\"'][^>]*>(.*?)</script>", re.S | re.I)
+
+
+def jsonld_types(html: str) -> list[str]:
+    import json
+
+    found: list[str] = []
+
+    def walk(node):
+        if isinstance(node, dict):
+            t = node.get("@type")
+            for x in (t if isinstance(t, list) else [t]):
+                if isinstance(x, str) and x not in found:
+                    found.append(x)
+            for v in node.values():
+                walk(v)
+        elif isinstance(node, list):
+            for v in node:
+                walk(v)
+
+    for block in JSONLD_RE.findall(html or ""):
+        try:
+            walk(json.loads(block.strip()))
+        except ValueError:
+            continue
+    return found
+
+
+def robots_rules(robots: dict[str, Any] | None, urls: list[str]) -> dict[str, Any]:
+    from urllib.robotparser import RobotFileParser
+
+    if not robots or robots.get("status") != 200 or "<html" in (robots.get("body") or "")[:500].lower():
+        return {"present": False, "bots": {b: "allowed (no robots.txt)" for b in AI_BOTS}}
+    rp = RobotFileParser()
+    rp.parse((robots.get("body") or "").splitlines())
+    bots = {}
+    for bot in AI_BOTS:
+        blocked = [u for u in urls if u and not rp.can_fetch(bot, u)]
+        bots[bot] = "blocked" if blocked else "allowed"
+    return {"present": True, "bots": bots}
+
+
+def detect_agent(cap: dict[str, Any]) -> dict[str, Any]:
+    ag = cap.get("agent") or {}
+    page_url = cap.get("final_url") or cap.get("url") or ""
+    donate = ag.get("donate") or None
+    llms = ag.get("llms") or {}
+    llms_body = (llms.get("body") or "").lstrip()
+    llms_ok = llms.get("status") == 200 and not llms_body[:100].lower().startswith(("<!doctype", "<html")) and bool(llms_body)
+
+    home_types = jsonld_types(cap.get("raw_html") or "")
+    donate_types = jsonld_types(donate.get("body") or "") if donate else []
+    all_types = home_types + [x for x in donate_types if x not in home_types]
+    org = [x for x in all_types if x in ("NGO", "NonprofitOrganization") or x.endswith("Organization") or x == "Organization"]
+
+    donate_status = None
+    if donate:
+        body = donate.get("body") or ""
+        low = body[:300_000].lower()
+        if not donate.get("status") or donate["status"] >= 400 or any(s in low[:20000] for s in ("just a moment...", "cf-chl", "verify you are human")):
+            donate_status = "blocked"
+        elif FU_SNIPPET_RE.search(body) or "form=" in low or "<form" in low or "<iframe" in low and "donat" in low:
+            donate_status = "readable"
+        else:
+            donate_status = "needs_javascript"
+
+    return {
+        "robots": robots_rules(ag.get("robots"), [page_url, donate.get("final_url") if donate else None]),
+        "llms_txt": llms_ok,
+        "jsonld_types": all_types[:15],
+        "organization_markup": org[:5],
+        "donate_action_markup": "DonateAction" in all_types,
+        "donate_page": {
+            "url": donate.get("final_url") or donate.get("url") if donate else None,
+            "http_status": donate.get("status") if donate else None,
+            "without_javascript": donate_status,
+        },
+    }
+
+
 def analyze(cap: dict[str, Any]) -> dict[str, Any]:
     return {
         "url": cap.get("url"),
@@ -270,4 +360,5 @@ def analyze(cap: dict[str, Any]) -> dict[str, Any]:
         "fundraiseup": detect_fundraiseup(cap),
         "tags": detect_tags(cap),
         "other_donation_platforms": detect_other_platforms(cap),
+        "agent_readiness": detect_agent(cap),
     }

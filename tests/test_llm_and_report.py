@@ -71,3 +71,13 @@ def test_read_urls_from_csv(tmp_path):
     f.write_text("url,name\nexample.org,Ex\n# comment\nhttps://b.org/donate,B\nexample.org,dup\n")
     args = SimpleNamespace(urls=[], csv=str(f))
     assert cli.read_urls(args) == ["https://example.org", "https://b.org/donate"]
+
+
+def test_day7_plan_lists_calls_only(good_cap):
+    from golive_checker import postlaunch
+
+    r = evaluate(good_cap, use_ai=False, model="x")
+    plan = postlaunch.plan_day7(r)
+    assert [p["tool"] for p in plan] == ["get_donations_stats", "get_insights_timeseries", "get_insights_url",
+                                         "get_insights_elements", "get_insights_utm", "get_insights_agentic_giving"]
+    assert plan[2]["inputs"]["pages"] == ["https://example.org/"]

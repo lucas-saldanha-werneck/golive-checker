@@ -1,13 +1,16 @@
 {
   "url": "https://www.hrw.org/",
-  "checked_at": "2026-11-20 08:55 UTC",
+  "checked_at": "2026-11-20 09:07 UTC",
   "verdict": {
     "status": "not_installed",
     "reason": "installation code missing",
     "blockers": [
       "fu_code_in_source"
     ],
-    "warnings": []
+    "warnings": [],
+    "agent_warnings": [
+      "donate_no_js"
+    ]
   },
   "checklist": [
     {
@@ -72,7 +75,7 @@
       "id": "page_speed",
       "title": "Page load under 6 s",
       "status": "pass",
-      "detail": "load event at 3.3s",
+      "detail": "load event at 2.5s",
       "evidence": [],
       "blocking": false
     },
@@ -86,6 +89,40 @@
         "Loading the script 'https://conversions.digitalwerksautomation.com/api/fb.min.js' violates the following Content Security Policy directive: \"script-src 'self' '"
       ],
       "blocking": false
+    },
+    {
+      "id": "ai_crawlers",
+      "title": "AI assistants and AI search can read the pages",
+      "status": "pass",
+      "detail": "robots.txt allows all listed AI bots.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "llms_txt",
+      "title": "llms.txt published",
+      "status": "info",
+      "detail": "No /llms.txt (optional, still a proposal).",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "structured_data",
+      "title": "schema.org organization markup",
+      "status": "info",
+      "detail": "No Organization/NGO JSON-LD on the home or donate page (types seen: SpeakableSpecification, WebPage).",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "donate_no_js",
+      "title": "Donate page readable without JavaScript",
+      "status": "warn",
+      "detail": "https://donate.hrw.org/page/107245/donate/1?ea.tracking.id=EP2022EVpgdonate&promo_id=1000 is blocked or errors for a plain HTTP client (HTTP 403).",
+      "evidence": [
+        "https://donate.hrw.org/page/107245/donate/1?ea.tracking.id=EP2022EVpgdonate&promo_id=1000"
+      ],
+      "blocking": false
     }
   ],
   "facts": {
@@ -95,9 +132,9 @@
       "final_url": "https://www.hrw.org/",
       "https": true,
       "load_error": null,
-      "load_ms": 3319,
-      "dom_content_loaded_ms": 1578,
-      "check_seconds": 7.7,
+      "load_ms": 2471,
+      "dom_content_loaded_ms": 636,
+      "check_seconds": 7.2,
       "request_count": 86,
       "failed_request_count": 2,
       "console_error_count": 2,
@@ -155,76 +192,110 @@
       },
       "consent": []
     },
-    "other_donation_platforms": []
+    "other_donation_platforms": [],
+    "agent_readiness": {
+      "robots": {
+        "present": true,
+        "bots": {
+          "GPTBot": "allowed",
+          "ClaudeBot": "allowed",
+          "Google-Extended": "allowed",
+          "Claude-User": "allowed",
+          "OAI-SearchBot": "allowed",
+          "PerplexityBot": "allowed"
+        }
+      },
+      "llms_txt": false,
+      "jsonld_types": [
+        "SpeakableSpecification",
+        "WebPage"
+      ],
+      "organization_markup": [],
+      "donate_action_markup": false,
+      "donate_page": {
+        "url": "https://donate.hrw.org/page/107245/donate/1?ea.tracking.id=EP2022EVpgdonate&promo_id=1000",
+        "http_status": 403,
+        "without_javascript": "blocked"
+      }
+    }
   },
   "ai": {
-    "summary": "The page https://www.hrw.org/ loaded in the headless browser (HTTP 200, load event at 3.3s). No FundraiseUp installation code was found in the page source, and no FundraiseUp widget request was recorded. The FundraiseUp global object is not defined. The browser did not click anything, so no checkout or donate button was tested. Google Tag Manager container GTM-W5D7ZP, GA4 IDs G-7G2G6XTV4C and G-8G7WH8R2Z8, and Meta Pixel 1179892355551430 were found. No other donation tool was found. No known cookie consent tool was detected. Two console errors were recorded, both Content Security Policy blocks on third-party scripts (bat.bing.com and conversions.digitalwerksautomation.com). Verdict: not installed, because installation code is missing.",
+    "summary": "The FundraiseUp installation code was not found on https://www.hrw.org/. The page loaded with HTTP 200 in a headless browser. No FundraiseUp code, widget request, or global object was recorded. Google Tag Manager (GTM-W5D7ZP), two GA4 IDs, and a Meta Pixel were found. The browser did not click anything, so the checkout or donate button was not tested. The donate page at donate.hrw.org returned HTTP 403 to a plain HTTP client, so its content could not be read without JavaScript. Verdict: not installed.",
     "risks": [
       {
-        "title": "FundraiseUp installation code is missing",
+        "title": "FundraiseUp code is missing from the home page",
         "severity": "high",
-        "detail": "No installation code was found in the page source and no widget request was recorded. The verdict is not installed.",
+        "detail": "No installation code was found in the page source, and no widget request was recorded. The verdict is not installed.",
         "check_ids": [
           "fu_code_in_source"
         ]
       },
       {
-        "title": "No cookie consent tool detected",
+        "title": "Donate page blocks plain HTTP clients",
         "severity": "medium",
-        "detail": "No known consent tool was detected. Consent is needed for EU and UK visitors, and vendor cookies need a consent setup.",
+        "detail": "The donate page returned HTTP 403 to a plain HTTP client. Its content could not be checked without JavaScript.",
         "check_ids": [
-          "consent_banner"
+          "donate_no_js"
         ]
       },
       {
-        "title": "Content Security Policy blocks two third-party scripts",
+        "title": "Content Security Policy blocks two scripts",
         "severity": "low",
-        "detail": "The browser recorded two CSP errors blocking bat.bing.com and conversions.digitalwerksautomation.com scripts. The cause was not checked.",
+        "detail": "Two scripts were blocked by the Content Security Policy: bat.bing.com and conversions.digitalwerksautomation.com. Two console errors were recorded.",
         "check_ids": [
           "console_errors"
+        ]
+      },
+      {
+        "title": "No consent tool detected",
+        "severity": "low",
+        "detail": "No known cookie consent tool was detected. Vendor cookies need a consent setup for EU and UK visitors.",
+        "check_ids": [
+          "consent_banner"
         ]
       }
     ],
     "next_steps": [
       {
         "owner": "customer",
-        "action": "Add the FundraiseUp installation code to the page source of https://www.hrw.org/. Make sure it is in the head of the page.",
+        "action": "Add the FundraiseUp installation code to the page source of https://www.hrw.org/, then tell the onboarding team when it is live.",
         "check_ids": [
           "fu_code_in_source"
         ]
       },
       {
         "owner": "customer",
-        "action": "Set up a cookie consent tool for EU and UK visitors, and make sure vendor cookies respect it.",
+        "action": "Confirm that the donate page at donate.hrw.org allows plain HTTP requests, or tell the onboarding team if access is blocked on purpose.",
+        "check_ids": [
+          "donate_no_js"
+        ]
+      },
+      {
+        "owner": "onboarding_team",
+        "action": "Confirm with the customer which consent tool they use, if any, for EU and UK visitors.",
         "check_ids": [
           "consent_banner"
         ]
       },
       {
-        "owner": "customer",
-        "action": "Review the Content Security Policy on the site so the Bing and Meta scripts are allowed or removed, if they are needed.",
-        "check_ids": [
-          "console_errors"
-        ]
-      },
-      {
         "owner": "onboarding_team",
-        "action": "Confirm with the customer that the installation code change is live, then re-run this check.",
+        "action": "Re-run this check after the customer confirms the installation code is live.",
         "check_ids": [
-          "fu_code_in_source"
+          "fu_code_in_source",
+          "page_reachable"
         ]
       }
     ],
     "customer_email": {
-      "subject": "Next steps for installing FundraiseUp on hrw.org",
-      "body": "Hello,\n\nThank you for working with us to set up donations on your site. We checked https://www.hrw.org/ and found that the FundraiseUp installation code is not in the page source yet.\n\nPlease make these changes:\n\n1. Add the FundraiseUp installation code to the head of the page at https://www.hrw.org/. We will send you the exact code to copy.\n2. Set up a cookie consent tool for visitors in the EU and UK, and make sure vendor cookies respect the visitor's choice.\n3. Review your Content Security Policy. Two third-party scripts, bat.bing.com and conversions.digitalwerksautomation.com, are being blocked. Allow them or remove them if you no longer use them.\n\nOnce these are done, let us know and we will run the check again.\n\nThank you,\nOnboarding Team"
+      "subject": "FundraiseUp setup for hrw.org: next steps",
+      "body": "Hello,\n\nThank you for working with us on your donation platform setup. We checked https://www.hrw.org/ and could not find the FundraiseUp installation code in the page source. No widget request was recorded.\n\nPlease do the following:\n\n1. Add the FundraiseUp installation code to the page source of https://www.hrw.org/.\n2. Check that the donate page at https://donate.hrw.org/page/107245/donate/1 is reachable by standard web requests. It returned an access error (HTTP 403) during our check.\n3. Let us know which cookie consent tool you use, if any, for visitors in the EU and UK.\n\nOnce these changes are live, reply to this email and we will run the check again.\n\nThank you,\nThe Onboarding Team"
     },
     "_dropped_uncited": 0,
     "_usage": {
       "model": "claude-haiku-5-5",
-      "input_tokens": 2659,
-      "output_tokens": 1128,
-      "cost_usd": 0.00083
+      "input_tokens": 3339,
+      "output_tokens": 1108,
+      "cost_usd": 0.00089
     }
   }
 }

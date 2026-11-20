@@ -1,6 +1,6 @@
 {
   "url": "https://www.thetrevorproject.org/",
-  "checked_at": "2026-11-20 08:56 UTC",
+  "checked_at": "2026-11-20 09:07 UTC",
   "verdict": {
     "status": "not_installed",
     "reason": "installation code missing",
@@ -9,6 +9,9 @@
     ],
     "warnings": [
       "page_speed"
+    ],
+    "agent_warnings": [
+      "donate_no_js"
     ]
   },
   "checklist": [
@@ -74,7 +77,7 @@
       "id": "page_speed",
       "title": "Page load under 6 s",
       "status": "warn",
-      "detail": "load event at 8.0s",
+      "detail": "load event at 7.5s",
       "evidence": [],
       "blocking": false
     },
@@ -88,6 +91,40 @@
         "Failed to load resource: the server responded with a status of 451 ()"
       ],
       "blocking": false
+    },
+    {
+      "id": "ai_crawlers",
+      "title": "AI assistants and AI search can read the pages",
+      "status": "pass",
+      "detail": "robots.txt allows all listed AI bots.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "llms_txt",
+      "title": "llms.txt published",
+      "status": "info",
+      "detail": "No /llms.txt (optional, still a proposal).",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "structured_data",
+      "title": "schema.org organization markup",
+      "status": "pass",
+      "detail": "JSON-LD types: Organization; DonateAction: no.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "donate_no_js",
+      "title": "Donate page readable without JavaScript",
+      "status": "warn",
+      "detail": "https://give.thetrevorproject.org/campaign/867704/donate?c_src=UCGOF271150105&c_src2=dt-20261116-28-c-FY27-WEBHeader-Footer-4x-225kMatch-donate-button&utm_medium=fundraising&utm_source=websitebutton6&utm_campaign=yearend is blocked or errors for a plain HTTP client (HTTP 403).",
+      "evidence": [
+        "https://give.thetrevorproject.org/campaign/867704/donate?c_src=UCGOF271150105&c_src2=dt-20261116-28-c-FY27-WEBHeader-Footer-4x-225kMatch-donate-button&utm_medium=fundraising&utm_source=websitebutton6&utm_campaign=yearend"
+      ],
+      "blocking": false
     }
   ],
   "facts": {
@@ -97,10 +134,10 @@
       "final_url": "https://www.thetrevorproject.org/",
       "https": true,
       "load_error": null,
-      "load_ms": 7982,
-      "dom_content_loaded_ms": 4135,
-      "check_seconds": 12.2,
-      "request_count": 153,
+      "load_ms": 7472,
+      "dom_content_loaded_ms": 3868,
+      "check_seconds": 13.4,
+      "request_count": 146,
       "failed_request_count": 2,
       "console_error_count": 2,
       "console_errors_sample": [
@@ -138,7 +175,7 @@
         "in_source_ids": [
           "GTM-K652FKQ"
         ],
-        "dataLayer_entries": 11
+        "dataLayer_entries": 12
       },
       "ga4": {
         "measurement_ids": [
@@ -159,76 +196,120 @@
       },
       "consent": []
     },
-    "other_donation_platforms": []
+    "other_donation_platforms": [],
+    "agent_readiness": {
+      "robots": {
+        "present": true,
+        "bots": {
+          "GPTBot": "allowed",
+          "ClaudeBot": "allowed",
+          "Google-Extended": "allowed",
+          "Claude-User": "allowed",
+          "OAI-SearchBot": "allowed",
+          "PerplexityBot": "allowed"
+        }
+      },
+      "llms_txt": false,
+      "jsonld_types": [
+        "WebPage",
+        "ReadAction",
+        "BreadcrumbList",
+        "ListItem",
+        "WebSite",
+        "SearchAction",
+        "EntryPoint",
+        "PropertyValueSpecification",
+        "Organization",
+        "ImageObject"
+      ],
+      "organization_markup": [
+        "Organization"
+      ],
+      "donate_action_markup": false,
+      "donate_page": {
+        "url": "https://give.thetrevorproject.org/campaign/867704/donate?c_src=UCGOF271150105&c_src2=dt-20261116-28-c-FY27-WEBHeader-Footer-4x-225kMatch-donate-button&utm_medium=fundraising&utm_source=websitebutton6&utm_campaign=yearend",
+        "http_status": 403,
+        "without_javascript": "blocked"
+      }
+    }
   },
   "ai": {
-    "summary": "The page loaded (HTTP 200, final URL https://www.thetrevorproject.org/). No FundraiseUp installation code was found in the page source, and no FundraiseUp widget request was recorded. The verdict is not installed, with one blocker: installation code missing. Tags found: Google Tag Manager container GTM-K652FKQ; GA4 measurement IDs G-A2ABC2ABCD, G-BD80V9CE2Q, G-DZG3N29WTN (hits recorded for G-BD80V9CE2Q and G-DZG3N29WTN); Meta Pixel 249611735914172 loaded. No other donation tool was found. No known cookie consent tool was detected. The page load event took 8.0 seconds, over the 6 second target. The browser did not click any links, so checkout behavior was not tested. Two console errors were recorded, and two requests failed.",
+    "summary": "The page https://www.thetrevorproject.org/ loaded in the headless browser with HTTP 200 in about 7.5 seconds. No FundraiseUp installation code was found in the page source, and no FundraiseUp widget request was recorded. The verdict is not installed. Google Tag Manager, GA4, and Meta Pixel were found and loaded. No other donation tool was found on the page. The page load time is over the 6 second threshold. A plain HTTP client received HTTP 403 from the linked donate page, so that page could not be read without JavaScript. No consent tool was detected. The browser did not click any buttons, so it did not test whether any checkout or donate button works. Two console errors were recorded.",
     "risks": [
       {
         "title": "FundraiseUp installation code is missing",
         "severity": "high",
-        "detail": "No installation code was found in the page source and no widget request was recorded. The install is not in place on this page.",
+        "detail": "No installation code was found in the page source and no widget request was recorded. The verdict is not installed.",
         "check_ids": [
           "fu_code_in_source"
         ]
       },
       {
-        "title": "No cookie consent tool detected",
+        "title": "Page load is slow",
         "severity": "medium",
-        "detail": "No known consent tool was detected. Visitors from the EU and UK need a consent setup for vendor cookies.",
+        "detail": "The load event was recorded at 7.5 seconds, above the 6 second threshold.",
         "check_ids": [
-          "consent_banner"
+          "page_speed"
         ]
       },
       {
-        "title": "Slow page load",
-        "severity": "low",
-        "detail": "The load event fired at 8.0 seconds, over the 6 second target.",
+        "title": "Donate page returned HTTP 403 to a plain HTTP client",
+        "severity": "medium",
+        "detail": "The linked donate page at give.thetrevorproject.org returned HTTP 403 without JavaScript. The browser did not test it with JavaScript enabled, so the cause is not confirmed.",
         "check_ids": [
-          "page_speed"
+          "donate_no_js"
+        ]
+      },
+      {
+        "title": "No consent tool detected",
+        "severity": "low",
+        "detail": "No known cookie consent tool was detected. Vendor cookies may need a consent setup for EU and UK visitors.",
+        "check_ids": [
+          "consent_banner"
         ]
       }
     ],
     "next_steps": [
       {
-        "owner": "customer",
-        "action": "Add the FundraiseUp installation code to the page source of https://www.thetrevorproject.org/, then tell the onboarding team when it is live.",
+        "owner": "onboarding_team",
+        "action": "Confirm with the customer that the FundraiseUp installation code is not yet on the page and that they plan to add it.",
         "check_ids": [
           "fu_code_in_source"
         ]
       },
       {
         "owner": "customer",
-        "action": "Set up a cookie consent tool on the site so EU and UK visitors can accept or decline vendor cookies.",
-        "check_ids": [
-          "consent_banner"
-        ]
-      },
-      {
-        "owner": "onboarding_team",
-        "action": "Confirm with the customer that the installation code was added, then re-run this check.",
+        "action": "Add the FundraiseUp installation code to the page source so it loads on https://www.thetrevorproject.org/.",
         "check_ids": [
           "fu_code_in_source"
         ]
       },
       {
-        "owner": "onboarding_team",
-        "action": "Confirm with the customer whether the cookie consent setup is planned, and note the answer in the account record.",
+        "owner": "customer",
+        "action": "Check why the donate page at give.thetrevorproject.org returns HTTP 403 to non-browser requests, and confirm it loads for visitors.",
         "check_ids": [
-          "consent_banner"
+          "donate_no_js"
+        ]
+      },
+      {
+        "owner": "onboarding_team",
+        "action": "Re-run this check after the customer adds the installation code.",
+        "check_ids": [
+          "fu_code_in_source",
+          "page_speed"
         ]
       }
     ],
     "customer_email": {
-      "subject": "Next steps to launch your donation page",
-      "body": "Hello,\n\nThank you for working with us to set up online donations. We ran a check on https://www.thetrevorproject.org/. The page loads, but the donation installation code was not found in the page source, so the donation tool is not live yet.\n\nPlease do the following:\n\n1. Add the donation installation code to the page source of https://www.thetrevorproject.org/. Our team will send the code to you separately.\n2. Set up a cookie consent tool so visitors in the EU and UK can accept or decline vendor cookies.\n\nOnce the code is added, please reply to this email so we can re-run the check.\n\nThank you,\nThe Onboarding Team"
+      "subject": "Next steps for installing FundraiseUp on thetrevorproject.org",
+      "body": "Hello,\n\nThank you for working with us on your FundraiseUp launch. We checked https://www.thetrevorproject.org/ in a headless browser. The FundraiseUp installation code was not found in the page source, so the widget is not yet installed.\n\nPlease do the following:\n\n1. Add the FundraiseUp installation code to the page source so it loads on https://www.thetrevorproject.org/.\n2. Check the donate page at give.thetrevorproject.org. It returned HTTP 403 to our non-browser check. Please confirm it loads normally for visitors.\n\nOnce the code is in place, we will run the check again. Please reply if you have questions.\n\nThank you,\nOnboarding Team"
     },
     "_dropped_uncited": 0,
     "_usage": {
       "model": "claude-haiku-5-5",
-      "input_tokens": 2625,
-      "output_tokens": 1032,
-      "cost_usd": 0.00078
+      "input_tokens": 3544,
+      "output_tokens": 1134,
+      "cost_usd": 0.00092
     }
   }
 }

@@ -1,13 +1,14 @@
 {
   "url": "https://www.rescue.org/",
-  "checked_at": "2026-11-20 08:56 UTC",
+  "checked_at": "2026-11-20 09:07 UTC",
   "verdict": {
     "status": "ready_with_warnings",
     "reason": "Installation code is in the page source",
     "blockers": [],
     "warnings": [
       "fu_code_in_source"
-    ]
+    ],
+    "agent_warnings": []
   },
   "checklist": [
     {
@@ -111,8 +112,42 @@
       "id": "page_speed",
       "title": "Page load under 6 s",
       "status": "pass",
-      "detail": "load event at 2.6s",
+      "detail": "load event at 2.9s",
       "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "ai_crawlers",
+      "title": "AI assistants and AI search can read the pages",
+      "status": "pass",
+      "detail": "robots.txt allows all listed AI bots.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "llms_txt",
+      "title": "llms.txt published",
+      "status": "info",
+      "detail": "No /llms.txt (optional, still a proposal).",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "structured_data",
+      "title": "schema.org organization markup",
+      "status": "pass",
+      "detail": "JSON-LD types: NGO; DonateAction: no.",
+      "evidence": [],
+      "blocking": false
+    },
+    {
+      "id": "donate_no_js",
+      "title": "Donate page readable without JavaScript",
+      "status": "pass",
+      "detail": "https://www.rescue.org/?form=donate&ms=ws_resq_top_nav_btn_fy27_q1_mmus_oct returns HTTP 200 with donation content in the HTML.",
+      "evidence": [
+        "https://www.rescue.org/?form=donate&ms=ws_resq_top_nav_btn_fy27_q1_mmus_oct"
+      ],
       "blocking": false
     }
   ],
@@ -123,10 +158,10 @@
       "final_url": "https://www.rescue.org/",
       "https": true,
       "load_error": null,
-      "load_ms": 2606,
-      "dom_content_loaded_ms": 298,
-      "check_seconds": 7.0,
-      "request_count": 253,
+      "load_ms": 2880,
+      "dom_content_loaded_ms": 339,
+      "check_seconds": 7.7,
+      "request_count": 249,
       "failed_request_count": 0,
       "console_error_count": 0,
       "console_errors_sample": [],
@@ -202,15 +237,44 @@
         }
       ]
     },
-    "other_donation_platforms": []
+    "other_donation_platforms": [],
+    "agent_readiness": {
+      "robots": {
+        "present": true,
+        "bots": {
+          "GPTBot": "allowed",
+          "ClaudeBot": "allowed",
+          "Google-Extended": "allowed",
+          "Claude-User": "allowed",
+          "OAI-SearchBot": "allowed",
+          "PerplexityBot": "allowed"
+        }
+      },
+      "llms_txt": false,
+      "jsonld_types": [
+        "NGO",
+        "ImageObject",
+        "WebPage",
+        "WebSite"
+      ],
+      "organization_markup": [
+        "NGO"
+      ],
+      "donate_action_markup": false,
+      "donate_page": {
+        "url": "https://www.rescue.org/?form=donate&ms=ws_resq_top_nav_btn_fy27_q1_mmus_oct",
+        "http_status": 200,
+        "without_javascript": "readable"
+      }
+    }
   },
   "ai": {
-    "summary": "The page https://www.rescue.org/ loaded in a headless browser with HTTP 200 and no load error. The FundraiseUp widget script loads at runtime from account AFGSSTXA. The installation code is not in the server HTML and is not in the page source. It is inserted by a JavaScript file at runtime. Vendor docs ask for the code in the global head and a check of the page source, so this needs a fix. The browser found three checkout links with '?form=' (donate, evergreen-crisis-ftr, evergreen-crisis-w). The browser did not click these links. No console errors, no failed requests, and no other donation tools were recorded. The page load event was at 2.6 seconds. Overall verdict: ready with warnings.",
+    "summary": "The page https://www.rescue.org/ loaded in a headless browser with HTTP 200 and no load error. The FundraiseUp widget script loads at runtime with account ID AFGSSTXA, but the installation code is not in the server HTML. It is inserted by a JavaScript file, not by a tag manager. Vendor docs ask for the code in the global head and confirm it by viewing the page source. The verdict is ready with warnings. No blockers were recorded. The browser did not click anything, so the checkout was not tested. Three checkout-form links were found: donate, evergreen-crisis-ftr, and evergreen-crisis-w. Other checks passed: GTM container GTM-5JH3VLS, GA4 IDs G-DDZCWB8N2Y and G-MCH4QLVDRD, Meta Pixel 412981725737143, OneTrust consent, no other donation tool, and page load at 2.9 s.",
     "risks": [
       {
-        "title": "Installation code is not in page source",
+        "title": "Widget code is not in the page source",
         "severity": "medium",
-        "detail": "The FundraiseUp code is not in the server HTML. It is added by a JavaScript file at runtime. Vendor docs ask for the code in the global head and confirmation by viewing the page source. Check that the widget still loads after any change to the site's JavaScript.",
+        "detail": "The FundraiseUp code is added at runtime by a JavaScript file. It is not in the server HTML and not in the global head. The vendor asks for the code in the head and a page-source check to confirm it.",
         "check_ids": [
           "fu_code_in_source"
         ]
@@ -219,36 +283,29 @@
     "next_steps": [
       {
         "owner": "customer",
-        "action": "Add the FundraiseUp installation code for account AFGSSTXA to the global head of the site, so it appears in the page source.",
+        "action": "Add the FundraiseUp installation snippet for account AFGSSTXA to the global head of the site template so it appears in the page source.",
         "check_ids": [
           "fu_code_in_source"
         ]
       },
       {
         "owner": "onboarding_team",
-        "action": "After the customer updates the site, re-run this check and confirm the code appears in the page source and in the head.",
+        "action": "After the customer confirms the change, re-run this check and confirm the snippet appears in the page source.",
         "check_ids": [
           "fu_code_in_source"
-        ]
-      },
-      {
-        "owner": "onboarding_team",
-        "action": "Confirm with the customer that the three checkout links (donate, evergreen-crisis-ftr, evergreen-crisis-w) go to the intended FundraiseUp forms.",
-        "check_ids": [
-          "fu_checkout_links"
         ]
       }
     ],
     "customer_email": {
-      "subject": "One fix needed for your donation widget",
-      "body": "Hello,\n\nWe checked your website, https://www.rescue.org/, for the online donation widget. The widget loads on your page, and we found three donation links that point to checkout forms. The page loads without errors.\n\nOne fix is needed. The widget code is not in your page source. It is added later by a JavaScript file. Please add the widget installation code for account AFGSSTXA to the global head section of your website, so it appears in the page source. Once it is added, you can view the page source to confirm it is there.\n\nPlease let us know when the change is live. We will run the check again.\n\nThank you,\nOnboarding Team"
+      "subject": "One fix needed for your donation widget on rescue.org",
+      "body": "Hello,\n\nThank you for working with us to set up online donations. Our check of https://www.rescue.org/ found that the donation widget loads, but its installation code is not in the page source.\n\nPlease do the following:\n\n1. Add the FundraiseUp installation snippet for account AFGSSTXA to the global head section of your site template. The snippet should be in the server-delivered HTML, not added later by JavaScript.\n2. View the page source and confirm the snippet appears inside the head section.\n3. Reply to let us know when this is done.\n\nOnce you confirm, we will run the check again.\n\nThank you,\n\nOnboarding Team"
     },
     "_dropped_uncited": 0,
     "_usage": {
       "model": "claude-haiku-5-5",
-      "input_tokens": 3792,
-      "output_tokens": 843,
-      "cost_usd": 0.0008
+      "input_tokens": 4439,
+      "output_tokens": 825,
+      "cost_usd": 0.00086
     }
   }
 }

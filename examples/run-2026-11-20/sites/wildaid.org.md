@@ -1,7 +1,7 @@
 # https://wildaid.org/
 
-**Status:** Ready
-**Checked:** 2026-11-20 08:55 UTC in 10.2s
+**Status:** Ready, with warnings (Page load under 6 s)
+**Checked:** 2026-11-20 09:07 UTC in 13.9s
 **Account ID(s):** AQTMUHNH
 
 ## Checklist
@@ -20,39 +20,54 @@
 | PASS | Meta Pixel | loaded, pixel id(s): 862335194865117 |
 | INFO | Cookie consent tool | No known consent tool detected. Needed for EU/UK visitors; vendor cookies need a consent setup. |
 | PASS | No other donation tool on the page | None found. |
-| PASS | Page load under 6 s | load event at 5.9s |
+| WARN | Page load under 6 s | load event at 8.9s |
 | INFO | Console errors (any source) | 3 error(s) |
+
+## AI agent readiness
+
+Not part of the go-live verdict. Can AI assistants and AI search read the organization and reach the donate page?
+
+| Status | Check | Detail |
+|---|---|---|
+| PASS | AI assistants and AI search can read the pages | robots.txt allows all listed AI bots. |
+| PASS | llms.txt published | /llms.txt found. |
+| PASS | schema.org organization markup | JSON-LD types: Organization; DonateAction: no. |
+| PASS | Donate page readable without JavaScript | https://wildaid.org/?form=donate returns HTTP 200 with donation content in the HTML. |
 
 ## Summary (AI, from the facts above)
 
-The page https://wildaid.org/ loaded in a headless browser with HTTP 200 in 5.9 seconds. The FundraiseUp install code is in the page source once, in the head, with no scripts after it. The widget script loads from account AQTMUHNH with no widget console errors. Two donate links were found that point to checkout forms (FUNAUWUZXNA and donate). The browser did not click these links, so checkout behavior is not verified. Google Tag Manager, GA4, and Meta Pixel were found. No known cookie consent tool was detected. The page has 3 console errors: one failed resource that could not be resolved and two 404 responses.
+The page https://wildaid.org/ loaded in a headless browser with HTTP 200. The FundraiseUp install code is in the page source once, in the head, with no scripts after it. The widget script loaded from account ID AQTMUHNH. The browser did not click anything, so the checkout itself was not tested. Two donate links with form parameters were found. The page load event took 8.9 seconds, which is over the 6 second limit and is a warning, not a blocker. Three console errors were recorded, including one failed request and two 404 responses. No known cookie consent tool was detected. The Meta Pixel, GA4, and GTM containers were found in the page. The robots.txt allows the listed AI bots, llms.txt is present, and Organization markup is present. DonateAction markup is not present.
 
 ### Risks
 
-- **medium** No cookie consent tool detected: No known consent tool was found on the page. Vendor cookies from GTM, GA4, Meta Pixel, and FundraiseUp may need a consent setup for EU and UK visitors. _(checks: consent_banner)_
-- **low** Console errors on the page: Three errors were recorded: one resource failed to resolve and two resources returned 404. The source of these resources was not identified in the recorded data. _(checks: console_errors)_
+- **medium** Page load is slow: The load event fired at 8.9 seconds. The check limit is 6 seconds. _(checks: page_speed)_
+- **low** Failed requests and 404 errors on the page: Three console errors were recorded: one name resolution failure and two 404 responses. The source of these requests was not identified. _(checks: console_errors)_
+- **medium** No cookie consent tool detected: No known consent tool was found. Visitors from the EU or UK may need a consent setup because vendor cookies are set. _(checks: consent_banner)_
 
 ### Next steps
 
+- [onboarding_team] Confirm with the customer which page elements produce the three console errors and the 404 responses, and whether the page speed issue is known. _(checks: page_speed, console_errors)_
 - [onboarding_team] Confirm with the customer whether they need a cookie consent setup for EU and UK visitors. _(checks: consent_banner)_
-- [customer] Check the page for links or files that return 404 or fail to resolve, and fix or remove them. _(checks: console_errors)_
-- [onboarding_team] Open the FundraiseUp dashboard and confirm that the checkout links FUNAUWUZXNA and donate open the correct forms for this account. _(checks: fu_checkout_links)_
+- [onboarding_team] Test a donate link in a normal browser to confirm the checkout opens. The headless check did not click anything. _(checks: fu_checkout_links)_
+- [customer] Fix the 404 and failed resource references on the page, and reduce page load time to under 6 seconds. _(checks: page_speed, console_errors)_
+- [customer] Decide whether to set up a cookie consent tool for EU and UK visitors. _(checks: consent_banner)_
 
 ### Draft email to the customer
 
-**Subject:** Next steps for your donation page on wildaid.org
+**Subject:** Next steps for your donation page at wildaid.org
 
 ```text
 Hello,
 
-We checked your donation page at https://wildaid.org/. The FundraiseUp code is installed correctly, and the widget loads on the page. Your Google Tag Manager, GA4, and Meta Pixel tags were also found.
+Thanks for working with us to set up donations on wildaid.org. The donation widget is installed correctly and loads on your page. We found a few items to fix:
 
-We need a few fixes from your side:
+1. Reduce page load time. Your page took 8.9 seconds to finish loading. Please aim for under 6 seconds. Large images and scripts are common causes.
 
-1. Please check the page for files or links that return a 404 error or fail to load, and fix or remove them. Our check found three console errors.
-2. Please tell us whether you need a cookie consent banner for visitors in the EU or UK. We did not find a consent tool on the page.
+2. Fix broken resource links. We found three errors, including two 404 responses and one failed request. Please find the missing files or update the links that point to them.
 
-Once these are done, we can run the check again.
+3. Decide on cookie consent. If you have visitors in the EU or UK, you may need a cookie consent tool. Please let us know if you want help choosing one.
+
+Once these are fixed, reply to this email and we will run the check again.
 
 Thank you,
 The Onboarding Team
@@ -66,3 +81,4 @@ The Onboarding Team
 - console_errors: Failed to load resource: net::ERR_NAME_NOT_RESOLVED
 - console_errors: Failed to load resource: the server responded with a status of 404 ()
 - console_errors: Failed to load resource: the server responded with a status of 404 ()
+- donate_no_js: https://wildaid.org/?form=donate

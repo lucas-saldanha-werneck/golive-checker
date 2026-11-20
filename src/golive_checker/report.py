@@ -40,9 +40,19 @@ def site_markdown(r: dict[str, Any]) -> str:
         "| Status | Check | Detail |",
         "|---|---|---|",
     ]
-    for c in r["checklist"]:
+    from .checklist import AGENT_IDS
+
+    golive = [c for c in r["checklist"] if c["id"] not in AGENT_IDS]
+    agent = [c for c in r["checklist"] if c["id"] in AGENT_IDS]
+    for c in golive:
         detail = c["detail"].replace("|", "\\|")
         lines.append(f"| {ICON[c['status']]} | {c['title']} | {detail} |")
+    if agent:
+        lines += ["", "## AI agent readiness", "", "Not part of the go-live verdict. Can AI assistants and AI search read the organization and reach the donate page?", "",
+                  "| Status | Check | Detail |", "|---|---|---|"]
+        for c in agent:
+            detail = c["detail"].replace("|", "\\|")
+            lines.append(f"| {ICON[c['status']]} | {c['title']} | {detail} |")
     ai = r.get("ai")
     if ai:
         lines += ["", "## Summary (AI, from the facts above)", "", ai["summary"], ""]
@@ -93,10 +103,28 @@ def batch_markdown(results: list[dict[str, Any]], meta: dict[str, Any]) -> str:
     lines += ["", f"Sites with the widget: {len(installed)}. Checks that failed or warned on them:", "", "| Check | Sites |", "|---|---|"]
     for k, n in reasons.most_common():
         lines.append(f"| {titles.get(k, k)} (`{k}`) | {n} |")
-    lines += ["", "| Site | Status | Account | GTM | GA4 | CMP | Other donation tools | Reason | Time |", "|---|---|---|---|---|---|---|---|---|"]
+    agent_counts = Counter(w for r in results for w in r["verdict"].get("agent_warnings", []))
+    blocked_bots = Counter(b for r in results for b, s in r["facts"]["agent_readiness"]["robots"]["bots"].items() if s == "blocked")
+    checked = [r for r in results if r["verdict"]["status"] != "unreachable"]
+    ag = [r["facts"]["agent_readiness"] for r in checked]
+    lines += ["", f"AI agent readiness (all {len(checked)} sites that loaded; not part of the verdict):", "", "| Signal | Sites |", "|---|---|",
+              f"| robots.txt blocks an AI bot that fetches for users or AI search | {agent_counts.get('ai_crawlers', 0)} |",
+              f"| llms.txt published | {sum(1 for a in ag if a['llms_txt'])} |",
+              f"| Organization/NGO JSON-LD | {sum(1 for a in ag if a['organization_markup'])} |",
+              f"| DonateAction JSON-LD | {sum(1 for a in ag if a['donate_action_markup'])} |",
+              f"| Donate page readable without JavaScript | {sum(1 for a in ag if a['donate_page']['without_javascript'] == 'readable')} |",
+              f"| Donate page needs JavaScript or blocks plain HTTP | {agent_counts.get('donate_no_js', 0)} |"]
+    if blocked_bots:
+        lines += ["", "Blocked in robots.txt: " + ", ".join(f"{b} ({n})" for b, n in blocked_bots.most_common())]
+    lines += ["", "| Site | Status | Account | GTM | GA4 | CMP | Other donation tools | AI bots blocked | llms.txt | Org JSON-LD | Donate page w/o JS | Reason | Time |", "|---|---|---|---|---|---|---|---|---|---|---|---|---|"]
     for r in results:
         f = r["facts"]
-        lines.append("| {u} | {s} | {a} | {g} | {ga} | {c} | {o} | {why} | {t}s |".format(
+        a_ = f.get("agent_readiness") or {}
+        bb = [b for b, s in (a_.get("robots") or {}).get("bots", {}).items() if s == "blocked"] if r["verdict"]["status"] != "unreachable" else ["?"]
+        lines.append("| {u} | {s} | {a} | {g} | {ga} | {c} | {o} | {bb} | {ll} | {oj} | {dj} | {why} | {t}s |".format(
+            bb=", ".join(bb) or "none", ll="yes" if a_.get("llms_txt") else "no",
+            oj=", ".join(a_.get("organization_markup") or []) or "-",
+            dj=((a_.get("donate_page") or {}).get("without_javascript") or "-").replace("_", " "),
             u=r["url"], s=STATUS_LABEL[r["verdict"]["status"]],
             a=", ".join(f["fundraiseup"]["account_ids"]) or "-",
             g=", ".join(f["tags"]["gtm"]["container_ids"][:2]) or "-",
@@ -112,7 +140,8 @@ def batch_markdown(results: list[dict[str, Any]], meta: dict[str, Any]) -> str:
 def batch_csv(results: list[dict[str, Any]]) -> str:
     buf = io.StringIO()
     w = csv.writer(buf)
-    w.writerow(["url", "status", "reason", "account_ids", "gtm", "ga4", "meta_pixel", "consent", "other_donation_tools", "load_ms", "check_seconds"])
+    w.writerow(["url", "status", "reason", "account_ids", "gtm", "ga4", "meta_pixel", "consent", "other_donation_tools",
+                "ai_bots_blocked", "llms_txt", "org_jsonld", "donate_action_jsonld", "donate_url", "donate_without_js", "load_ms", "check_seconds"])
     for r in results:
         f = r["facts"]
         w.writerow([
@@ -123,6 +152,12 @@ def batch_csv(results: list[dict[str, Any]]) -> str:
             f["tags"]["meta_pixel"]["loaded"],
             " ".join(c["name"] for c in f["tags"]["consent"]),
             "; ".join(o["name"] for o in f["other_donation_platforms"]),
+            " ".join(b for b, s in f["agent_readiness"]["robots"]["bots"].items() if s == "blocked"),
+            f["agent_readiness"]["llms_txt"],
+            " ".join(f["agent_readiness"]["organization_markup"]),
+            f["agent_readiness"]["donate_action_markup"],
+            f["agent_readiness"]["donate_page"]["url"] or "",
+            f["agent_readiness"]["donate_page"]["without_javascript"] or "",
             f["page"]["load_ms"], f["page"]["check_seconds"],
         ])
     return buf.getvalue()
